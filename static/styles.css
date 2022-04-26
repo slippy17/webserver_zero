@@ -14,8 +14,8 @@ body {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%,-50%);
-	width: 320px;
-	height: 480px;
+	width:   80%;/* 320px */
+	height: 600px; /*480px; */
 	overflow: hidden;
 }
 .player .main {
@@ -71,7 +71,7 @@ body {
 	cursor: pointer;
 }
 .player .main .controls i.fa {
-	font-size:25px;
+	font-size:1.5rem;
 	color: #ddd;
 }
 .player .main .controls > div.play-pause-control i.fa-play {
@@ -166,7 +166,8 @@ body {
 	filter:blur(5px);
 }
 
-@media all and (max-width: 1000px) {
+/*
+@media all and (max-width: 1500px) {
 .player{width: 90%;
 	top: 48%;
 	height: 90%;}
