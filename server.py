@@ -28,7 +28,7 @@ class Juke():
         self.cur_disc = disc_indx
         self.cur_track = track
         self.is_playing = True
-        self.song_len = int(player.cddb[str(disc_indx)]['disc']['release-list'][0]['medium-list'][0]['track-list'][track]['length'])/1000
+        self.song_len = int(player.cddb[str(disc_indx)]['disc']['release-list'][0]['medium-list'][0]['track-list'][track-1]['length'])/1000
         self.datum = time.time()
         self.end = self.datum + self.song_len
         self.cancel_future_calls = self.call_repeatedly(5, self.set_elaspsed)
@@ -128,7 +128,7 @@ def send_code(commands):
 		code = (cd_player[command])
 		raw = bin(int(code, 16))[2:].zfill(32)
 		print (command, code, raw)
-		os.system("sudo ./pioneer "+ raw)
+		#os.system("sudo ./pioneer "+ raw)
 		time.sleep(1)
 	return
 
