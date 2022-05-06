@@ -58,9 +58,10 @@ class Juke():
         self.cur_time = round(time.time() - self.datum)
         
         if time.time() > self.end:
-            self.is_playing = False
-            self.cur_time=0
-            self.cancel_future_calls()
+            self.stop()
+            #self.is_playing = False
+            #self.cur_time=0
+            #self.cancel_future_calls()
             
         return self.cur_time
 
@@ -73,6 +74,7 @@ class Juke():
         self.is_playing = False
         self.cur_time = 0
         self.cancel_future_calls()
+        send_code(['Stop'])
         return 'Stop'
 
 
