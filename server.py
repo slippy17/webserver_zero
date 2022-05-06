@@ -128,7 +128,7 @@ def send_code(commands):
 		code = (cd_player[command])
 		raw = bin(int(code, 16))[2:].zfill(32)
 		print (command, code, raw)
-		##os.system("sudo ./pioneer "+ raw)
+		os.system("sudo ./pioneer "+ raw)
 		time.sleep(1)
 	return
 
