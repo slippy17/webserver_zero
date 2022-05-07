@@ -6,7 +6,7 @@ import os
 
 ip_addr= os.environ['IP_ADDRESS']
 
-gpio_avail= os.environ['GPIO_AVAIL']
+gpio_avail= eval(os.environ['GPIO_AVAIL'])
 
 print (f"IP ADDRESS {ip_addr} GPIO_AVAIL is {gpio_avail}")
 
@@ -132,11 +132,11 @@ def send_code(commands):
 	with open("./static/p_codes.json", "r") as infile:
 		cd_player = json.load(infile)
 	for command in commands:
-		code = (cd_player[command])
-		raw = bin(int(code, 16))[2:].zfill(32)
-		print (command, code, raw)
-		#os.system("sudo ./pioneer "+ raw)
-		time.sleep(1)
+            code = (cd_player[command])
+            raw = bin(int(code, 16))[2:].zfill(32)
+            print (command, code, raw)
+            if gpio_avail : os.system("sudo ./pioneer "+ raw)
+            time.sleep(1)
 	return
 
 
