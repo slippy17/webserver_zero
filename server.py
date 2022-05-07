@@ -4,6 +4,13 @@ import json
 import time 
 import os
 
+ip_addr= os.environ['IP_ADDRESS']
+
+gpio_avail= os.environ['GPIO_AVAIL']
+
+print (f"IP ADDRESS {ip_addr} GPIO_AVAIL is {gpio_avail}")
+
+
 
 class Juke():
     def __init__(self):
@@ -214,5 +221,5 @@ def requestSong():
 
 
 if __name__=="__main__":
-	app.run(debug=True, host='192.168.1.190')
+	app.run(debug=True, host=ip_addr)
 	
