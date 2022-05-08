@@ -16,12 +16,6 @@ let songList = [
 ];
  
 
-var songIndex = 0;
-var diskIndex = 3;
-var test_seek = 0;
-var  dict = {};
-
-
 function stat() {
 	fetch('/stat')
 	.then (data => data.json())
@@ -34,8 +28,9 @@ function stat() {
     time: data.time,
     is_playing: data.is_playing
     }});
+	console.log(dict);
 
-return dict
+	return dict
 	
 };
 
@@ -64,8 +59,10 @@ return dict
 // Work in  progress.
 
 //});
-
-
+var songIndex = 0;
+var diskIndex = 3;
+var test_seek = 0;
+var  status = {};
 
 
 var url = '/loadDatabase/'  ;
@@ -189,7 +186,7 @@ function loadSong(songIndex){
 	main.songname.innerText = song.songname;
 	main.artistname.innerText = song.artistname;
 
-	main.audio.setAttribute("src","./static/"+song.audio);
+	//main.audio.setAttribute("src","./static/"+song.audio);
 	main.seekbar.setAttribute("value",0);
 	main.seekbar.setAttribute("min",0);
 	main.seekbar.setAttribute("max",(song.song_length)/1000); 
