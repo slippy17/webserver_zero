@@ -65,12 +65,12 @@ var test_seek = 0;
 var  status = {};
 
 
-var url = '/loadDatabase/'  ;
+
 
 
 // Query server for tracks list from disc in url. response is a list of dicts in json form.
 async function loadDB() {
-	
+	var url = '/loadDatabase/'  ;
 	const response = await fetch(url+diskIndex);
 	const data = await response.json();
 	songList =[]
