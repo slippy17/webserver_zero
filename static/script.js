@@ -15,6 +15,7 @@ let songList = [
 	}
 ];
  
+let dict={};
 
 function stat() {
 	fetch('/stat')
@@ -28,7 +29,7 @@ function stat() {
     time: data.time,
     is_playing: data.is_playing
     }});
-	console.log(dict);
+	//console.log(dict.length);
 
 	return dict
 	
@@ -106,7 +107,7 @@ async function loadDB() {
 
 
 
-loadDB()
+loadDB();
 
 
  
@@ -240,11 +241,13 @@ main.nextDisk.addEventListener("click",function(){
 main.playPauseControl.addEventListener("click",play_button)
 
 
-function play_button()
-{d_stat = stat()
+function play_button() {
+	d_stat = stat();
+	console.log(d_stat.is_playing );
+
 	if(d_stat.is_playing == false){
 		main.playPauseControl.classList.add("paused");
-		console.log('is_playing set as playing');
+		
 		requestSong(diskIndex, songIndex);
 	} 
 
