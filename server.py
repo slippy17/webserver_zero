@@ -184,7 +184,7 @@ def requestSong():
 		
 ## Command builder makes list of commands to send.
 
-	c_builder = []
+	c_builder = ['Pause']
 
 	if (int(s_cd)>100) or (len(s_track)>2):
 	    print("Error in the length of numbers")
