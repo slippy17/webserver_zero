@@ -18,8 +18,8 @@ class Juke():
         self.cur_disc = 2
         self.cur_track = 1
         self.cur_time = 0
-        self.song_len = 0
-        self.end = 0
+        self.song_len = 0   
+        self.end = 0        ## Time that songs ends.
         
         
     def call_repeatedly(self,interval, func, *args):
@@ -37,7 +37,7 @@ class Juke():
         self.is_playing = True
         self.song_len = int(player.cddb[str(disc_indx)]['disc']['release-list'][0]['medium-list'][0]['track-list'][track-1]['length'])/1000
         self.datum = time.time()
-        self.end = self.datum + self.song_len
+        self.end = self.datum + self.song_len - 2 ## (2 secs approx offset CD player)
         self.cancel_future_calls = self.call_repeatedly(5, self.set_elaspsed)
         self.p_datum = 0
         return 'Playing', self.end
@@ -135,7 +135,7 @@ def send_code(commands):
 	for command in commands:
             code = (cd_player[command])
             raw = bin(int(code, 16))[2:].zfill(32)
-            print (command, code, raw)
+            print (command, code)
             if gpio_avail : os.system("sudo ./pioneer "+ raw)
             time.sleep(1)
 	return
