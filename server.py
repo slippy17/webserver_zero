@@ -211,8 +211,7 @@ def requestSong():
 	    c_builder.append(b2)
 	c_builder.append('Track')
 
-
-    c_builder.append('Play')
+	c_builder.append('Play')
 
 
 	send_code(c_builder)
