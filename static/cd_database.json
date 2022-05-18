@@ -122395,7 +122395,1037 @@
       "release-count": 4
     }
   },
-  "76": null,
+  "76": {
+    "disc": {
+      "id": "LJOuTiYqz5OxCNyFFoLm8alqJis-",
+      "sectors": "280275",
+      "offset-list": [
+        150,
+        22492,
+        39157,
+        54152,
+        85435,
+        103935,
+        118740,
+        148737,
+        172260,
+        198462,
+        218607,
+        257867,
+        265270
+      ],
+      "offset-count": 13,
+      "release-list": [
+        {
+          "id": "a829531e-06fd-307b-a5b1-0f04481984a1",
+          "title": "Siamese Dream",
+          "status": "Official",
+          "quality": "normal",
+          "text-representation": {
+            "language": "eng",
+            "script": "Latn"
+          },
+          "artist-credit": [
+            {
+              "name": "Smashing Pumpkins",
+              "artist": {
+                "id": "ba0d6274-db14-4ef5-b28d-657ebde1a396",
+                "type": "Group",
+                "name": "The Smashing Pumpkins",
+                "sort-name": "Smashing Pumpkins, The"
+              }
+            }
+          ],
+          "date": "1993-07-27",
+          "country": "AU",
+          "release-event-list": [
+            {
+              "date": "1993-07-27",
+              "area": {
+                "id": "106e0bec-b638-3b37-b731-f53d507dc00e",
+                "name": "Australia",
+                "sort-name": "Australia",
+                "iso-3166-1-code-list": [
+                  "AU"
+                ]
+              }
+            }
+          ],
+          "release-event-count": 1,
+          "barcode": "724383910625",
+          "cover-art-archive": {
+            "artwork": "true",
+            "count": "2",
+            "front": "true",
+            "back": "true"
+          },
+          "medium-list": [
+            {
+              "position": "1",
+              "format": "CD",
+              "disc-list": [
+                {
+                  "id": "83m1d2oiu6taXn2YWmSHdbMfsU8-",
+                  "sectors": "280274",
+                  "offset-list": [
+                    150,
+                    22492,
+                    39157,
+                    54152,
+                    85435,
+                    103935,
+                    118740,
+                    148737,
+                    172260,
+                    198462,
+                    218607,
+                    257867,
+                    265270
+                  ],
+                  "offset-count": 13
+                },
+                {
+                  "id": "9cCSHtXOorZGvXJbaiVOEgif1Q4-",
+                  "sectors": "280686",
+                  "offset-list": [
+                    150,
+                    22536,
+                    39215,
+                    54214,
+                    85519,
+                    104067,
+                    118891,
+                    148923,
+                    172495,
+                    198693,
+                    218864,
+                    258161,
+                    265610
+                  ],
+                  "offset-count": 13
+                },
+                {
+                  "id": "Cf.BpwT6oB_Szz2_Ou71vxwvUuk-",
+                  "sectors": "282251",
+                  "offset-list": [
+                    150,
+                    22644,
+                    39461,
+                    54608,
+                    86043,
+                    104695,
+                    119652,
+                    149801,
+                    173476,
+                    199830,
+                    220127,
+                    259539,
+                    267094
+                  ],
+                  "offset-count": 13
+                },
+                {
+                  "id": "DREv83jUGLm1I1N3.8Sn3tyCzJ4-",
+                  "sectors": "280325",
+                  "offset-list": [
+                    200,
+                    22542,
+                    39207,
+                    54202,
+                    85485,
+                    103985,
+                    118790,
+                    148787,
+                    172310,
+                    198512,
+                    218657,
+                    257917,
+                    265320
+                  ],
+                  "offset-count": 13
+                },
+                {
+                  "id": "Gy58y8NIbVU..I4EBYlFp4UOGF0-",
+                  "sectors": "280335",
+                  "offset-list": [
+                    150,
+                    22510,
+                    39157,
+                    54152,
+                    85435,
+                    103952,
+                    118742,
+                    148737,
+                    172277,
+                    198465,
+                    218610,
+                    257870,
+                    265290
+                  ],
+                  "offset-count": 13
+                },
+                {
+                  "id": "LJOuTiYqz5OxCNyFFoLm8alqJis-",
+                  "sectors": "280275",
+                  "offset-list": [
+                    150,
+                    22492,
+                    39157,
+                    54152,
+                    85435,
+                    103935,
+                    118740,
+                    148737,
+                    172260,
+                    198462,
+                    218607,
+                    257867,
+                    265270
+                  ],
+                  "offset-count": 13
+                }
+              ],
+              "disc-count": 6,
+              "track-list": [
+                {
+                  "id": "61ac17a5-ac56-3c35-9e56-03b0d866c20e",
+                  "position": "1",
+                  "number": "1",
+                  "length": "298133",
+                  "recording": {
+                    "id": "40a1bdab-d6cc-4116-8cdb-736979854503",
+                    "title": "Cherub Rock",
+                    "length": "298253"
+                  },
+                  "track_or_recording_length": "298133"
+                },
+                {
+                  "id": "0cc9adfe-b471-35d3-8387-064f46903dd2",
+                  "position": "2",
+                  "number": "2",
+                  "length": "221960",
+                  "recording": {
+                    "id": "199069ef-ff18-48a7-95f3-caaa9ee20b10",
+                    "title": "Quiet",
+                    "length": "221986"
+                  },
+                  "track_or_recording_length": "221960"
+                },
+                {
+                  "id": "5b1acfac-437f-3524-a245-8f25213d6aa0",
+                  "position": "3",
+                  "number": "3",
+                  "length": "199933",
+                  "recording": {
+                    "id": "622baf54-342a-40a6-801e-43f159fc4f38",
+                    "title": "Today",
+                    "length": "201000"
+                  },
+                  "track_or_recording_length": "199933"
+                },
+                {
+                  "id": "cff70b9c-cab8-30ed-8278-d58a74c0f640",
+                  "position": "4",
+                  "number": "4",
+                  "length": "417106",
+                  "recording": {
+                    "id": "af02bd48-8c3a-4e9b-b9d2-6a21e6bcf32d",
+                    "title": "Hummer",
+                    "length": "417000"
+                  },
+                  "track_or_recording_length": "417106"
+                },
+                {
+                  "id": "360d8ea7-3f1c-3498-9a30-4933dbe6b1a5",
+                  "position": "5",
+                  "number": "5",
+                  "length": "246893",
+                  "recording": {
+                    "id": "69d9ab4e-8beb-4bf6-b22b-7ee71d2a9bcf",
+                    "title": "Rocket",
+                    "length": "246893"
+                  },
+                  "track_or_recording_length": "246893"
+                },
+                {
+                  "id": "6cfd7905-fef1-33e5-ac09-d422377648a1",
+                  "position": "6",
+                  "number": "6",
+                  "length": "197200",
+                  "recording": {
+                    "id": "99479876-9f93-45b8-8e84-caef39f69d4d",
+                    "title": "Disarm",
+                    "length": "197200"
+                  },
+                  "track_or_recording_length": "197200"
+                },
+                {
+                  "id": "c45853b2-b7c7-3d6d-99ce-0df9499bd0d5",
+                  "position": "7",
+                  "number": "7",
+                  "length": "399933",
+                  "recording": {
+                    "id": "7f76d520-bdfa-48e1-9966-2fe8330c6245",
+                    "title": "Soma",
+                    "length": "399933"
+                  },
+                  "track_or_recording_length": "399933"
+                },
+                {
+                  "id": "402ea7cf-db81-3bb1-91c4-528f52327a63",
+                  "position": "8",
+                  "number": "8",
+                  "length": "313866",
+                  "recording": {
+                    "id": "ea714e98-6a99-4bca-b38a-a69ea34b5da4",
+                    "title": "Geek U.S.A.",
+                    "length": "313866"
+                  },
+                  "track_or_recording_length": "313866"
+                },
+                {
+                  "id": "b9488fef-0156-306f-af96-2978b8613a13",
+                  "position": "9",
+                  "number": "9",
+                  "length": "349173",
+                  "recording": {
+                    "id": "ed3bfa34-7b15-4853-b777-0daf549dedd8",
+                    "title": "Mayonaise",
+                    "length": "349173"
+                  },
+                  "track_or_recording_length": "349173"
+                },
+                {
+                  "id": "c8e5b797-63eb-3a19-8f68-c9e8f9adaf94",
+                  "position": "10",
+                  "number": "10",
+                  "length": "268600",
+                  "recording": {
+                    "id": "46c88b2c-7788-4bf3-880e-0b77155c2f84",
+                    "title": "Spaceboy",
+                    "length": "268600"
+                  },
+                  "track_or_recording_length": "268600"
+                },
+                {
+                  "id": "f81197b3-8806-3fe0-90c2-f2a413bead33",
+                  "position": "11",
+                  "number": "11",
+                  "length": "523466",
+                  "recording": {
+                    "id": "79666748-d0f7-4f8a-806e-6c8419345069",
+                    "title": "Silverfuck",
+                    "length": "523466"
+                  },
+                  "track_or_recording_length": "523466"
+                },
+                {
+                  "id": "27f8bf3e-1966-3f8d-aa67-afa766a9902a",
+                  "position": "12",
+                  "number": "12",
+                  "length": "98933",
+                  "recording": {
+                    "id": "a40e20b0-b08f-4657-8d15-57ead3408736",
+                    "title": "Sweet Sweet",
+                    "length": "98933"
+                  },
+                  "track_or_recording_length": "98933"
+                },
+                {
+                  "id": "4f7f9b70-c357-33c9-b621-e6ab0874a7b9",
+                  "position": "13",
+                  "number": "13",
+                  "length": "200600",
+                  "recording": {
+                    "id": "7d4b6488-d906-4d23-89f8-b6ca8fd8b843",
+                    "title": "Luna",
+                    "length": "200600"
+                  },
+                  "track_or_recording_length": "200600"
+                }
+              ],
+              "track-count": 13
+            }
+          ],
+          "medium-count": 1,
+          "artist-credit-phrase": "Smashing Pumpkins"
+        },
+        {
+          "id": "0dcb4610-006e-35a3-8575-3fee0fa1bb83",
+          "title": "Siamese Dream",
+          "status": "Official",
+          "quality": "normal",
+          "packaging": "Jewel Case",
+          "text-representation": {
+            "language": "eng",
+            "script": "Latn"
+          },
+          "artist-credit": [
+            {
+              "name": "Smashing Pumpkins",
+              "artist": {
+                "id": "ba0d6274-db14-4ef5-b28d-657ebde1a396",
+                "type": "Group",
+                "name": "The Smashing Pumpkins",
+                "sort-name": "Smashing Pumpkins, The"
+              }
+            }
+          ],
+          "date": "1993-07-26",
+          "country": "GB",
+          "release-event-list": [
+            {
+              "date": "1993-07-26",
+              "area": {
+                "id": "8a754a16-0027-3a29-b6d7-2b40ea0481ed",
+                "name": "United Kingdom",
+                "sort-name": "United Kingdom",
+                "iso-3166-1-code-list": [
+                  "GB"
+                ]
+              }
+            }
+          ],
+          "release-event-count": 1,
+          "barcode": "017046501026",
+          "asin": "B00000AQVJ",
+          "cover-art-archive": {
+            "artwork": "true",
+            "count": "4",
+            "front": "true",
+            "back": "true"
+          },
+          "medium-list": [
+            {
+              "position": "1",
+              "format": "CD",
+              "disc-list": [
+                {
+                  "id": "83m1d2oiu6taXn2YWmSHdbMfsU8-",
+                  "sectors": "280274",
+                  "offset-list": [
+                    150,
+                    22492,
+                    39157,
+                    54152,
+                    85435,
+                    103935,
+                    118740,
+                    148737,
+                    172260,
+                    198462,
+                    218607,
+                    257867,
+                    265270
+                  ],
+                  "offset-count": 13
+                },
+                {
+                  "id": "9cCSHtXOorZGvXJbaiVOEgif1Q4-",
+                  "sectors": "280686",
+                  "offset-list": [
+                    150,
+                    22536,
+                    39215,
+                    54214,
+                    85519,
+                    104067,
+                    118891,
+                    148923,
+                    172495,
+                    198693,
+                    218864,
+                    258161,
+                    265610
+                  ],
+                  "offset-count": 13
+                },
+                {
+                  "id": "Cf.BpwT6oB_Szz2_Ou71vxwvUuk-",
+                  "sectors": "282251",
+                  "offset-list": [
+                    150,
+                    22644,
+                    39461,
+                    54608,
+                    86043,
+                    104695,
+                    119652,
+                    149801,
+                    173476,
+                    199830,
+                    220127,
+                    259539,
+                    267094
+                  ],
+                  "offset-count": 13
+                },
+                {
+                  "id": "DREv83jUGLm1I1N3.8Sn3tyCzJ4-",
+                  "sectors": "280325",
+                  "offset-list": [
+                    200,
+                    22542,
+                    39207,
+                    54202,
+                    85485,
+                    103985,
+                    118790,
+                    148787,
+                    172310,
+                    198512,
+                    218657,
+                    257917,
+                    265320
+                  ],
+                  "offset-count": 13
+                },
+                {
+                  "id": "Gy58y8NIbVU..I4EBYlFp4UOGF0-",
+                  "sectors": "280335",
+                  "offset-list": [
+                    150,
+                    22510,
+                    39157,
+                    54152,
+                    85435,
+                    103952,
+                    118742,
+                    148737,
+                    172277,
+                    198465,
+                    218610,
+                    257870,
+                    265290
+                  ],
+                  "offset-count": 13
+                },
+                {
+                  "id": "LJOuTiYqz5OxCNyFFoLm8alqJis-",
+                  "sectors": "280275",
+                  "offset-list": [
+                    150,
+                    22492,
+                    39157,
+                    54152,
+                    85435,
+                    103935,
+                    118740,
+                    148737,
+                    172260,
+                    198462,
+                    218607,
+                    257867,
+                    265270
+                  ],
+                  "offset-count": 13
+                }
+              ],
+              "disc-count": 6,
+              "track-list": [
+                {
+                  "id": "17e808b9-0ce4-3b73-83cf-fb9fdf0dfc67",
+                  "position": "1",
+                  "number": "1",
+                  "length": "298133",
+                  "recording": {
+                    "id": "40a1bdab-d6cc-4116-8cdb-736979854503",
+                    "title": "Cherub Rock",
+                    "length": "298253"
+                  },
+                  "track_or_recording_length": "298133"
+                },
+                {
+                  "id": "867226ce-b04b-3c24-bf30-cbf13657a49b",
+                  "position": "2",
+                  "number": "2",
+                  "length": "221960",
+                  "recording": {
+                    "id": "199069ef-ff18-48a7-95f3-caaa9ee20b10",
+                    "title": "Quiet",
+                    "length": "221986"
+                  },
+                  "track_or_recording_length": "221960"
+                },
+                {
+                  "id": "75a991ef-f03b-31c0-a761-c83f45ebe18e",
+                  "position": "3",
+                  "number": "3",
+                  "length": "199933",
+                  "recording": {
+                    "id": "622baf54-342a-40a6-801e-43f159fc4f38",
+                    "title": "Today",
+                    "length": "201000"
+                  },
+                  "track_or_recording_length": "199933"
+                },
+                {
+                  "id": "49f24e02-3f7e-34a6-97db-da21b437bb5f",
+                  "position": "4",
+                  "number": "4",
+                  "length": "417106",
+                  "recording": {
+                    "id": "af02bd48-8c3a-4e9b-b9d2-6a21e6bcf32d",
+                    "title": "Hummer",
+                    "length": "417000"
+                  },
+                  "track_or_recording_length": "417106"
+                },
+                {
+                  "id": "56657a9a-c547-3539-9b8f-760eff09547f",
+                  "position": "5",
+                  "number": "5",
+                  "length": "246893",
+                  "recording": {
+                    "id": "69d9ab4e-8beb-4bf6-b22b-7ee71d2a9bcf",
+                    "title": "Rocket",
+                    "length": "246893"
+                  },
+                  "track_or_recording_length": "246893"
+                },
+                {
+                  "id": "ffdb5a9e-3a3e-3203-8f51-f3013e4f9fe7",
+                  "position": "6",
+                  "number": "6",
+                  "length": "197200",
+                  "recording": {
+                    "id": "99479876-9f93-45b8-8e84-caef39f69d4d",
+                    "title": "Disarm",
+                    "length": "197200"
+                  },
+                  "track_or_recording_length": "197200"
+                },
+                {
+                  "id": "9d4733f6-ee34-3b2c-bcbc-312887208e53",
+                  "position": "7",
+                  "number": "7",
+                  "length": "399933",
+                  "recording": {
+                    "id": "7f76d520-bdfa-48e1-9966-2fe8330c6245",
+                    "title": "Soma",
+                    "length": "399933"
+                  },
+                  "track_or_recording_length": "399933"
+                },
+                {
+                  "id": "f081cfc2-3190-317a-89e4-34b59bfd002e",
+                  "position": "8",
+                  "number": "8",
+                  "length": "313866",
+                  "recording": {
+                    "id": "ea714e98-6a99-4bca-b38a-a69ea34b5da4",
+                    "title": "Geek U.S.A.",
+                    "length": "313866"
+                  },
+                  "track_or_recording_length": "313866"
+                },
+                {
+                  "id": "54add04f-97b2-3a4d-b393-cba8cc72339a",
+                  "position": "9",
+                  "number": "9",
+                  "length": "349173",
+                  "recording": {
+                    "id": "ed3bfa34-7b15-4853-b777-0daf549dedd8",
+                    "title": "Mayonaise",
+                    "length": "349173"
+                  },
+                  "track_or_recording_length": "349173"
+                },
+                {
+                  "id": "7062d47b-727a-3c0f-bf66-89e26a388792",
+                  "position": "10",
+                  "number": "10",
+                  "length": "268600",
+                  "recording": {
+                    "id": "46c88b2c-7788-4bf3-880e-0b77155c2f84",
+                    "title": "Spaceboy",
+                    "length": "268600"
+                  },
+                  "track_or_recording_length": "268600"
+                },
+                {
+                  "id": "a98d9f25-a694-39f1-a7c7-424e01da6c36",
+                  "position": "11",
+                  "number": "11",
+                  "length": "523466",
+                  "recording": {
+                    "id": "79666748-d0f7-4f8a-806e-6c8419345069",
+                    "title": "Silverfuck",
+                    "length": "523466"
+                  },
+                  "track_or_recording_length": "523466"
+                },
+                {
+                  "id": "88abe4fb-2f00-3430-a9ad-92fb67700f17",
+                  "position": "12",
+                  "number": "12",
+                  "length": "98933",
+                  "recording": {
+                    "id": "a40e20b0-b08f-4657-8d15-57ead3408736",
+                    "title": "Sweet Sweet",
+                    "length": "98933"
+                  },
+                  "track_or_recording_length": "98933"
+                },
+                {
+                  "id": "84ef2838-4b61-33fb-ba5b-3e3a64bf0a5a",
+                  "position": "13",
+                  "number": "13",
+                  "length": "200600",
+                  "recording": {
+                    "id": "7d4b6488-d906-4d23-89f8-b6ca8fd8b843",
+                    "title": "Luna",
+                    "length": "200600"
+                  },
+                  "track_or_recording_length": "200600"
+                }
+              ],
+              "track-count": 13
+            }
+          ],
+          "medium-count": 1,
+          "artist-credit-phrase": "Smashing Pumpkins"
+        },
+        {
+          "id": "8d967bcd-02e3-380f-8e0d-2f3cfb79561d",
+          "title": "Siamese Dream",
+          "status": "Official",
+          "quality": "normal",
+          "packaging": "Jewel Case",
+          "text-representation": {
+            "language": "eng",
+            "script": "Latn"
+          },
+          "artist-credit": [
+            {
+              "name": "Smashing Pumpkins",
+              "artist": {
+                "id": "ba0d6274-db14-4ef5-b28d-657ebde1a396",
+                "type": "Group",
+                "name": "The Smashing Pumpkins",
+                "sort-name": "Smashing Pumpkins, The"
+              }
+            }
+          ],
+          "date": "1993-07-27",
+          "country": "US",
+          "release-event-list": [
+            {
+              "date": "1993-07-27",
+              "area": {
+                "id": "489ce91b-6658-3307-9877-795b68554c98",
+                "name": "United States",
+                "sort-name": "United States",
+                "iso-3166-1-code-list": [
+                  "US"
+                ]
+              }
+            }
+          ],
+          "release-event-count": 1,
+          "barcode": "077778826729",
+          "asin": "B000000WJZ",
+          "cover-art-archive": {
+            "artwork": "true",
+            "count": "1",
+            "front": "true",
+            "back": "false"
+          },
+          "medium-list": [
+            {
+              "position": "1",
+              "format": "CD",
+              "disc-list": [
+                {
+                  "id": "83m1d2oiu6taXn2YWmSHdbMfsU8-",
+                  "sectors": "280274",
+                  "offset-list": [
+                    150,
+                    22492,
+                    39157,
+                    54152,
+                    85435,
+                    103935,
+                    118740,
+                    148737,
+                    172260,
+                    198462,
+                    218607,
+                    257867,
+                    265270
+                  ],
+                  "offset-count": 13
+                },
+                {
+                  "id": "9cCSHtXOorZGvXJbaiVOEgif1Q4-",
+                  "sectors": "280686",
+                  "offset-list": [
+                    150,
+                    22536,
+                    39215,
+                    54214,
+                    85519,
+                    104067,
+                    118891,
+                    148923,
+                    172495,
+                    198693,
+                    218864,
+                    258161,
+                    265610
+                  ],
+                  "offset-count": 13
+                },
+                {
+                  "id": "Cf.BpwT6oB_Szz2_Ou71vxwvUuk-",
+                  "sectors": "282251",
+                  "offset-list": [
+                    150,
+                    22644,
+                    39461,
+                    54608,
+                    86043,
+                    104695,
+                    119652,
+                    149801,
+                    173476,
+                    199830,
+                    220127,
+                    259539,
+                    267094
+                  ],
+                  "offset-count": 13
+                },
+                {
+                  "id": "DREv83jUGLm1I1N3.8Sn3tyCzJ4-",
+                  "sectors": "280325",
+                  "offset-list": [
+                    200,
+                    22542,
+                    39207,
+                    54202,
+                    85485,
+                    103985,
+                    118790,
+                    148787,
+                    172310,
+                    198512,
+                    218657,
+                    257917,
+                    265320
+                  ],
+                  "offset-count": 13
+                },
+                {
+                  "id": "Gy58y8NIbVU..I4EBYlFp4UOGF0-",
+                  "sectors": "280335",
+                  "offset-list": [
+                    150,
+                    22510,
+                    39157,
+                    54152,
+                    85435,
+                    103952,
+                    118742,
+                    148737,
+                    172277,
+                    198465,
+                    218610,
+                    257870,
+                    265290
+                  ],
+                  "offset-count": 13
+                },
+                {
+                  "id": "LJOuTiYqz5OxCNyFFoLm8alqJis-",
+                  "sectors": "280275",
+                  "offset-list": [
+                    150,
+                    22492,
+                    39157,
+                    54152,
+                    85435,
+                    103935,
+                    118740,
+                    148737,
+                    172260,
+                    198462,
+                    218607,
+                    257867,
+                    265270
+                  ],
+                  "offset-count": 13
+                }
+              ],
+              "disc-count": 6,
+              "track-list": [
+                {
+                  "id": "f9efcd90-0cb6-3327-94f0-b3ef4642506e",
+                  "position": "1",
+                  "number": "1",
+                  "length": "298133",
+                  "recording": {
+                    "id": "40a1bdab-d6cc-4116-8cdb-736979854503",
+                    "title": "Cherub Rock",
+                    "length": "298253"
+                  },
+                  "track_or_recording_length": "298133"
+                },
+                {
+                  "id": "17376818-ca99-39cf-980f-980f567766fe",
+                  "position": "2",
+                  "number": "2",
+                  "length": "221960",
+                  "recording": {
+                    "id": "199069ef-ff18-48a7-95f3-caaa9ee20b10",
+                    "title": "Quiet",
+                    "length": "221986"
+                  },
+                  "track_or_recording_length": "221960"
+                },
+                {
+                  "id": "538e5b15-2c44-3cff-b120-547fe66d958d",
+                  "position": "3",
+                  "number": "3",
+                  "length": "199933",
+                  "recording": {
+                    "id": "622baf54-342a-40a6-801e-43f159fc4f38",
+                    "title": "Today",
+                    "length": "201000"
+                  },
+                  "track_or_recording_length": "199933"
+                },
+                {
+                  "id": "5966a7b7-d3ff-3d39-a6ff-a1ace9aa147a",
+                  "position": "4",
+                  "number": "4",
+                  "length": "417106",
+                  "recording": {
+                    "id": "af02bd48-8c3a-4e9b-b9d2-6a21e6bcf32d",
+                    "title": "Hummer",
+                    "length": "417000"
+                  },
+                  "track_or_recording_length": "417106"
+                },
+                {
+                  "id": "dd12fdad-a9d5-3278-88a4-0375891ee414",
+                  "position": "5",
+                  "number": "5",
+                  "length": "246893",
+                  "recording": {
+                    "id": "69d9ab4e-8beb-4bf6-b22b-7ee71d2a9bcf",
+                    "title": "Rocket",
+                    "length": "246893"
+                  },
+                  "track_or_recording_length": "246893"
+                },
+                {
+                  "id": "5cf48215-cc7c-36cd-9890-0de121c5abd0",
+                  "position": "6",
+                  "number": "6",
+                  "length": "197200",
+                  "recording": {
+                    "id": "99479876-9f93-45b8-8e84-caef39f69d4d",
+                    "title": "Disarm",
+                    "length": "197200"
+                  },
+                  "track_or_recording_length": "197200"
+                },
+                {
+                  "id": "6572b43f-8c56-381e-b0be-e30a178be72a",
+                  "position": "7",
+                  "number": "7",
+                  "length": "399933",
+                  "recording": {
+                    "id": "7f76d520-bdfa-48e1-9966-2fe8330c6245",
+                    "title": "Soma",
+                    "length": "399933"
+                  },
+                  "track_or_recording_length": "399933"
+                },
+                {
+                  "id": "eec60eee-f0c6-3d71-9c0e-8eb09b7043ff",
+                  "position": "8",
+                  "number": "8",
+                  "length": "313866",
+                  "recording": {
+                    "id": "ea714e98-6a99-4bca-b38a-a69ea34b5da4",
+                    "title": "Geek U.S.A.",
+                    "length": "313866"
+                  },
+                  "track_or_recording_length": "313866"
+                },
+                {
+                  "id": "0cf3ce9e-0c90-3847-9169-8fb45647fa39",
+                  "position": "9",
+                  "number": "9",
+                  "length": "349173",
+                  "recording": {
+                    "id": "ed3bfa34-7b15-4853-b777-0daf549dedd8",
+                    "title": "Mayonaise",
+                    "length": "349173"
+                  },
+                  "track_or_recording_length": "349173"
+                },
+                {
+                  "id": "2cbff5d9-1bcf-300f-a6b1-4df5ca0c3f6e",
+                  "position": "10",
+                  "number": "10",
+                  "length": "268600",
+                  "recording": {
+                    "id": "46c88b2c-7788-4bf3-880e-0b77155c2f84",
+                    "title": "Spaceboy",
+                    "length": "268600"
+                  },
+                  "track_or_recording_length": "268600"
+                },
+                {
+                  "id": "d67c98a8-4aad-3709-8476-480292b28a84",
+                  "position": "11",
+                  "number": "11",
+                  "length": "523466",
+                  "recording": {
+                    "id": "79666748-d0f7-4f8a-806e-6c8419345069",
+                    "title": "Silverfuck",
+                    "length": "523466"
+                  },
+                  "track_or_recording_length": "523466"
+                },
+                {
+                  "id": "32af0aec-7140-3a33-9338-3f24ae4ef681",
+                  "position": "12",
+                  "number": "12",
+                  "length": "98933",
+                  "recording": {
+                    "id": "a40e20b0-b08f-4657-8d15-57ead3408736",
+                    "title": "Sweet Sweet",
+                    "length": "98933"
+                  },
+                  "track_or_recording_length": "98933"
+                },
+                {
+                  "id": "7fedeffc-8075-3a5b-84fd-d9c7e703b7cc",
+                  "position": "13",
+                  "number": "13",
+                  "length": "200600",
+                  "recording": {
+                    "id": "7d4b6488-d906-4d23-89f8-b6ca8fd8b843",
+                    "title": "Luna",
+                    "length": "200600"
+                  },
+                  "track_or_recording_length": "200600"
+                }
+              ],
+              "track-count": 13
+            }
+          ],
+          "medium-count": 1,
+          "artist-credit-phrase": "Smashing Pumpkins"
+        }
+      ],
+      "release-count": 3
+    }
+  },
   "77": null,
   "78": null,
   "79": null,

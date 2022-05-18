@@ -15,7 +15,6 @@ let songList = [
 	}
 ];
  
-let dict={};
 
 function stat() {
 	fetch('/stat')
@@ -45,7 +44,7 @@ function pause() {
 	dict = { 
 	disk: data.disk,
 	song: data.song,
-    lenght: data.length,
+    length: data.length,
     time: data.time,
     is_playing: data.is_playing
     }});
@@ -62,7 +61,7 @@ return dict
 //});
 var songIndex = 0;
 var diskIndex = 3;
-var test_seek = 0;
+var value_seek = 0;
 var  status = {};
 
 
@@ -188,17 +187,14 @@ function loadSong(songIndex){
 	main.artistname.innerText = song.artistname;
 
 	//main.audio.setAttribute("src","./static/"+song.audio);
-	main.seekbar.setAttribute("value",0);
-	main.seekbar.setAttribute("min",0);
-	main.seekbar.setAttribute("max",(song.song_length)/1000); 
-	console.log((song.song_length)/1000);
+
 	
 }
 
 
 setInterval(function(){
-	main.seekbar.value = (test_seek); //parseInt(main.audio.currentTime);
-	test_seek = test_seek + 1
+	main.seekbar.value = (value_seek); //parseInt(main.audio.currentTime);
+	value_seek = value_seek + 1
 	//console.log(test_seek);
 },2000);
 
@@ -246,9 +242,12 @@ function play_button() {
 	console.log(d_stat.is_playing );
 
 	if(d_stat.is_playing == false){
-		main.playPauseControl.classList.add("paused");
-		
-		requestSong(diskIndex, songIndex);
+			value_seek = 0;
+			main.seekbar.setAttribute("min",0);
+			main.seekbar.setAttribute("max",d_stat.length); 
+			//console.log(d_stat.length);
+			//main.playPauseControl.classList.add("paused");
+			requestSong(diskIndex, songIndex);
 	} 
 
 	if(d_stat.is_playing == true){
