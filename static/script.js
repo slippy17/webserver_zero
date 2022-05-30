@@ -15,26 +15,40 @@ let songList = [
 	}
 ];
  
-
-function stat() {
-	fetch('/stat')
-	.then (data => data.json())
-	.then ( data => {
-
+function get_stat(data) {
 	dict = { 
 	disk: data.disk,
 	song: data.song,
-    lenght: data.length,
+    length: data.length,
     time: data.time,
     is_playing: data.is_playing
-    }});
-	//console.log(dict.length);
+    };
 
-	return dict
+	return dict; 
+
+
+}
+
+
+async function stat() {
+	var url = '/stat'  ;
+	const response = await fetch(url);
+	const data = await response.json();
+	d_stat = await get_stat(data);
+	console.log(d_stat)
+	//var { 
+	//c_disk,
+	//c_song,
+    //c_length,
+    //c_time,
+    //c_is_playing
+    //} = data;
+
+	//console.log(c_is_playing);
+
+	//return c_is_playing
 	
 };
-
-
 
 function pause() {
 	fetch('/pause')
@@ -53,19 +67,13 @@ return dict
 	
 };
 
-
 //document.addEventListener("DOMContentLoaded", async () => {
-
 // Work in  progress.
-
 //});
 var songIndex = 0;
 var diskIndex = 3;
 var value_seek = 0;
 var  status = {};
-
-
-
 
 
 // Query server for tracks list from disc in url. response is a list of dicts in json form.
@@ -194,8 +202,8 @@ function loadSong(songIndex){
 
 setInterval(function(){
 	main.seekbar.value = (value_seek); //parseInt(main.audio.currentTime);
-	value_seek = value_seek + 1
-	//console.log(test_seek);
+	value_seek = value_seek + 2
+	//console.log(value_seek);
 },2000);
 
 
@@ -236,18 +244,19 @@ main.nextDisk.addEventListener("click",function(){
 
 main.playPauseControl.addEventListener("click",play_button)
 
-
 function play_button() {
-	d_stat = stat();
-	console.log(d_stat.is_playing );
+
+		console.log(d_stat.is_playing );
 
 	if(d_stat.is_playing == false){
 			value_seek = 0;
 			main.seekbar.setAttribute("min",0);
 			main.seekbar.setAttribute("max",d_stat.length); 
-			//console.log(d_stat.length);
+			console.log(d_stat.length);
 			//main.playPauseControl.classList.add("paused");
 			requestSong(diskIndex, songIndex);
+			setTimeout(stat, 10000);
+
 	} 
 
 	if(d_stat.is_playing == true){
@@ -266,6 +275,7 @@ function play_button() {
 
 		// To check is server paused
 	}
+	stat();
 };
 
 
@@ -278,4 +288,4 @@ main.seekbar.addEventListener("change",function(){
 
 loadSong(songIndex);
 
-
+stat();

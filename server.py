@@ -22,6 +22,7 @@ class Juke():
         self.end = 0        ## Time that songs ends.
         
         
+        
     def call_repeatedly(self,interval, func, *args):
         stopped = Event()
         def loop():
@@ -87,11 +88,11 @@ class Juke():
 
     def status(self):
         message = {}
-        message ['disk'] = self.cur_disc
-        message ['song'] = self.cur_track
-        message ['length'] = self.song_len
-        message ['time'] = self.get_elaspsed()
-        message ['is_playing'] = self.is_playing
+        message['disk'] = self.cur_disc
+        message['song'] = self.cur_track
+        message['length']= self.song_len
+        message['time'] = self.get_elaspsed()
+        message['is_playing'] = self.is_playing
         return message
 
     def load(self):
@@ -142,10 +143,10 @@ def send_code(commands):
 
 
 
-@app.route('/stat', methods=['GET'])
+@app.route('/stat', methods=['POST', 'GET'])
 def init():
-	message = player.status()
-	return jsonify(message)  # serialize and use JSON headers
+	stat = player.status()
+	return jsonify(stat)  # serialize and use JSON headers
 
 
 
