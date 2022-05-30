@@ -5,6 +5,7 @@ function _all(query){
 	return document.querySelectorAll(query);
 }
 
+
 let songList = [
 	{
 		thumbnail:"Bright_Future.jpg",
@@ -15,6 +16,7 @@ let songList = [
 	}
 ];
  
+
 function get_stat(data) {
 	dict = { 
 	disk: data.disk,
@@ -25,29 +27,12 @@ function get_stat(data) {
     };
 
 	return dict; 
-
-
 }
-
-
 async function stat() {
 	var url = '/stat'  ;
 	const response = await fetch(url);
 	const data = await response.json();
 	d_stat = await get_stat(data);
-	console.log(d_stat)
-	//var { 
-	//c_disk,
-	//c_song,
-    //c_length,
-    //c_time,
-    //c_is_playing
-    //} = data;
-
-	//console.log(c_is_playing);
-
-	//return c_is_playing
-	
 };
 
 function pause() {
@@ -63,9 +48,9 @@ function pause() {
     is_playing: data.is_playing
     }});
 
-return dict
-	
+return dict	
 };
+
 
 //document.addEventListener("DOMContentLoaded", async () => {
 // Work in  progress.
@@ -112,16 +97,12 @@ async function loadDB() {
 	
 	}
 
-
-
 loadDB();
-
 
  
 let player = _(".player"),
 	toggleSongList = _(".player .toggle-list");
 
- 
 let main = {
 	audio:_(".player .main audio"),
 	thumbnail:_(".player .main img"),
@@ -193,18 +174,23 @@ function loadSong(songIndex){
 	document.body.style.backgroundSize = "cover";	
 	main.songname.innerText = song.songname;
 	main.artistname.innerText = song.artistname;
-
 	//main.audio.setAttribute("src","./static/"+song.audio);
-
-	
 }
 
 
 setInterval(function(){
 	main.seekbar.value = (value_seek); //parseInt(main.audio.currentTime);
-	value_seek = value_seek + 2
+	if (d_stat.is_playing){
+		value_seek = value_seek + 2;
+	}
+
+	if (value_seek > d_stat.length) {
+		value_seek = 0;
+		d_stat.is_playing = false;
+	} 
 	//console.log(value_seek);
 },2000);
+
 
 
 main.prevDisk.addEventListener("click",function(){
@@ -235,56 +221,44 @@ main.nextDisk.addEventListener("click",function(){
 		diskIndex = diskIndex+1;
 		//currentSongIndex = 0
 		console.log('Disk ',diskIndex, 'Song ',songIndex);
-		
 	}
 	loadDB();
 });
 
 
-
 main.playPauseControl.addEventListener("click",play_button)
-
 function play_button() {
 
 		console.log(d_stat.is_playing );
 
 	if(d_stat.is_playing == false){
-			value_seek = 0;
-			main.seekbar.setAttribute("min",0);
-			main.seekbar.setAttribute("max",d_stat.length); 
-			console.log(d_stat.length);
-			//main.playPauseControl.classList.add("paused");
 			requestSong(diskIndex, songIndex);
+
+			// delay 10secs to allow Pioneer cd player time to access cd.
 			setTimeout(stat, 10000);
-
-	} 
-
-	if(d_stat.is_playing == true){
-		main.playPauseControl.classList.add("paused");
-		pause();
-		console.log('is_playing now paused');
-		//main.audio.pause();
+			setTimeout(function(){
+				value_seek = 0;
+				main.seekbar.setAttribute("min",0);
+				main.seekbar.setAttribute("max",d_stat.length); 
+				console.log('length: ' + d_stat.length);
+			}, 12000);
+			//main.playPauseControl.classList.add("paused");
+		} 
 	}
+	//if(d_stat.is_playing == true){
+	//	main.playPauseControl.classList.add("paused");
+	//	pause();
+	//	console.log('is_playing now paused');
+	//	//main.audio.pause();
+	//}
+	//if(d_stat.is_playing == 'Paused'){
+	//	main.playPauseControl.classList.remove("paused");
+	//	pause();
+	//	console.log('is_playing set as playing');
 
-
-	if(d_stat.is_playing == 'Paused'){
-
-		main.playPauseControl.classList.remove("paused");
-		pause();
-		console.log('is_playing set as playing');
-
-		// To check is server paused
-	}
-	stat();
-};
-
-
-main.seekbar.addEventListener("change",function(){
-	main.audio.currentTime = main.seekbar.value;
-});
-
-//if (is_init == 0) {init()};
-//console.log('is_init =', is_init);
+//main.seekbar.addEventListener("change",function(){
+//	main.audio.currentTime = main.seekbar.value;
+//});
 
 loadSong(songIndex);
 
