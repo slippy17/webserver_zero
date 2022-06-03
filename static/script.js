@@ -33,6 +33,8 @@ async function stat() {
 	const response = await fetch(url);
 	const data = await response.json();
 	d_stat = await get_stat(data);
+	value_seek = d_stat.time;
+
 };
 
 function pause() {
@@ -59,6 +61,7 @@ var songIndex = 0;
 var diskIndex = 3;
 var value_seek = 0;
 var  status = {};
+var play_pause_css = document.querySelector(':root');
 
 
 // Query server for tracks list from disc in url. response is a list of dicts in json form.
@@ -187,6 +190,8 @@ setInterval(function(){
 	if (value_seek > d_stat.length) {
 		value_seek = 0;
 		d_stat.is_playing = false;
+		play_pause_css.style.setProperty('--show_play','block');
+		play_pause_css.style.setProperty('--show_pause','none');
 	} 
 	//console.log(value_seek);
 },2000);
@@ -234,15 +239,18 @@ function play_button() {
 	if(d_stat.is_playing == false){
 			requestSong(diskIndex, songIndex);
 
+			// display the pause button.
+			play_pause_css.style.setProperty('--show_play','none');
+			play_pause_css.style.setProperty('--show_pause','block');
+
 			// delay 10secs to allow Pioneer cd player time to access cd.
 			setTimeout(stat, 10000);
 			setTimeout(function(){
-				value_seek = 0;
 				main.seekbar.setAttribute("min",0);
 				main.seekbar.setAttribute("max",d_stat.length); 
 				console.log('length: ' + d_stat.length);
 			}, 12000);
-			//main.playPauseControl.classList.add("paused");
+			
 		} 
 	}
 	//if(d_stat.is_playing == true){

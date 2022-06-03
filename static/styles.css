@@ -4,6 +4,13 @@
 	box-sizing: border-box;
 
 }
+
+:root{
+--show_play:block;
+--show_pause:none;
+}
+
+
 body {
 	height: 100vh;
 	font-family: "Raleway";
@@ -78,10 +85,10 @@ body {
 	display: none;
 }
 .player .main .controls > div.play-pause-control.paused i.fa-play {
-	display: block;
+	display: var(--show_play);
 }
 .player .main .controls > div.play-pause-control.paused i.fa-pause {
-	display: none;
+	display: var(--show_pause);
 }
 .player .player-list {
 	

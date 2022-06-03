@@ -4,6 +4,8 @@ import json
 import time 
 import os
 
+
+# Environment variables.
 ip_addr= os.environ['IP_ADDRESS']
 
 gpio_avail= eval(os.environ['GPIO_AVAIL'])
