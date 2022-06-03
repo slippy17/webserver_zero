@@ -243,13 +243,13 @@ function play_button() {
 			play_pause_css.style.setProperty('--show_play','none');
 			play_pause_css.style.setProperty('--show_pause','block');
 
-			// delay 10secs to allow Pioneer cd player time to access cd.
-			setTimeout(stat, 10000);
+			// delay 15secs to allow Pioneer cd player time to access cd.
+			setTimeout(stat, 15000);
 			setTimeout(function(){
 				main.seekbar.setAttribute("min",0);
 				main.seekbar.setAttribute("max",d_stat.length); 
 				console.log('length: ' + d_stat.length);
-			}, 12000);
+			}, 20000);
 			
 		} 
 	}
