@@ -139,7 +139,7 @@ def send_code(commands):
             code = (cd_player[command])
             raw = bin(int(code, 16))[2:].zfill(32)
             print (command, code)
-            if gpio_avail : os.system("sudo ./static/pioneer "+ raw)
+            if gpio_avail : os.system("sudo ./pioneer "+ raw)
             time.sleep(1)
 	return
 
@@ -161,7 +161,7 @@ def  pause_request():
 
 @app.route('/')
 def home():
-    if gpio_avail : os.system("sudo ./static/ledON")
+    if gpio_avail : os.system("sudo ./ledON")
     return render_template('index.html')
 
 
