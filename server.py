@@ -12,6 +12,8 @@ gpio_avail= eval(os.environ['GPIO_AVAIL'])
 
 print (f"IP ADDRESS {ip_addr} GPIO_AVAIL is {gpio_avail}")
 
+if gpio_avail : os.system("sudo ./ledON")
+
 
 
 class Juke():
@@ -161,7 +163,7 @@ def  pause_request():
 
 @app.route('/')
 def home():
-    if gpio_avail : os.system("sudo ./ledON")
+    
     return render_template('index.html')
 
 
