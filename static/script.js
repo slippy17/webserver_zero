@@ -182,7 +182,7 @@ function loadSong(songIndex){
 
 
 setInterval(function(){
-	main.seekbar.value = (value_seek); //parseInt(main.audio.currentTime);
+	main.seekbar.value = value_seek; //parseInt(main.audio.currentTime);
 	if (d_stat.is_playing){
 		value_seek = value_seek + 2;
 	}
@@ -234,7 +234,7 @@ main.nextDisk.addEventListener("click",function(){
 main.playPauseControl.addEventListener("click",play_button)
 function play_button() {
 
-		console.log(d_stat.is_playing );
+		// console.log(d_stat.is_playing );
 
 	if(d_stat.is_playing == false){
 			requestSong(diskIndex, songIndex);
@@ -248,7 +248,8 @@ function play_button() {
 			setTimeout(function(){
 				main.seekbar.setAttribute("min",0);
 				main.seekbar.setAttribute("max",d_stat.length); 
-				console.log('length: ' + d_stat.length);
+				value_seek = d_stat.time;
+				//console.log('length: ' + d_stat.length);
 			}, 20000);
 			
 		} 

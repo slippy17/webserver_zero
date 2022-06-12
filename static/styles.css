@@ -2,6 +2,7 @@
 	margin:0px;
 	padding: 0px;
 	box-sizing: border-box;
+	
 
 }
 
@@ -39,7 +40,7 @@ body {
 }
 .player .main .seekbar input[type="range"] {
 	-webkit-appearance:none;
-	width: 100%;
+	width: 120%;
 	height: 25px;
 	outline: none;
 	background: #aaa;
@@ -79,7 +80,7 @@ body {
 }
 .player .main .controls i.fa {
 	font-size:6rem;
-	color: #ddd;
+	color: orange;
 }
 .player .main .controls > div.play-pause-control i.fa-play {
 	display: none;
