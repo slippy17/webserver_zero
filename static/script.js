@@ -65,7 +65,43 @@ var play_pause_css = document.querySelector(':root');
 
 
 // Query server for tracks list from disc in url. response is a list of dicts in json form.
-async function loadDB() {
+// async function loadDB() {
+// 	var url = '/loadDatabase/'  ;
+// 	const response = await fetch(url+diskIndex);
+// 	const data = await response.json();
+// 	songList =[]
+// 	var tk= data[0].tracks;
+// 	//console.log(tk);
+// 	var i = 0
+// 	//update = ".player .player-list .list"
+// 	while (i<(tk)) {
+// 		const artistname = data[2].artistname;
+// 		const album = data[3].album;
+// 		console.log(album);
+// 		const {title, length} = data[1][i].recording;
+// 		object = {
+// 			thumbnail:"Bright_Future.jpg",
+// 			audio:"Frog Princess -- The Divine Comedy.mp3",
+// 			songname: title,
+// 			artistname: artistname,
+// 			album: album,
+// 			song_length: length
+// 			};
+
+// 		songList.push(object);		
+		
+// 		i = i + 1;
+// 		main.songname.innerText = songList[0].songname;
+// 		main.artistname.innerText = songList[0].artistname;
+// 		main.album.innerText = songList[0].album;
+		
+// };
+// 	updateSongs();
+	
+// 	}
+
+// Testing a load from dataframe function. Below is the old Loaddb()
+async function loadDB_DF() {
 	var url = '/loadDatabase/'  ;
 	const response = await fetch(url+diskIndex);
 	const data = await response.json();
@@ -100,7 +136,12 @@ async function loadDB() {
 	
 	}
 
-loadDB();
+
+
+
+
+//loadDB();
+loadDB_DF();
 
  
 let player = _(".player"),
@@ -205,7 +246,7 @@ main.prevDisk.addEventListener("click",function(){
 		console.log('Disk ',diskIndex, 'Song ',songIndex);
 		
 	}
-	loadDB();
+	loadDB_DF();
 });
 	
  
@@ -227,7 +268,7 @@ main.nextDisk.addEventListener("click",function(){
 		//currentSongIndex = 0
 		console.log('Disk ',diskIndex, 'Song ',songIndex);
 	}
-	loadDB();
+	loadDB_DF();
 });
 
 

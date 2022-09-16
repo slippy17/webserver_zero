@@ -1,0 +1,193 @@
+[
+  {
+    "tracks": 15
+  },
+  [
+    {
+      "id": "e4215520-ed60-3c5a-9909-1085b9918021",
+      "position": "1",
+      "number": "1",
+      "length": "134666",
+      "recording": {
+        "id": "c64f7207-e394-4c19-93b3-16ffed5ae2ea",
+        "title": "The Start",
+        "length": "134666"
+      },
+      "track_or_recording_length": "134666"
+    },
+    {
+      "id": "e86b785e-27c2-3a78-ba29-a60211d1c96a",
+      "position": "2",
+      "number": "2",
+      "length": "200733",
+      "recording": {
+        "id": "f27984d8-3b30-4e17-8f45-1c99ede513a6",
+        "title": "Into the Light",
+        "length": "200733"
+      },
+      "track_or_recording_length": "200733"
+    },
+    {
+      "id": "27f99480-b6f3-3204-9b8b-9e36d0df8fb0",
+      "position": "3",
+      "number": "3",
+      "length": "224866",
+      "recording": {
+        "id": "8a87ffc2-19ae-4a56-8bc9-19735c72d891",
+        "title": "Cry Easily",
+        "length": "224866"
+      },
+      "track_or_recording_length": "224866"
+    },
+    {
+      "id": "6c067432-e8dd-3b40-be1c-3820bfca9740",
+      "position": "4",
+      "number": "4",
+      "length": "226026",
+      "recording": {
+        "id": "d08b28fc-3e03-4c5d-9c3c-abff35ace6d8",
+        "title": "No More Apologies",
+        "length": "226026"
+      },
+      "track_or_recording_length": "226026"
+    },
+    {
+      "id": "bfb9b949-0bdf-30cd-9e17-add6a3707b02",
+      "position": "5",
+      "number": "5",
+      "length": "232266",
+      "recording": {
+        "id": "b4334122-5185-4925-a8c1-1d416cc00b6f",
+        "title": "My Sweet Life",
+        "length": "232266"
+      },
+      "track_or_recording_length": "232266"
+    },
+    {
+      "id": "fe41167e-1736-348c-a4f7-8042c1ba634a",
+      "position": "6",
+      "number": "6",
+      "length": "200906",
+      "recording": {
+        "id": "38e6e857-8912-4f2e-988a-35403aa26bac",
+        "title": "Sisters Song",
+        "length": "200906"
+      },
+      "track_or_recording_length": "200906"
+    },
+    {
+      "id": "468a7077-7897-3036-9dd9-e5b7d36d6e0d",
+      "position": "7",
+      "number": "7",
+      "length": "201760",
+      "recording": {
+        "id": "15f79fb7-5151-45db-9a36-88ccad633dd7",
+        "title": "Twist & Squeeze",
+        "length": "201760"
+      },
+      "track_or_recording_length": "201760"
+    },
+    {
+      "id": "88650268-9289-36e6-88c4-4f2b8e47bc0c",
+      "position": "8",
+      "number": "8",
+      "length": "195533",
+      "recording": {
+        "id": "5b71466b-0d35-44aa-be59-c6581298b0a5",
+        "title": "Love Is.....",
+        "length": "195533"
+      },
+      "track_or_recording_length": "195533"
+    },
+    {
+      "id": "8e734bfb-c9a1-302e-baf0-70911270a465",
+      "position": "9",
+      "number": "9",
+      "length": "196106",
+      "recording": {
+        "id": "52736a8e-59c4-49fd-8fcc-010f364f7c4b",
+        "title": "Without Dreams",
+        "length": "196106"
+      },
+      "track_or_recording_length": "196106"
+    },
+    {
+      "id": "7fe28b7d-3f9c-3389-ab4b-0a11e31d07a3",
+      "position": "10",
+      "number": "10",
+      "length": "182360",
+      "recording": {
+        "id": "2df99a9f-3ca9-4b59-b073-3a2343d2c906",
+        "title": "Just Because",
+        "length": "182360"
+      },
+      "track_or_recording_length": "182360"
+    },
+    {
+      "id": "1a866174-ec3c-3209-8b40-90b0db98ade3",
+      "position": "11",
+      "number": "11",
+      "length": "233640",
+      "recording": {
+        "id": "7bad4fd9-4869-4f8d-adb0-01c6a27a00c7",
+        "title": "I Can't Change",
+        "length": "233640"
+      },
+      "track_or_recording_length": "233640"
+    },
+    {
+      "id": "d0381f4c-45d2-3691-839b-d45d18fff75a",
+      "position": "12",
+      "number": "12",
+      "length": "189533",
+      "recording": {
+        "id": "5e7a0cb8-2984-47c4-b855-24fb146a559c",
+        "title": "Clotheshorse",
+        "length": "189533"
+      },
+      "track_or_recording_length": "189533"
+    },
+    {
+      "id": "7df5f813-08e9-30fb-9a1e-61c32680a645",
+      "position": "13",
+      "number": "13",
+      "length": "220866",
+      "recording": {
+        "id": "c218589e-0b03-4ea1-af3f-a9fbc95cb9f2",
+        "title": "My Mind",
+        "length": "220866"
+      },
+      "track_or_recording_length": "220866"
+    },
+    {
+      "id": "803f4557-4cd0-36b2-a931-b1e8dea025d9",
+      "position": "14",
+      "number": "14",
+      "length": "208666",
+      "recording": {
+        "id": "fa1fc5e6-07c5-44e5-b2a3-c32ace33dc9c",
+        "title": "Broken",
+        "length": "208666"
+      },
+      "track_or_recording_length": "208666"
+    },
+    {
+      "id": "64780c5a-4c98-35e9-a47c-94989ea42eac",
+      "position": "15",
+      "number": "15",
+      "length": "98067",
+      "recording": {
+        "id": "8faa2010-5942-400e-bfa2-9ccfdc2a1891",
+        "title": "A Happy Ending",
+        "length": "98067"
+      },
+      "track_or_recording_length": "98067"
+    }
+  ],
+  {
+    "artistname": "A House"
+  },
+  {
+    "album": "No More Apologies"
+  }
+]

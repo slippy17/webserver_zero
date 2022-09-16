@@ -3,6 +3,7 @@ from flask import Flask, render_template, request, jsonify
 import json
 import time 
 import os
+import pandas as pd
 
 
 # Environment variables.
@@ -103,6 +104,10 @@ class Juke():
     	with open("./static/cd_database.json", "r") as infile:
             self.cddb = json.load(infile)
             return
+
+    def load_df(self):
+        self.df= pd.read_pickle("./static/cd_database.pkl")
+        return
     
     def album_stats(self,index_no):
    
@@ -118,6 +123,20 @@ class Juke():
     	message.append({'album':album})
     	return message
 
+    def album_stats_df(self,index_no):
+   
+        db = self.cddb[index_no]['disc']['release-list'][0]
+        message = []
+        tracks = db['medium-list'][0]['track-count']
+        track_list = db['medium-list'][0]['track-list']
+        artist =  db['artist-credit'][0]['artist']['name']
+        album = db['title']     
+        message.append({'tracks':tracks})
+        message.append(track_list)
+        message.append({'artistname':artist})
+        message.append({'album':album})
+        return message
+
         
 
 
@@ -125,6 +144,8 @@ app = Flask(__name__)
 
 player = Juke()
 player.load()
+player.load_df()
+
 
 
 #cur_disk = 10
@@ -167,11 +188,11 @@ def home():
     return render_template('index.html')
 
 
-
 @app.route('/loadDatabase/<index_no>', methods=['POST','GET'])
 def load_DB(index_no):
-	data = player.album_stats(index_no)
-
+	data = player.album_stats_df(index_no) ## changed from .ablum_stats
+	with open("data.json", "w") as outfile:
+                json.dump(data,outfile,indent=2)
 	return jsonify(data)
 
 
