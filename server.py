@@ -107,10 +107,11 @@ class Juke():
 
     def load_df(self):
         self.df= pd.read_pickle("./static/cd_database.pkl")
+        self.adf= self.df[['Album', 'Disc_ID', 'Artist']].copy()
+        self.adf= self.adf.drop_duplicates(subset=['Album'], ignore_index=True)
         return
     
     def album_stats(self,index_no):
-   
     	db = self.cddb[index_no]['disc']['release-list'][0]
     	message = []
     	tracks = db['medium-list'][0]['track-count']
@@ -123,19 +124,12 @@ class Juke():
     	message.append({'album':album})
     	return message
 
-    def album_stats_df(self,index_no):
-   
-        db = self.cddb[index_no]['disc']['release-list'][0]
-        message = []
-        tracks = db['medium-list'][0]['track-count']
-        track_list = db['medium-list'][0]['track-list']
-        artist =  db['artist-credit'][0]['artist']['name']
-        album = db['title']     
-        message.append({'tracks':tracks})
-        message.append(track_list)
-        message.append({'artistname':artist})
-        message.append({'album':album})
-        return message
+    def album_stats_df(self,index_no):  ## ************** NOT TESTED ************
+        db = self.adf.loc[index_no]
+        d_id = db.Disc_ID
+        tracks_df = self.df[self.df["Disc_ID"] == d_id]   ## Album info for the album at that Disc_ID.
+        tracks = tracks_df.Song_Title.count()   ## The number 0f tracks in the album
+        return tracks_df
 
         
 
@@ -143,8 +137,9 @@ class Juke():
 app = Flask(__name__)
 
 player = Juke()
-player.load()
+#player.load()
 player.load_df()
+
 
 
 
@@ -188,11 +183,16 @@ def home():
     return render_template('index.html')
 
 
-@app.route('/loadDatabase/<index_no>', methods=['POST','GET'])
+@app.route('/loadDatabase/<index_no>', methods=['GET','POST'])
 def load_DB(index_no):
+	index_no = int(index_no)
 	data = player.album_stats_df(index_no) ## changed from .ablum_stats
-	with open("data.json", "w") as outfile:
-                json.dump(data,outfile,indent=2)
+	
+	data = data.to_dict( orient="records")
+	print (f'*********************** {type(data)} *******************************')
+    #with open("data.json", "w") as outfile:
+    #            json.dump(data,outfile,indent=2)
+
 	return jsonify(data)
 
 
@@ -203,7 +203,8 @@ def requestSong():
 	if request.method == 'POST':
 		
 		data = request.json
-		s_cd = str(data['Disk'])
+		s_idx = data['Index']
+		s_cd = player.adf.loc[s_idx].Disc_ID
 		s_track = str(data['Song']+1)
 	
 
@@ -242,7 +243,7 @@ def requestSong():
 
 	send_code(c_builder)
 
-	print(player.play(int(s_cd), int(s_track)))
+	##print(player.play(int(s_cd), int(s_track)))
 
 
 	return '200'

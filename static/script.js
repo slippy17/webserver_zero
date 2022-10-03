@@ -105,23 +105,26 @@ async function loadDB_DF() {
 	var url = '/loadDatabase/'  ;
 	const response = await fetch(url+diskIndex);
 	const data = await response.json();
-	songList =[]
-	var tk= data[0].tracks;
-	//console.log(tk);
-	var i = 0
+	songList =[];
+	tk = data.length;
+	//console.log(data.length);
+	var i = 0;
+	
 	//update = ".player .player-list .list"
 	while (i<(tk)) {
-		const artistname = data[2].artistname;
-		const album = data[3].album;
-		console.log(album);
-		const {title, length} = data[1][i].recording;
+		const artistname = data[i]['Artist'];
+		const album = data[i]['Album'];
+		const title = data[i]['Song_Title'];
+		const length = data[i]['Length'];
+		//console.log(album);
+		//const {title, length} = data[1][i].recording;
 		object = {
 			thumbnail:"Bright_Future.jpg",
 			audio:"Frog Princess -- The Divine Comedy.mp3",
 			songname: title,
 			artistname: artistname,
 			album: album,
-			song_length: length
+			song_length: 100
 			};
 
 		songList.push(object);		
@@ -197,7 +200,7 @@ for(let i=0;i<songListItems.length;i++){
  function requestSong(diskIndex, currentSongIndex){
 	const requestUrl = '/requestSong/';
 	const requestData = {
-		Disk: diskIndex, 
+		Index: diskIndex, 
 		Song: currentSongIndex 
 	}
 	const request = new Request (requestUrl, 
