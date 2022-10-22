@@ -116,7 +116,7 @@ async function loadDB_DF() {
 		const album = data[i]['Album'];
 		const title = data[i]['Song_Title'];
 		const length = data[i]['Length'];
-		//console.log(album);
+		//console.log(length);
 		//const {title, length} = data[1][i].recording;
 		object = {
 			thumbnail:"Bright_Future.jpg",
@@ -124,7 +124,7 @@ async function loadDB_DF() {
 			songname: title,
 			artistname: artistname,
 			album: album,
-			song_length: 100
+			song_length: length
 			};
 
 		songList.push(object);		

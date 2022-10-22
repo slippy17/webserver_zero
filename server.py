@@ -41,7 +41,10 @@ class Juke():
         self.cur_disc = disc_indx
         self.cur_track = track
         self.is_playing = True
-        self.song_len = int(player.cddb[str(disc_indx)]['disc']['release-list'][0]['medium-list'][0]['track-list'][track-1]['length'])/1000
+        #self.song_len = int(player.cddb[str(disc_indx)]['disc']['release-list'][0]['medium-list'][0]['track-list'][track-1]['length'])/1000
+        self.song_len = self.df[(self.df["Disc_ID"] == disc_indx) & (self.df["Track_ID"] == track)].Length.item()
+    
+        print(f'*********** Song Length is {self.song_len}')
         self.datum = time.time()
         self.end = self.datum + self.song_len - 2 ## (2 secs approx offset CD player)
         self.cancel_future_calls = self.call_repeatedly(5, self.set_elaspsed)
@@ -107,6 +110,7 @@ class Juke():
 
     def load_df(self):
         self.df= pd.read_pickle("./static/cd_database.pkl")
+        self.df.Length = self.df.Length.astype('int32')
         self.adf= self.df[['Album', 'Disc_ID', 'Artist']].copy()
         self.adf= self.adf.drop_duplicates(subset=['Album'], ignore_index=True)
         return
@@ -203,8 +207,8 @@ def requestSong():
 	if request.method == 'POST':
 		
 		data = request.json
-		s_idx = data['Index']
-		s_cd = player.adf.loc[s_idx].Disc_ID
+		s_idx = data['Index']  ## Index from the client.
+		s_cd = str(player.adf.loc[s_idx].Disc_ID) ## Lookup the Disc_ID from that Index.
 		s_track = str(data['Song']+1)
 	
 
@@ -243,7 +247,7 @@ def requestSong():
 
 	send_code(c_builder)
 
-	##print(player.play(int(s_cd), int(s_track)))
+	print(player.play(int(s_cd), int(s_track)))
 
 
 	return '200'
