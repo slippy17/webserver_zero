@@ -4,7 +4,7 @@ import json
 import time 
 import os
 import pandas as pd
-
+import playtime as pt
 
 # Environment variables.
 ip_addr= os.environ['IP_ADDRESS']
@@ -17,7 +17,12 @@ if gpio_avail : os.system("sudo ./ledON")
 
 
 
+
 class Juke():
+
+    playtimer = pt.Tmr()
+
+
     def __init__(self):
         self.is_playing = False
         self.cur_disc = 2
@@ -41,15 +46,22 @@ class Juke():
         self.cur_disc = disc_indx
         self.cur_track = track
         self.is_playing = True
-        #self.song_len = int(player.cddb[str(disc_indx)]['disc']['release-list'][0]['medium-list'][0]['track-list'][track-1]['length'])/1000
-        self.song_len = self.df[(self.df["Disc_ID"] == disc_indx) & (self.df["Track_ID"] == track)].Length.item()
-    
-        print(f'*********** Song Length is {self.song_len}')
+        #self.song_len = 10#int(player.cddb[str(disc_indx)]['disc']['release-list'][0]['medium-list'][0]['track-list'][track-1]['length'])/1000
+        
+        print (f' Disk is {disc_indx}.  Track is {track}')
+
+        x = self.df[(self.df["Disc_ID"] == self.cur_disc) & (self.df["Track_ID"] == self.cur_track)]
+        self.song_len = int(x.Length)
+        print(x)
+        
+        print(f'*********** Song Length is {self.song_len/1000} seconds')
+        #Juke.playtimer.run(int(self.song_len))
         self.datum = time.time()
         self.end = self.datum + self.song_len - 2 ## (2 secs approx offset CD player)
         self.cancel_future_calls = self.call_repeatedly(5, self.set_elaspsed)
         self.p_datum = 0
-        return 'Playing', self.end
+        #if Juke.playtimer.eplap == self.song_len
+        return
 
     
     def pause(self):
@@ -111,6 +123,7 @@ class Juke():
     def load_df(self):
         self.df= pd.read_pickle("./static/cd_database.pkl")
         self.df.Length = self.df.Length.astype('int32')
+        self.df.Disc_ID = self.df.Disc_ID.astype('int')
         self.adf= self.df[['Album', 'Disc_ID', 'Artist']].copy()
         self.adf= self.adf.drop_duplicates(subset=['Album'], ignore_index=True)
         return
@@ -128,10 +141,12 @@ class Juke():
     	message.append({'album':album})
     	return message
 
-    def album_stats_df(self,index_no):  ## ************** NOT TESTED ************
+    def album_stats_df(self,index_no):  ## ************** TESTED ************
         db = self.adf.loc[index_no]
         d_id = db.Disc_ID
-        tracks_df = self.df[self.df["Disc_ID"] == d_id]   ## Album info for the album at that Disc_ID.
+        tracks_df = self.df[self.df["Disc_ID"] == d_id]
+        tracks_df = tracks_df.sort_values(by=['Track_ID'], ignore_index=True)
+           ## Album info for the album at that Disc_ID.
         tracks = tracks_df.Song_Title.count()   ## The number 0f tracks in the album
         return tracks_df
 
@@ -162,7 +177,7 @@ def send_code(commands):
             raw = bin(int(code, 16))[2:].zfill(32)
             print (command, code)
             if gpio_avail : os.system("sudo ./pioneer "+ raw)
-            time.sleep(1)
+            time.sleep(0.6)
 	return
 
 
@@ -193,9 +208,9 @@ def load_DB(index_no):
 	data = player.album_stats_df(index_no) ## changed from .ablum_stats
 	
 	data = data.to_dict( orient="records")
-	print (f'*********************** {type(data)} *******************************')
-    #with open("data.json", "w") as outfile:
-    #            json.dump(data,outfile,indent=2)
+	#print (f'*********************** {type(data)} *******************************')
+	#with open("data.json", "w") as outfile:
+	#	json.dump(data,outfile,indent=2)
 
 	return jsonify(data)
 
