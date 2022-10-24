@@ -33,7 +33,7 @@ async function stat() {
 	const response = await fetch(url);
 	const data = await response.json();
 	d_stat = await get_stat(data);
-	value_seek = d_stat.time;
+	value_seek = value_seek; //d_stat.time; changed dc
 
 };
 
@@ -59,7 +59,7 @@ return dict
 //});
 var songIndex = 0;
 var diskIndex = 3;
-var value_seek = 0;
+var value_seek = diskIndex;
 var  status = {};
 var play_pause_css = document.querySelector(':root');
 
@@ -116,7 +116,7 @@ async function loadDB_DF() {
 		const album = data[i]['Album'];
 		const title = data[i]['Song_Title'];
 		const length = data[i]['Length'];
-		//console.log(length);
+		// console.log(length);
 		//const {title, length} = data[1][i].recording;
 		object = {
 			thumbnail:"Bright_Future.jpg",
@@ -228,16 +228,16 @@ function loadSong(songIndex){
 setInterval(function(){
 	main.seekbar.value = value_seek; //parseInt(main.audio.currentTime);
 	if (d_stat.is_playing){
-		value_seek = value_seek + 2;
+		value_seek = diskIndex; // + 2;
 	}
 
 	if (value_seek > d_stat.length) {
-		value_seek = 0;
+		value_seek = diskIndex;  // changed dc
 		d_stat.is_playing = false;
 		play_pause_css.style.setProperty('--show_play','block');
 		play_pause_css.style.setProperty('--show_pause','none');
 	} 
-	//console.log(value_seek);
+	console.log('Seekbar value ',main.seekbar.value);
 },2000);
 
 
@@ -245,6 +245,7 @@ setInterval(function(){
 main.prevDisk.addEventListener("click",function(){
 	if(diskIndex > 1){
 		diskIndex = diskIndex-1;
+		value_seek = diskIndex;
 		//currentSongIndex=0
 		console.log('Disk ',diskIndex, 'Song ',songIndex);
 		
@@ -268,6 +269,7 @@ main.nextControl.addEventListener("click",function(){
 main.nextDisk.addEventListener("click",function(){
 	if(diskIndex < 99){
 		diskIndex = diskIndex+1;
+		value_seek = diskIndex;
 		//currentSongIndex = 0
 		console.log('Disk ',diskIndex, 'Song ',songIndex);
 	}
@@ -291,8 +293,8 @@ function play_button() {
 			setTimeout(stat, 15000);
 			setTimeout(function(){
 				main.seekbar.setAttribute("min",0);
-				main.seekbar.setAttribute("max",d_stat.length); 
-				value_seek = d_stat.time;
+				main.seekbar.setAttribute("max",10); 
+				value_seek = diskIndex;
 				//console.log('length: ' + d_stat.length);
 			}, 20000);
 			
@@ -309,9 +311,11 @@ function play_button() {
 	//	pause();
 	//	console.log('is_playing set as playing');
 
-//main.seekbar.addEventListener("change",function(){
-//	main.audio.currentTime = main.seekbar.value;
-//});
+main.seekbar.addEventListener("change",function(){
+	main.seekbar.setAttribute("min",0);
+	main.seekbar.setAttribute("max",10);
+	diskIndex = main.seekbar.value;
+});
 
 loadSong(songIndex);
 

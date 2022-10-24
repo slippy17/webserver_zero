@@ -175,6 +175,8 @@ def send_code(commands):
 	for command in commands:
             code = (cd_player[command])
             raw = bin(int(code, 16))[2:].zfill(32)
+            if command == 'Play':
+                time.sleep(2)
             print (command, code)
             if gpio_avail : os.system("sudo ./pioneer "+ raw)
             time.sleep(0.6)
