@@ -25,7 +25,7 @@ class Juke():
 
     def __init__(self):
         self.is_playing = False
-        self.cur_disc = 2
+        self.cur_disc = 40
         self.cur_track = 1
         self.cur_time = 0
         self.song_len = 0   
