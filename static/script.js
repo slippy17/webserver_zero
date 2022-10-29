@@ -58,7 +58,7 @@ return dict
 // Work in  progress.
 //});
 var songIndex = 0;
-var diskIndex = 3;
+var diskIndex = 40;
 var value_seek = diskIndex;
 var  status = {};
 var play_pause_css = document.querySelector(':root');
