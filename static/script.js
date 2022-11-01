@@ -225,20 +225,20 @@ function loadSong(songIndex){
 }
 
 
-setInterval(function(){
-	main.seekbar.value = value_seek; //parseInt(main.audio.currentTime);
-	if (d_stat.is_playing){
-		value_seek = diskIndex; // + 2;
-	}
+// setInterval(function(){
+// 	main.seekbar.value = value_seek; //parseInt(main.audio.currentTime);
+// 	if (d_stat.is_playing){
+// 		value_seek = diskIndex; // + 2;
+// 	}
 
-	if (value_seek > d_stat.length) {
-		value_seek = diskIndex;  // changed dc
-		d_stat.is_playing = false;
-		play_pause_css.style.setProperty('--show_play','block');
-		play_pause_css.style.setProperty('--show_pause','none');
-	} 
-	console.log('Seekbar value ',main.seekbar.value);
-},2000);
+// 	if (value_seek > d_stat.length) {
+// 		value_seek = diskIndex;  // changed dc
+// 		d_stat.is_playing = false;
+// 		play_pause_css.style.setProperty('--show_play','block');
+// 		play_pause_css.style.setProperty('--show_pause','none');
+// 	} 
+// 	console.log('Seekbar value ',main.seekbar.value);
+// },2000);
 
 
 
@@ -289,14 +289,14 @@ function play_button() {
 			play_pause_css.style.setProperty('--show_play','none');
 			play_pause_css.style.setProperty('--show_pause','block');
 
-			// delay 15secs to allow Pioneer cd player time to access cd.
-			setTimeout(stat, 15000);
-			setTimeout(function(){
-				main.seekbar.setAttribute("min",0);
-				main.seekbar.setAttribute("max",10); 
-				value_seek = diskIndex;
-				//console.log('length: ' + d_stat.length);
-			}, 20000);
+			// // delay 15secs to allow Pioneer cd player time to access cd.
+			// setTimeout(stat, 15000);
+			// setTimeout(function(){
+			// 	main.seekbar.setAttribute("min",0);
+			// 	main.seekbar.setAttribute("max",10); 
+			// 	value_seek = diskIndex;
+			// 	//console.log('length: ' + d_stat.length);
+			// }, 20000);
 			
 		} 
 	}
