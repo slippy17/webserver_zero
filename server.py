@@ -42,7 +42,7 @@ class Juke():
         return stopped.set        
 
 
-    def play(self, disc_indx, track):
+    def old_play(self, disc_indx, track):
         self.cur_disc = disc_indx
         self.cur_track = track
         self.is_playing = True
@@ -62,6 +62,29 @@ class Juke():
         self.p_datum = 0
         #if Juke.playtimer.eplap == self.song_len
         return 'Playing', self.song_len
+
+    def play(self, disc_indx, track):
+        self.cur_disc = disc_indx
+        self.cur_track = track
+        self.is_playing = True
+        #self.song_len = 10#int(player.cddb[str(disc_indx)]['disc']['release-list'][0]['medium-list'][0]['track-list'][track-1]['length'])/1000
+        
+        print (f' Disk is {disc_indx}.  Track is {track}')
+
+        x = self.df[(self.df["Disc_ID"] == self.cur_disc) & (self.df["Track_ID"] == self.cur_track)]
+        self.song_len = int(x.Length/1000)
+        
+        print(f'*********** Song Length is {int(self.song_len)} seconds')
+        Juke.playtimer.run(int(self.song_len))
+        self.cancel_future_calls = self.call_repeatedly(5, self.check_timer)
+
+        return 'Playing', self.song_len
+
+    def check_timer(self):
+        if Juke.playtimer.remaining == 0:
+            self.stop()
+            return
+        return
 
     
     def pause(self):
