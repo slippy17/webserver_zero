@@ -24,7 +24,7 @@ class Juke():
 
 
     def __init__(self):
-        self.is_playing = False
+        self.is_playing = 0
         self.cur_disc = 40
         self.cur_track = 1
         self.cur_time = 0
@@ -45,7 +45,7 @@ class Juke():
     def old_play(self, disc_indx, track):
         self.cur_disc = disc_indx
         self.cur_track = track
-        self.is_playing = True
+        self.is_playing = 1
         #self.song_len = 10#int(player.cddb[str(disc_indx)]['disc']['release-list'][0]['medium-list'][0]['track-list'][track-1]['length'])/1000
         
         print (f' Disk is {disc_indx}.  Track is {track}')
@@ -66,13 +66,12 @@ class Juke():
     def play(self, disc_indx, track):
         self.cur_disc = disc_indx
         self.cur_track = track
-        self.is_playing = True
+        self.is_playing = 1
         #self.song_len = 10#int(player.cddb[str(disc_indx)]['disc']['release-list'][0]['medium-list'][0]['track-list'][track-1]['length'])/1000
-        
-        print (f' Disk is {disc_indx}.  Track is {track}')
 
         x = self.df[(self.df["Disc_ID"] == self.cur_disc) & (self.df["Track_ID"] == self.cur_track)]
         self.song_len = int(x.Length/1000)
+        print(x)
         
         print(f'*********** Song Length is {int(self.song_len)} seconds')
         Juke.playtimer.run(int(self.song_len))
@@ -87,8 +86,7 @@ class Juke():
         return
 
     
-    def pause(self):
-        
+    def old_pause(self):
         if self.is_playing == True:
             self.p_datum = time.time()
             self.is_playing = 'Paused'
@@ -103,6 +101,21 @@ class Juke():
             return self.is_playing, offset
         return self.is_playing
 
+    def pause(self):
+        if self.is_playing == 1:
+            self.is_playing = -1
+            Juke.playtimer.pause()
+            return self.is_playing, Juke.playtimer.remaining
+
+        if self.is_playing == -1:
+            self.is_playing = 1
+            Juke.playtimer.resume()
+            return self.is_playing
+
+        return self.is_playing
+
+
+
 
     def set_elaspsed(self):
         if self.is_playing == 'Paused': return self.cur_time
@@ -115,14 +128,10 @@ class Juke():
             #self.cancel_future_calls()
             
         return self.cur_time
-
-     
-    def get_elaspsed(self):
-        return self.cur_time
   
         
     def stop(self):
-        self.is_playing = False
+        self.is_playing = 0
         self.cur_time = 0
         self.cancel_future_calls()
         send_code(['Stop'])
@@ -134,7 +143,7 @@ class Juke():
         message['disk'] = self.cur_disc
         message['song'] = self.cur_track
         message['length']= self.song_len
-        message['time'] = self.get_elaspsed()
+        message['time'] = Juke.playtimer.elap
         message['is_playing'] = self.is_playing
         return message
 
@@ -219,6 +228,11 @@ def  pause_request():
     message = player.pause()
     return jsonify(message)  # serialize and use JSON headers
 
+
+# @app.route('/resume', methods=['GET'])
+# def  pause_request():
+#     message = player.resume()
+#     return jsonify(message)  # serialize and use JSON headers
 
 
 @app.route('/')

@@ -54,6 +54,26 @@ return dict
 };
 
 
+
+function show_pause_button() {
+				// display the pause button.
+			play_pause_css.style.setProperty('--show_play','none');
+			play_pause_css.style.setProperty('--show_pause','block');
+return
+};
+
+
+function show_play_button() {
+				// display the pause button.
+			play_pause_css.style.setProperty('--show_play','block');
+			play_pause_css.style.setProperty('--show_pause','none');
+return
+};
+
+
+
+
+
 //document.addEventListener("DOMContentLoaded", async () => {
 // Work in  progress.
 //});
@@ -62,6 +82,8 @@ var diskIndex = 40;
 var value_seek = diskIndex;
 var  status = {};
 var play_pause_css = document.querySelector(':root');
+
+
 
 
 // Query server for tracks list from disc in url. response is a list of dicts in json form.
@@ -225,6 +247,7 @@ function loadSong(songIndex){
 }
 
 
+
 // setInterval(function(){
 // 	main.seekbar.value = value_seek; //parseInt(main.audio.currentTime);
 // 	if (d_stat.is_playing){
@@ -281,13 +304,18 @@ main.playPauseControl.addEventListener("click",play_button)
 function play_button() {
 
 		// console.log(d_stat.is_playing );
+		//  d_stat   0 = stopped     1 - playing    -1 = paused
+	stat()
 
-	if(d_stat.is_playing == false){
+	if(d_stat.is_playing == 0){
 			requestSong(diskIndex, songIndex);
+			show_pause_button();
+			d_stat.is_playing == 1;
 
 			// display the pause button.
-			play_pause_css.style.setProperty('--show_play','none');
-			play_pause_css.style.setProperty('--show_pause','block');
+			//play_pause_css.style.setProperty('--show_play','none');
+			//play_pause_css.style.setProperty('--show_pause','block');
+			//const intervalID = setInterval(stat(),1);
 
 			// // delay 15secs to allow Pioneer cd player time to access cd.
 			// setTimeout(stat, 15000);
@@ -296,12 +324,18 @@ function play_button() {
 			// 	main.seekbar.setAttribute("max",10); 
 			// 	value_seek = diskIndex;
 			// 	//console.log('length: ' + d_stat.length);
-			// }, 20000);
-			
-		} 
-	}
-	//if(d_stat.is_playing == true){
-	//	main.playPauseControl.classList.add("paused");
+			// }, 20000)
+
+		}
+	
+
+	 if(d_stat.is_playing == 1){
+	 	pause();
+	 	show_play_button();
+	 	d_stat.is_playing == -1;
+	 }
+
+	//main.playPauseControl.classList.add("paused");
 	//	pause();
 	//	console.log('is_playing now paused');
 	//	//main.audio.pause();
@@ -310,6 +344,26 @@ function play_button() {
 	//	main.playPauseControl.classList.remove("paused");
 	//	pause();
 	//	console.log('is_playing set as playing');
+	
+
+
+	// if(d_stat.is_playing == -1){
+	// 	pause();
+	// 	show_pause_button();
+		
+	// //main.playPauseControl.classList.add("paused");
+	// //	pause();
+	// //	console.log('is_playing now paused');
+	// //	//main.audio.pause();
+	// //}
+	// //if(d_stat.is_playing == 'Paused'){
+	// //	main.playPauseControl.classList.remove("paused");
+	// //	pause();
+	// //	console.log('is_playing set as playing');
+	// }
+};
+
+stat();
 
 main.seekbar.addEventListener("change",function(){
 	main.seekbar.setAttribute("min",0);
@@ -320,3 +374,5 @@ main.seekbar.addEventListener("change",function(){
 loadSong(songIndex);
 
 stat();
+
+
