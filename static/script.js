@@ -70,8 +70,6 @@ function show_pause_button() {
 			play_pause_css.style.setProperty('--show_paused','none');
 return
 };
-
-
 function show_play_button() {
 				// display the pause button.
 			play_pause_css.style.setProperty('--show_play','block');
@@ -79,13 +77,13 @@ function show_play_button() {
 			play_pause_css.style.setProperty('--show_paused','none');
 return
 };
-
 function show_paused_button(){
 				// display the paused buttin.
 			play_pause_css.style.setProperty('--show_play','none');
 			play_pause_css.style.setProperty('--show_pause','none');
 			play_pause_css.style.setProperty('--show_paused','block');
-}
+return
+};
 
 
 //document.addEventListener("DOMContentLoaded", async () => {
@@ -97,44 +95,6 @@ var value_seek = diskIndex;
 var  status = {};
 var play_pause_css = document.querySelector(':root');
 
-
-
-
-// Query server for tracks list from disc in url. response is a list of dicts in json form.
-// async function loadDB() {
-// 	var url = '/loadDatabase/'  ;
-// 	const response = await fetch(url+diskIndex);
-// 	const data = await response.json();
-// 	songList =[]
-// 	var tk= data[0].tracks;
-// 	//console.log(tk);
-// 	var i = 0
-// 	//update = ".player .player-list .list"
-// 	while (i<(tk)) {
-// 		const artistname = data[2].artistname;
-// 		const album = data[3].album;
-// 		console.log(album);
-// 		const {title, length} = data[1][i].recording;
-// 		object = {
-// 			thumbnail:"Bright_Future.jpg",
-// 			audio:"Frog Princess -- The Divine Comedy.mp3",
-// 			songname: title,
-// 			artistname: artistname,
-// 			album: album,
-// 			song_length: length
-// 			};
-
-// 		songList.push(object);		
-		
-// 		i = i + 1;
-// 		main.songname.innerText = songList[0].songname;
-// 		main.artistname.innerText = songList[0].artistname;
-// 		main.album.innerText = songList[0].album;
-		
-// };
-// 	updateSongs();
-	
-// 	}
 
 // Testing a load from dataframe function. Below is the old Loaddb()
 async function loadDB_DF() {
@@ -172,12 +132,7 @@ async function loadDB_DF() {
 		
 };
 	updateSongs();
-	
-	}
-
-
-
-
+	};
 
 //loadDB();
 loadDB_DF();
@@ -260,25 +215,6 @@ function loadSong(songIndex){
 	//main.audio.setAttribute("src","./static/"+song.audio);
 }
 
-
-
-// setInterval(function(){
-// 	main.seekbar.value = value_seek; //parseInt(main.audio.currentTime);
-// 	if (d_stat.is_playing){
-// 		value_seek = diskIndex; // + 2;
-// 	}
-
-// 	if (value_seek > d_stat.length) {
-// 		value_seek = diskIndex;  // changed dc
-// 		d_stat.is_playing = false;
-// 		play_pause_css.style.setProperty('--show_play','block');
-// 		play_pause_css.style.setProperty('--show_pause','none');
-// 	} 
-// 	console.log('Seekbar value ',main.seekbar.value);
-// },2000);
-
-
-
 main.prevDisk.addEventListener("click",function(){
 	if(diskIndex > 1){
 		diskIndex = diskIndex-1;
@@ -316,74 +252,25 @@ main.nextDisk.addEventListener("click",function(){
 
 main.playPauseControl.addEventListener("click",play_button)
 function play_button() {
-
-		// console.log(d_stat.is_playing );
 		//  d_stat   0 = stopped     1 - playing    -1 = paused
-	stat()
-
 	if(d_stat.is_playing == 0){
-			requestSong(diskIndex, songIndex);
-			show_pause_button();
-			d_stat.is_playing == 1;
-
-			// display the pause button.
-			//play_pause_css.style.setProperty('--show_play','none');
-			//play_pause_css.style.setProperty('--show_pause','block');
-			//const intervalID = setInterval(stat(),1);
-
-			// // delay 15secs to allow Pioneer cd player time to access cd.
-			// setTimeout(stat, 15000);
-			// setTimeout(function(){
-			// 	main.seekbar.setAttribute("min",0);
-			// 	main.seekbar.setAttribute("max",10); 
-			// 	value_seek = diskIndex;
-			// 	//console.log('length: ' + d_stat.length);
-			// }, 20000)
-
+		requestSong(diskIndex, songIndex);
+		show_pause_button();
+		d_stat.is_playing == 1;
 		}
-	
-
 	 if(d_stat.is_playing == 1){
 	 	pause();
-	 	show_play_button();
+	 	show_paused_button();
 	 	d_stat.is_playing == -1;
-	 }
-
+	 	}
 	 if(d_stat.is_playing == -1){
 	 	pause();
 	 	show_pause_button();
 	 	d_stat.is_playing == 1;
-	 }
-
-	//main.playPauseControl.classList.add("paused");
-	//	pause();
-	//	console.log('is_playing now paused');
-	//	//main.audio.pause();
-	//}
-	//if(d_stat.is_playing == 'Paused'){
-	//	main.playPauseControl.classList.remove("paused");
-	//	pause();
-	//	console.log('is_playing set as playing');
-	
+	 	}
 
 
-	// if(d_stat.is_playing == -1){
-	// 	pause();
-	// 	show_pause_button();
-		
-	// //main.playPauseControl.classList.add("paused");
-	// //	pause();
-	// //	console.log('is_playing now paused');
-	// //	//main.audio.pause();
-	// //}
-	// //if(d_stat.is_playing == 'Paused'){
-	// //	main.playPauseControl.classList.remove("paused");
-	// //	pause();
-	// //	console.log('is_playing set as playing');
-	// }
 };
-
-stat();
 
 main.seekbar.addEventListener("change",function(){
 	main.seekbar.setAttribute("min",0);
