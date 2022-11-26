@@ -82,7 +82,7 @@ body {
 	font-size:6rem;
 	color: orange;
 }
-.player .main .controls > div.play-pause-control i.fa-play {
+.player .main .controls > div.play-pause-control i.fa-play-circle {
 	display: none;
 }
 .player .main .controls > div.play-pause-control.paused i.fa-play {
@@ -91,6 +91,10 @@ body {
 .player .main .controls > div.play-pause-control.paused i.fa-pause {
 	display: var(--show_pause);
 }
+.player .main .controls > div.play-pause-control.paused i.fa-play-circle {
+	display: var(--show_paused);
+}
+
 .player .player-list {
 	
 	position: absolute;

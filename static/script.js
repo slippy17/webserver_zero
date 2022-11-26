@@ -32,9 +32,17 @@ async function stat() {
 	var url = '/stat'  ;
 	const response = await fetch(url);
 	const data = await response.json();
-	d_stat = await get_stat(data);
+	d_stat =  get_stat(data);
 	value_seek = value_seek; //d_stat.time; changed dc
+	if(d_stat.is_playing == 0){
+			show_play_button()}
+	if(d_stat.is_playing == 1){
+			show_pause_button()}
+	if(d_stat.is_playing == -1){
+			show_paused_button()}
 
+	setTimeout(stat, 5000)
+	return d_stat
 };
 
 function pause() {
@@ -59,6 +67,7 @@ function show_pause_button() {
 				// display the pause button.
 			play_pause_css.style.setProperty('--show_play','none');
 			play_pause_css.style.setProperty('--show_pause','block');
+			play_pause_css.style.setProperty('--show_paused','none');
 return
 };
 
@@ -67,11 +76,16 @@ function show_play_button() {
 				// display the pause button.
 			play_pause_css.style.setProperty('--show_play','block');
 			play_pause_css.style.setProperty('--show_pause','none');
+			play_pause_css.style.setProperty('--show_paused','none');
 return
 };
 
-
-
+function show_paused_button(){
+				// display the paused buttin.
+			play_pause_css.style.setProperty('--show_play','none');
+			play_pause_css.style.setProperty('--show_pause','none');
+			play_pause_css.style.setProperty('--show_paused','block');
+}
 
 
 //document.addEventListener("DOMContentLoaded", async () => {
@@ -333,6 +347,12 @@ function play_button() {
 	 	pause();
 	 	show_play_button();
 	 	d_stat.is_playing == -1;
+	 }
+
+	 if(d_stat.is_playing == -1){
+	 	pause();
+	 	show_pause_button();
+	 	d_stat.is_playing == 1;
 	 }
 
 	//main.playPauseControl.classList.add("paused");
