@@ -105,11 +105,13 @@ class Juke():
         if self.is_playing == 1:
             self.is_playing = -1
             Juke.playtimer.pause()
+            send_code(['Pause'])
             return self.is_playing, Juke.playtimer.remaining
 
         if self.is_playing == -1:
             self.is_playing = 1
             Juke.playtimer.resume()
+            send_code(['Play'])
             return self.is_playing
 
         return self.is_playing
