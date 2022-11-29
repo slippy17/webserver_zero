@@ -54,10 +54,30 @@ body {
 }
 .player .main .details {
 	text-align: center;
-	padding: 15px 0px;
+	color:#eee;
+	padding: 35px 0px;
 }
+
+.player .main .details h5 {
+	font-size: 10px;
+	color:#eee;
+	margin-bottom: 5px;
+}
+
+
+.player .main .details p {
+	font-size: 70px;
+	color: #eee;
+}
+
+.player .main .details h3 {
+	font-size: 50px;
+	color: #aaa;
+}
+
+
 .player .main .details h2 {
-	font-size: 60px;
+	font-size: 38px;
 	color:#eee;
 	margin-bottom: 5px;
 }
@@ -65,10 +85,7 @@ body {
 	font-size: 50px;
 	color: #aaa;
 }
-.player .main .details p {
-	font-size: 70px;
-	color: #eee;
-}
+
 .player .main .controls {
 	display: flex;
 	justify-content: center;

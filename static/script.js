@@ -42,6 +42,8 @@ async function stat() {
 			show_paused_button()}
 
 	setTimeout(stat, 5000)
+	text = "H5 text"
+	main.run_time.innerText = text;
 	return d_stat
 };
 
@@ -129,10 +131,13 @@ async function loadDB_DF() {
 		main.songname.innerText = songList[0].songname;
 		main.artistname.innerText = songList[0].artistname;
 		main.album.innerText = songList[0].album;
+
 		
 };
 	updateSongs();
 	};
+
+
 
 //loadDB();
 loadDB_DF();
@@ -145,6 +150,7 @@ let main = {
 	audio:_(".player .main audio"),
 	thumbnail:_(".player .main img"),
 	seekbar:_(".player .main input"),
+	run_time:(".player .main .details h5"),
 	songname:_(".player .main .details h2"),
 	album:_(".player .main .details h3"),
 	artistname:_(".player .main .details p"),
@@ -161,6 +167,7 @@ toggleSongList.addEventListener("click", function(){
 });
 
 
+
 //load album details into album song list in index,html
 function updateSongs(){
 _(".player .player-list .list").innerHTML = (songList.map(function(song,songIndex){
@@ -170,6 +177,7 @@ _(".player .player-list .list").innerHTML = (songList.map(function(song,songInde
 				<img src="./static/${song.thumbnail}">
 			</div>
 			<div class="details">
+
 				<h2>${song.songname}</h2>
 				<p>${song.artistname}</p>
 			</div>
@@ -281,5 +289,3 @@ main.seekbar.addEventListener("change",function(){
 loadSong(songIndex);
 
 stat();
-
-
