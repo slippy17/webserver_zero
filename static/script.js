@@ -41,9 +41,10 @@ async function stat() {
 	if(d_stat.is_playing == -1){
 			show_paused_button()}
 
+	update_runtime(d_stat.length-d_stat.time);
+
 	setTimeout(stat, 5000)
-	text = "H5 text"
-	main.run_time.innerText = text;
+	
 	return d_stat
 };
 
@@ -87,6 +88,11 @@ function show_paused_button(){
 return
 };
 
+function update_runtime(runTime){
+
+  document.getElementById("runTime").innerHTML = runTime+" secs";
+
+};
 
 //document.addEventListener("DOMContentLoaded", async () => {
 // Work in  progress.

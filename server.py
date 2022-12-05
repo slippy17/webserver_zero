@@ -16,23 +16,19 @@ print (f"IP ADDRESS {ip_addr} GPIO_AVAIL is {gpio_avail}")
 if gpio_avail : os.system("sudo ./ledON")
 
 
-
-
 class Juke():
 
     playtimer = pt.Tmr()
-
 
     def __init__(self):
         self.is_playing = 0
         self.cur_disc = 40
         self.cur_track = 1
-        self.cur_time = 0
+        self.cur_time = 0 ## not used
         self.song_len = 0   
-        self.end = 0        ## Time that songs ends.
-        
-        
-        
+        self.end = 0        ## Not used. Time that songs ends.
+
+                
     def call_repeatedly(self,interval, func, *args):
         stopped = Event()
         def loop():
@@ -42,18 +38,15 @@ class Juke():
         return stopped.set        
 
 
-
     def play(self, disc_indx, track):
         self.cur_disc = disc_indx
         self.cur_track = track
         self.is_playing = 1
-        #self.song_len = 10#int(player.cddb[str(disc_indx)]['disc']['release-list'][0]['medium-list'][0]['track-list'][track-1]['length'])/1000
-
+        
         x = self.df[(self.df["Disc_ID"] == self.cur_disc) & (self.df["Track_ID"] == self.cur_track)]
         self.song_len = int(x.Length/1000)
         print(x)
         
-        print(f'*********** Song Length is {int(self.song_len)} seconds')
         Juke.playtimer.run(int(self.song_len))
         self.cancel_future_calls = self.call_repeatedly(5, self.check_timer)
 
@@ -65,8 +58,6 @@ class Juke():
             self.stop()
             return
         return
-
-    
  
 
     def pause(self):
@@ -83,16 +74,14 @@ class Juke():
             return self.is_playing
 
         return self.is_playing
-        
-  
+
         
     def stop(self):
         self.is_playing = 0
-        self.cur_time = 0
+        self.cur_time = 0   ## not used
         self.cancel_future_calls()
         send_code(['Stop'])
         return 'Stop'
-
 
     def status(self):
         message = {}
@@ -116,18 +105,18 @@ class Juke():
         self.adf= self.adf.drop_duplicates(subset=['Album'], ignore_index=True)
         return
     
-    def album_stats(self,index_no):
-    	db = self.cddb[index_no]['disc']['release-list'][0]
-    	message = []
-    	tracks = db['medium-list'][0]['track-count']
-    	track_list = db['medium-list'][0]['track-list']
-    	artist =  db['artist-credit'][0]['artist']['name']
-    	album = db['title'] 	
-    	message.append({'tracks':tracks})
-    	message.append(track_list)
-    	message.append({'artistname':artist})
-    	message.append({'album':album})
-    	return message
+    # def album_stats(self,index_no):
+    # 	db = self.cddb[index_no]['disc']['release-list'][0]
+    # 	message = []
+    # 	tracks = db['medium-list'][0]['track-count']
+    # 	track_list = db['medium-list'][0]['track-list']
+    # 	artist =  db['artist-credit'][0]['artist']['name']
+    # 	album = db['title'] 	
+    # 	message.append({'tracks':tracks})
+    # 	message.append(track_list)
+    # 	message.append({'artistname':artist})
+    # 	message.append({'album':album})
+    # 	return message
 
     def album_stats_df(self,index_no):  ## ************** TESTED ************
         db = self.adf.loc[index_no]
@@ -139,23 +128,17 @@ class Juke():
         return tracks_df
 
         
-
-
 app = Flask(__name__)
 
 player = Juke()
 #player.load()
 player.load_df()
 
-
-
-
 #cur_disk = 10
 #cur_song = 5
 #cur_song_len = 0
 #cur_time = 0
 #is_playing = False
-
 
 def send_code(commands):
 	with open("./static/p_codes.json", "r") as infile:
@@ -164,11 +147,46 @@ def send_code(commands):
             code = (cd_player[command])
             raw = bin(int(code, 16))[2:].zfill(32)
             if command == 'Play':
-                time.sleep(6)
+                time.sleep(8)
             print (command, code)
             if gpio_avail : os.system("sudo ./pioneer "+ raw)
             time.sleep(0.6)
 	return
+
+
+def command_builder(s_cd, s_track):
+    c_builder = ['Pause']
+
+    if (int(s_cd)>100) or (len(s_track)>2):
+        print("Error in the length of numbers")
+
+    a1= s_cd[0]
+    c_builder.append(a1)
+    
+    if len(s_cd) == 2:
+        a2= s_cd[1]
+        c_builder.append(a2)
+        
+    if len(s_cd) == 3:
+        a2= s_cd[1]
+        c_builder.append(a2)
+        a3 = s_cd[2]
+        c_builder.append(a3)
+    
+    c_builder.append('Disc')
+    b1= s_track[0]
+    c_builder.append(b1)
+    if len(s_track) == 2:
+        b2= s_track[1]
+        c_builder.append(b2)
+    c_builder.append('Track')
+
+    c_builder.append('Play')
+    return c_builder
+
+
+
+
 
 
 
@@ -197,15 +215,19 @@ def home():
     return render_template('index.html')
 
 
+@app.route('/search')
+def search_DB():
+    ##sname=render_template(request.args['sname'])
+    ##print(sname)
+    return render_template('search.html', sname=request.args['sname'])
+
+
 @app.route('/loadDatabase/<index_no>', methods=['GET','POST'])
 def load_DB(index_no):
 	index_no = int(index_no)
 	data = player.album_stats_df(index_no) ## changed from .ablum_stats
 	
 	data = data.to_dict( orient="records")
-	#print (f'*********************** {type(data)} *******************************')
-	#with open("data.json", "w") as outfile:
-	#	json.dump(data,outfile,indent=2)
 
 	return jsonify(data)
 
@@ -218,47 +240,13 @@ def requestSong():
 		
 		data = request.json
 		s_idx = data['Index']  ## Index from the client.
-		s_cd = str(player.adf.loc[s_idx].Disc_ID) ## Lookup the Disc_ID from that Index.
-		s_track = str(data['Song']+1)
+		sel_cd = str(player.adf.loc[s_idx].Disc_ID) ## Lookup the Disc_ID from that Index.
+		sel_track = str(data['Song']+1)
 	
+	command_list = command_builder(sel_cd, sel_track)
+	send_code(command_list)
 
-		
-## Command builder makes list of commands to send.
-
-	c_builder = ['Pause']
-
-	if (int(s_cd)>100) or (len(s_track)>2):
-	    print("Error in the length of numbers")
-
-	a1= s_cd[0]
-	c_builder.append(a1)
-	
-	if len(s_cd) == 2:
-	    a2= s_cd[1]
-	    c_builder.append(a2)
-	    
-	if len(s_cd) == 3:
-	    a2= s_cd[1]
-	    c_builder.append(a2)
-	    a3 = s_cd[2]
-	    c_builder.append(a3)
-    
-    
-	c_builder.append('Disc')
-	b1= s_track[0]
-	c_builder.append(b1)
-	if len(s_track) == 2:
-	    b2= s_track[1]
-	    c_builder.append(b2)
-	c_builder.append('Track')
-
-	c_builder.append('Play')
-
-
-	send_code(c_builder)
-
-	print(player.play(int(s_cd), int(s_track)))
-
+	player.play(int(sel_cd), int(sel_track))
 
 	return '200'
 
