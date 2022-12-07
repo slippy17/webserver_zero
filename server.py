@@ -4,9 +4,11 @@ import json
 import time 
 import os
 import pandas as pd
-import playtime as pt
+import playtime as pt  ## Custom timer module for Play, Pause and Stop functions.
 
-# Environment variables.
+#### Environment variables.
+## Used to autoset options if testing on laptop or running on Raspberr Pi.
+
 ip_addr= os.environ['IP_ADDRESS']
 
 gpio_avail= eval(os.environ['GPIO_AVAIL'])
@@ -17,6 +19,7 @@ if gpio_avail : os.system("sudo ./ledON")
 
 
 class Juke():
+    ### Juke class to keep time based on song length. Play, Pause, Stop and report status.
 
     playtimer = pt.Tmr()
 
@@ -105,18 +108,6 @@ class Juke():
         self.adf= self.adf.drop_duplicates(subset=['Album'], ignore_index=True)
         return
     
-    # def album_stats(self,index_no):
-    # 	db = self.cddb[index_no]['disc']['release-list'][0]
-    # 	message = []
-    # 	tracks = db['medium-list'][0]['track-count']
-    # 	track_list = db['medium-list'][0]['track-list']
-    # 	artist =  db['artist-credit'][0]['artist']['name']
-    # 	album = db['title'] 	
-    # 	message.append({'tracks':tracks})
-    # 	message.append(track_list)
-    # 	message.append({'artistname':artist})
-    # 	message.append({'album':album})
-    # 	return message
 
     def album_stats_df(self,index_no):  ## ************** TESTED ************
         db = self.adf.loc[index_no]
@@ -126,6 +117,9 @@ class Juke():
            ## Album info for the album at that Disc_ID.
         tracks = tracks_df.Song_Title.count()   ## The number 0f tracks in the album
         return tracks_df
+
+    def search_DB():
+        pass
 
         
 app = Flask(__name__)
@@ -140,6 +134,8 @@ player.load_df()
 #cur_time = 0
 #is_playing = False
 
+
+## Convert list of commands to IR codes and send using 'pioneer module built with 'IRSlinger'.
 def send_code(commands):
 	with open("./static/p_codes.json", "r") as infile:
 		cd_player = json.load(infile)
@@ -154,6 +150,7 @@ def send_code(commands):
 	return
 
 
+## Build command sequence to play a song based on disk and track number.
 def command_builder(s_cd, s_track):
     c_builder = ['Pause']
 
@@ -215,11 +212,11 @@ def home():
     return render_template('index.html')
 
 
-@app.route('/search')
+@app.route('/search', methods=['GET'])
 def search_DB():
     ##sname=render_template(request.args['sname'])
     ##print(sname)
-    return render_template('search.html', sname=request.args['sname'])
+    return render_template('search.html')
 
 
 @app.route('/loadDatabase/<index_no>', methods=['GET','POST'])

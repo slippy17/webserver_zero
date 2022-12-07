@@ -65,6 +65,25 @@ return dict
 };
 
 
+// function search() {
+// 	fetch('/search')
+// 	.then (data => data.json())
+// 	.then ( data => {
+// 	dict = { 
+// 	disk: data.disk,
+// 	song: data.song,
+//     length: data.length,
+//     time: data.time,
+//     is_playing: data.is_playing
+//     }});
+
+// return dict	
+// };
+
+
+
+
+
 
 function show_pause_button() {
 				// display the pause button.
@@ -164,7 +183,8 @@ let main = {
 	prevControl:_(".player .main .controls .prev-control"),
 	playPauseControl:_(".player .main .controls .play-pause-control"),
 	nextDisk:_(".player .main .controls .next-disc-control"),
-	nextControl:_(".player .main .controls .next-control")
+	nextControl:_(".player .main .controls .next-control"),
+	searchButton:_(".player .main .search button")
 }
  
 toggleSongList.addEventListener("click", function(){
@@ -285,6 +305,16 @@ function play_button() {
 
 
 };
+
+main.searchButton.addEventListener("click", function(){
+	console.log('Button Pressed');
+	window.location = '/search';
+
+
+});
+
+
+
 
 main.seekbar.addEventListener("change",function(){
 	main.seekbar.setAttribute("min",0);

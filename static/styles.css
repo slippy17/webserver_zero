@@ -111,12 +111,17 @@ body {
 
 .player .main .search button {
 	position: absolute;
-	top : 71%;
-	left : 38%;
-	border-radius : 10%;
+	cursor: pointer;
+	font-size: 6px;
+	top : 81%;
+	left : 35%;
+	border-radius : 8%;
 	font-size: 56px;
 	color: orange;
-	background: black
+	background: black;
+	border: 2px solid orange;
+	padding: 10px 24px;
+  	button:hover {background-color: #3e8e41}
 
 }
 
