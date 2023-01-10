@@ -1,3 +1,4 @@
+
 from threading import Event, Thread
 from flask import Flask, render_template, request, jsonify
 import json
@@ -47,10 +48,10 @@ class Juke():
         self.is_playing = 1
         
         x = self.df[(self.df["Disc_ID"] == self.cur_disc) & (self.df["Track_ID"] == self.cur_track)]
-        self.song_len = int(x.Length/1000)
+        self.song_len = int(x.Length/1000) - 2
         print(x)
         
-        Juke.playtimer.run(int(self.song_len))
+        Juke.playtimer.run(self.song_len)
         self.cancel_future_calls = self.call_repeatedly(5, self.check_timer)
 
         return 'Playing', self.song_len
