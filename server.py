@@ -119,7 +119,14 @@ class Juke():
         tracks = tracks_df.Song_Title.count()   ## The number 0f tracks in the album
         return tracks_df
 
-    def search_DB():
+    def search_DB(input):
+        result = self.df[(self.df["Song_Title"].str.contains(input, case= False, regex=False))  |
+                (self.df["Album"].str.contains(input, case= False, regex=False))  |
+                (self.df["Artist"].str.contains(input, case= False, regex=False)) ]
+
+        return result
+
+
         pass
 
         
