@@ -2,16 +2,106 @@
 <html>
 <body>
 
-<h1>Search Songs</h1>
 
-<form action="search">
-  <label for="sname">Song name:</label>
-  <input type="text" id="sname" name="sname"><br><br>
 
-  <input type="submit" value="Submit">
-</form>
+<!DOCTYPE html>
 
-<p>Click the "Submit" button.</p>
+<!-- https://www.gitto.tech/posts/create-simple-music-player-app-using-html-css-and-javascript/ -->
+
+<html>
+<head>
+	<title> Pioneer Audio Player </title>
+	<link rel="shortcut icon" type="image/jpg" href="./static/pioneer.png"/>
+	<link rel='stylesheet' type="text/css" href="/static/styles_search.css">
+	<link rel="stylesheet" href="static/font-awesome-4.7.0/css/font-awesome.min.css">
+</head>
+
+
+<body>
+
+<div class="player">
+	<div class="main">
+		<audio></audio>
+		<div class="thumbnail">
+			<img src="">
+		</div>
+		<div class="seekbar">
+			<input type="range">
+			
+		</div>
+
+		<div class="details">
+			<h5 id="runTime">00:00</h5>
+			<p></p>
+			<h3></h3>
+			<h2></h2>
+		</div>
+		<div class="controls">
+			 <div class="prev-disc-control">
+				<i class="fa fa-minus-circle"></i> 
+			</div>
+			<div class="prev-control">
+				<i class="fa fa-backward"></i>
+			</div>
+			<div class="play-pause-control paused">
+				<i class="fa fa-play"></i>
+				<i class="fa fa-pause"></i>
+				<i class="fa fa-play-circle-o"></i>
+			</div>
+			<div class="next-control">
+				<i class="fa fa-forward"></i>
+			</div>
+			<div class="next-disc-control">
+				<i class="fa fa-plus-circle"></i> 
+			</div>
+
+		<div>
+
+			 <div class="search-wrapper">
+    <label for="search">Search Users</label>
+    <input type="search" id="search" data-search>
+  </div>
+  <div class="user-cards" data-user-cards-container></div>
+  <template data-user-template>
+    <div class="card">
+      <div class="header" data-header></div>
+      <div class="body" data-body></div>
+    </div>
+
+		</div>
+
+
+
+		</div>
+	</div>
+	<div class="player-list">
+		<div class="toggle-list">
+			<i class="fa fa-angle-up"></i>
+			<i class="fa fa-angle-down"></i>
+		</div>
+		<div class="list">
+		</div>
+	</div>
+</div>
+
+<script src="static/script.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </body>
 </html>
