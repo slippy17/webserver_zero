@@ -13,6 +13,7 @@ class Cddb:
 
 	def add_disc(self,disc_info):
 		try:
+                        print('Enter slot for cd. Note: For double albums assumption is Disc 1 and 2 in consecitive slots')
 			ip_slot = input ("What slot will this CD be placed in? ")
 			self.cddb.update({ip_slot:disc_info})
 		except:

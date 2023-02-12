@@ -9,7 +9,6 @@ def read():
 				cddb = json.load(infile)
 				return cddb
 			    
-			    
 		except:
                             print("There was a problem reading database!!")
                             return
@@ -24,34 +23,55 @@ def db_to_df():
     json_formatted = read()
 
     df = pd.DataFrame(columns= ['Disc_ID', 'Artist', 'Album', 'Track_ID', 'Song_Title', 'Length'])
+    
+    cd = 0 ## for tracking multi disc albums
 
     for disc_id in range(1,100):
         id = str(disc_id)
+        
         if json_formatted[id] == None:
             break
-        num_tracks = json_formatted[id]['disc']['release-list'][0]['medium-list'][0]['track-count']
+        
+        
+        num_tracks = json_formatted[id]['disc']['release-list'][0]['medium-list'][cd]['track-count']
+        is_double_album = len(json_formatted[id]['disc']['release-list'][0]['medium-list'])-1
     
         for track in range(0,num_tracks,1):
-            song = json_formatted[id]['disc']['release-list'][0]['medium-list'][0]['track-list'][track]['recording']['title']
+            song = json_formatted[id]['disc']['release-list'][0]['medium-list'][cd]['track-list'][track]['recording']['title']
             artist = json_formatted[id]["disc"]["release-list"][0]["artist-credit-phrase"]
             album = json_formatted[id]['disc']['release-list'][0]['title']
-            length = json_formatted[id]['disc']['release-list'][0]['medium-list'][0]['track-list'][track]['recording']['length']
+            length = json_formatted[id]['disc']['release-list'][0]['medium-list'][cd]['track-list'][track]['recording']['length']
+            
+            if is_double_album: album = album + " "+ str(cd+1) # add a 1 or 2 to the Album title.
         
             s_row = pd.Series([id, artist, album, track+1, song, length], index=df.columns)
             df= df.append(s_row, ignore_index=True)
-            #print (f'Disk ID:{id} Artist:{artist} Album:{album} Track_ID:{track+1} Song {song} Length:{length}')
+            
+        is_double_album = len(json_formatted[id]['disc']['release-list'][0]['medium-list'])-1 # set cd variable to pick cd 1 or cd 2 track list.
+        if (is_double_album and cd==0) :
+            cd = 1
+        else:
+            cd = 0
+        if id == '22': cd = 0
+        if id == '52': cd = 0 ## 22 Tom Dunne and 52 REM double albums with no disc 2 (lost). Haha hack!!
+                
+            ##print (f'Disk ID:{id} Artist:{artist} Album:{album} Track_ID:{track+1} Song {song} Length:{length}')
     return df
     
-df = db_to_df()
+df = db_to_df() ##Call function to create df ##*********************>>>>>>>>>>>>>>
         
 ##### ***************** Code above takes json database and converts to df dataframe   *********** ####################
         
 
-#df= pd.read_pickle("cd_database.pkl") ## reads pickle already created by code above.
+#df= pd.read_pickle("cd_database.pkl") ## reads pickle already created by code above. **************>>>>>>>>>>>>
 
 #####  sort and format the data.
 df = df.sort_values(by=['Artist', 'Album'], ignore_index=True) #df sorted by artist
 df['Disc_ID'] = df['Disc_ID'].astype(int)
+df['Artist'] = df['Artist'].map(str)
+#df['Album'] = df['Album'].map(str)
+
+
 #subset of albums and disc_ID with duplicate albums dropped.
 album_df = df[['Album', 'Disc_ID', 'Artist']].copy()
 album_df=album_df.drop_duplicates(subset=['Album'], ignore_index=True)
@@ -70,7 +90,7 @@ album_df=album_df.drop_duplicates(subset=['Album'], ignore_index=True)
 ## find rows with Album <> "Airbag" and Artist equals "Radiohead".
 
 
-#df.to_pickle("cd_database.pkl")
+df.to_pickle("cd_database.pkl")  # *************************>>>>>>>>>>>>>>>>>>>>>>>>  write to pickle
 
 # #album_df.to_pickle("album_df.pkl")
 ## ******** Code above already created a pickle file. Note: The format has been sorted in previous code and two dataframes and pickel files created.
@@ -79,7 +99,11 @@ album_df=album_df.drop_duplicates(subset=['Album'], ignore_index=True)
 
 
 def album_stats(index_no):
-    db = album_df.loc[index_no]
+    try:
+        db = album_df.loc[index_no]
+    except:
+        print(f'Index {index_no} not returned from database')
+        return 
     message = []
     #message is a list with element 0 num of tracks, element 1 list of tracks, element2 artistname, element 3 album
     #tracks = db['medium-list'][0]['track-count']
@@ -102,9 +126,38 @@ def album_stats(index_no):
     #message.append({'album':album})
     return tracks_df
 
+def search_song(song):
+    result = df[df["Song_Title"].str.contains(song, case= False, regex=False)]  ##df[df["Song_Title"] == song]
+    
+    return result
+
+def search_album(album):
+    result = album_df[album_df["Album"].str.contains(album, case= False, regex=False)]  ##df[df["Song_Title"] == song]
+    
+    return result
+
+def search_artist(artist):
+    result = album_df[album_df["Artist"].str.contains(artist, case= False, regex=False)]  ##df[df["Song_Title"] == song]
+    
+    return result
+
+def compound_search(input):
+    
+    result = df[(df["Song_Title"].str.contains(input, case= False, regex=False))  |
+                (df["Album"].str.contains(input, case= False, regex=False))  |
+                (df["Artist"].str.contains(input, case= False, regex=False)) ]
+
+    return result
 
 
-##
+a = compound_search('The Essential Leonard Cohen')
+
+print(a.to_string())
+
+
+##with pd.option_context('display.max_rows', None, 'display.max_columns', None,'display.precision', 3):
+##print(a.to_markdown())
+#print(f"{Art} {Alb} {Sng}")
 ##result = df.to_json(orient="split")
 ##
 ##parsed = json.loads(result)
