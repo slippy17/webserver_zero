@@ -49,7 +49,7 @@ class Juke():
         
         x = self.df[(self.df["Disc_ID"] == self.cur_disc) & (self.df["Track_ID"] == self.cur_track)]
         self.song_len = int(x.Length/1000) - 2
-        print(x)
+        print(x.to_string())
         
         Juke.playtimer.run(self.song_len)
         self.cancel_future_calls = self.call_repeatedly(5, self.check_timer)
@@ -119,7 +119,7 @@ class Juke():
         tracks = tracks_df.Song_Title.count()   ## The number 0f tracks in the album
         return tracks_df
 
-    def search_DB(input):
+    def search_DB(self,input):
         result = self.df[(self.df["Song_Title"].str.contains(input, case= False, regex=False))  |
                 (self.df["Album"].str.contains(input, case= False, regex=False))  |
                 (self.df["Artist"].str.contains(input, case= False, regex=False)) ]
@@ -127,7 +127,7 @@ class Juke():
         return result
 
 
-        pass
+        
 
         
 app = Flask(__name__)
@@ -191,10 +191,6 @@ def command_builder(s_cd, s_track):
 
 
 
-
-
-
-
 @app.route('/stat', methods=['POST', 'GET'])
 def init():
 	stat = player.status()
@@ -221,10 +217,17 @@ def home():
 
 
 @app.route('/search', methods=['GET'])
-def search_DB():
+
+def search(song='beer'):
+    result = player.search_DB(song)
+
+
+    result = result.to_dict(orient="index")
+    print(result.keys())
+    
     ##sname=render_template(request.args['sname'])
     ##print(sname)
-    return render_template('search.html')
+    return render_template('search.html') #jsonify(result)
 
 
 @app.route('/loadDatabase/<index_no>', methods=['GET','POST'])
