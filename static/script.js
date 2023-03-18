@@ -5,6 +5,7 @@ function _all(query){
 	return document.querySelectorAll(query);
 }
 
+search_result = [];
 
 let songList = [
 	{
@@ -28,6 +29,33 @@ function get_stat(data) {
 
 	return dict; 
 }
+
+
+
+
+function get_s_data(data) {
+	//console.log(s_dict)
+	var list1  = Object.keys(data)
+	var results = [];
+
+	for (const element of list1) {
+  		//console.log(element);
+  		object = { 
+		index: element,
+		song: data[element].Song_Title,
+    	artist: data[element].Artist,
+    	length: data[element].Length,
+    	track: data[element].Track_ID
+    	};
+
+    	results.push(object);
+	}
+
+     //console.log(results[1].song)
+	return results; 
+}
+
+
 async function stat() {
 	var url = '/stat'  ;
 	const response = await fetch(url);
@@ -53,9 +81,9 @@ function pause() {
 	.then (data => data.json())
 	.then ( data => {
 
-	dict = { 
-	disk: data.disk,
-	song: data.song,
+	dict = {
+	disk: data.Album,
+	artist: data.Artist,
     length: data.length,
     time: data.time,
     is_playing: data.is_playing
@@ -65,23 +93,16 @@ return dict
 };
 
 
-// function search() {
-// 	fetch('/search')
-// 	.then (data => data.json())
-// 	.then ( data => {
-// 	dict = { 
-// 	disk: data.disk,
-// 	song: data.song,
-//     length: data.length,
-//     time: data.time,
-//     is_playing: data.is_playing
-//     }});
-
-// return dict	
-// };
-
-
-
+async function search(query) {
+	var url = '/search/'+query
+	//console.log(url)
+	const response = await fetch(url);
+	const data = await response.json();
+	//console.log(Object.keys(data));
+	search_result =  get_s_data(data);
+	console.log(search_result)
+	return search_result
+};
 
 
 
@@ -93,7 +114,7 @@ function show_pause_button() {
 return
 };
 function show_play_button() {
-				// display the pause button.
+				// display the play button.
 			play_pause_css.style.setProperty('--show_play','block');
 			play_pause_css.style.setProperty('--show_pause','none');
 			play_pause_css.style.setProperty('--show_paused','none');
@@ -139,7 +160,7 @@ async function loadDB_DF() {
 		const album = data[i]['Album'];
 		const title = data[i]['Song_Title'];
 		const length = data[i]['Length'];
-		// console.log(length);
+		//console.log(title);
 		//const {title, length} = data[1][i].recording;
 		object = {
 			thumbnail:"Bright_Future.jpg",
@@ -308,7 +329,10 @@ function play_button() {
 
 main.searchButton.addEventListener("click", function(){
 	console.log('Button Pressed');
-	window.location = '/search';
+	a = search('there');
+	console.log(search_result);
+	//console.log(a);
+	//window.location = '/search';
 
 
 });

@@ -216,18 +216,13 @@ def home():
     return render_template('index.html')
 
 
-@app.route('/search', methods=['GET'])
-
-def search(song='beer'):
-    result = player.search_DB(song)
-
-
+@app.route('/search/<query>', methods=['GET'])
+def search(query):
+    result = player.search_DB(query)
     result = result.to_dict(orient="index")
-    print(result.keys())
-    
     ##sname=render_template(request.args['sname'])
-    ##print(sname)
-    return render_template('search.html') #jsonify(result)
+    ##print(result)
+    return jsonify(result) #render_template('search.html') #
 
 
 @app.route('/loadDatabase/<index_no>', methods=['GET','POST'])
