@@ -216,14 +216,13 @@ def home():
     return render_template('index.html')
 
 
-@app.route('/search/<query>', methods=['GET'])
-def search(query):
+@app.route('/search', methods=['GET'])   # /<query> removed from url.
+def search(query='beer'):                     # query removed from function.
     result = player.search_DB(query)
     result = result.to_dict(orient="index")
     ##sname=render_template(request.args['sname'])
     ##print(result)
-    return jsonify(result) #render_template('search.html') #
-
+    return render_template('search.html')  #jsonify(result)
 
 @app.route('/loadDatabase/<index_no>', methods=['GET','POST'])
 def load_DB(index_no):

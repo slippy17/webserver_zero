@@ -6,256 +6,103 @@
 
 }
 
-:root{
---show_play:block;
---show_pause:none;
-}
+
 
 
 body {
 	height: 100vh;
 	font-family: "Raleway";
-
-}
-.player {
-	position: absolute;
-	top: 25%;
-	left: 50%;
-	transform: translate(-50%,-25%);
-	width:   80%;/* 320px */
-	height: 1200px; /*480px; */
-	overflow: hidden;
-}
-.player .main {
-	width: 100%;
-	height: 100%;
-	background: #222;
-	transition:all 500ms ease-in-out;
-}
-.player .main .thumbnail img {
-	width: 100%;
-}
-.player .main .seekbar {
-	margin-top: -25px;
-}
-.player .main .seekbar input[type="range"] {
-	-webkit-appearance:none;
-	width: 120%;
-	height: 50px;
-	outline: none;
-	background: #aaa;
-	overflow: hidden;
-}
-.player .main .seekbar input[type="range"]::-webkit-slider-thumb {
-	-webkit-appearance:none;
-	width: 60px;
-	height: 60px;
-	box-shadow: -300px 0px 0px 300px #00acee;
-}
-.player .main .details {
-	text-align: center;
-	color:#eee;
-	padding: 35px 0px;
-}
-
-.player .main .details h5 {
-	font-size: 10px;
-	color:#eee;
-	margin-bottom: 5px;
+	background: url("Bright_Future.jpg");
+	background-size: cover;
+	
 }
 
 
-.player .main .details p {
-	font-size: 70px;
-	color: #eee;
-}
-
-.player .main .details h3 {
-	font-size: 50px;
-	color: #aaa;
-}
-
-
-.player .main .details h2 {
-	font-size: 38px;
-	color:#eee;
-	margin-bottom: 5px;
-}
-
-
-.player .main .controls {
+.search {
 	display: flex;
-	justify-content: normal;
-	margin:5px -20px;
-}
-.player .main .controls > div {
-	margin:0px 40px;
-	cursor: pointer;
-}
-.player .main .controls i.fa {
-	font-size:6rem;
+	justify-content: center;
+	width: 80%;
+	height: 80%;
+	margin: 10%;
+/*	overflow-y: scroll;*/
+	background: rgba(0,0,0,0.3);
+	border-radius : 4%;
+	
 	color: orange;
-}
-.player .main .controls > div.play-pause-control i.fa-play-circle-o {
-	display: none;
-}
-.player .main .controls > div.play-pause-control.paused i.fa-play {
-	display: var(--show_play);
-}
-.player .main .controls > div.play-pause-control.paused i.fa-pause {
-	display: var(--show_pause);
-}
-.player .main .controls > div.play-pause-control.paused i.fa-play-circle-o {
-	display: var(--show_paused);
+	background: black;
+	/*border: 2px solid orange;*/
+	padding: 10px 24px;
+	/*text-align: center;*/
+	/*z-index:2;
+	transition:all 500ms ease-in-out;*/
 }
 
-.player .main .search button {
-	position: absolute;
+.search .box  {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+    /*font-size: xx-large;*/
+
+
+}
+
+
+ .search .box #query {
+	position: relative;
 	cursor: pointer;
-	font-size: 6px;
-	top : 81%;
-	left : 35%;
+	max-width: 65%;
 	border-radius : 8%;
 	font-size: 56px;
 	color: orange;
 	background: black;
 	border: 2px solid orange;
-	padding: 10px 24px;
-  	button:hover {background-color: #3e8e41}
+	padding: 8px 18px;
 
 }
 
 
-.player .player-list {
-	
+.search .box #submit {
 	position: absolute;
-	width: 100%;
-	height: 800px;
-	margin-top:-20px;
-	overflow-y: scroll;
-	background: rgba(0,0,0,0.8);
-	z-index:2;
-	transition:all 500ms ease-in-out;
+	cursor: pointer;	
+	left: 32%;
+	border-radius : 8%;
+	font-size: 56px;
+	color: orange;
+	background: black;
+	border: 2px solid orange;
+	padding: 0% 8%;
+	margin: 3%;
+
 }
+
+.search .box button {
+	position: absolute;
+	cursor: pointer;
+	bottom: 0%;	
+	left: 30%;
+	border-radius : 8%;
+	font-size: 56px;
+	color: orange;
+	background: black;
+	border: 2px solid orange;
+	padding: 0% 5%;
+	margin: 10%;
+
+}
+
+ 
+
 .player .player-list .toggle-list {
-	position: sticky;
+/*	position: sticky;
 	top:0px;
 	text-align: center;
 	height: 40px;
 	line-height: 40px;
-	background: #555;
-}
-.player .player-list .toggle-list i.fa {
-	position: sticky; 
-	color: #ccc;
-	font-size: 40px;
-	font-weight: 600;
-}
-.player .player-list .toggle-list i.fa-angle-down {
-	display: block;
-}
-.player .player-list .toggle-list.active i.fa-angle-up {
-	display: none;
-
-
+	background: #555;*/
 }
 
 
 
-
-
-.player .search-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: .25rem;
-}
-
-input {
-  font-size: 1rem;
-}
-
-.player .user-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: .25rem;
-  margin-top: 1rem;
-}
-
-.player .card {
-  border: 1px solid black;
-  background-color: white;
-  padding: .5rem;
-}
-
-.player .card > .header {
-  margin-bottom: .25rem;
-}
-
-.player .card > .body {
-  font-size: .8rem;
-  color: #777;
-}
-
-.player .hide {
-  display: none;
-}
-
-
-
-
-
-
-
-
-.player .player-list .toggle-list.active i.fa-angle-down {
-	display: none;
-}
-.player .list {
-	padding: 10px;
-}
-.player .list .item {
-	display: flex;
-	padding: 5px 0px;
-	border-bottom: 1px solid #222;
-	cursor: pointer;
-}
-.player .list .item .thumbnail {
-	width: 50px;
-	height: 50px;
-	overflow: hidden;
-}
-.player .list .thumbnail img {
-	width: 100%;
-	height: 100%;
-}
-.player .list .item .details {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	padding: 0px 10px;
-}
-.player .list .item .details h2 {
-	color: #eee;
-	font-size: 60px;
-}
-
-.player .list .item .details p {
-	color: #aaa;
-	font-size: 40px;
-}
-.player .player-list::-webkit-scrollbar {
-	width: 5px;
-	background: #222;
-}
-.player .player-list::-webkit-scrollbar-thumb {
-	background: #00acee;
-}
-.player.activeSongList .player-list {
-	margin-top: -800px; /* was about 300*/
-}
-.player.activeSongList .main {
-	filter:blur(10px);
-}
 
 /*
 @media all and (max-width: 1500px) {

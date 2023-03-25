@@ -1,3 +1,5 @@
+//NOT AI
+
 function _(query){
 	return document.querySelector(query);
 }
@@ -62,6 +64,7 @@ async function stat() {
 	const data = await response.json();
 	d_stat =  get_stat(data);
 	value_seek = value_seek; //d_stat.time; changed dc
+
 	if(d_stat.is_playing == 0){
 			show_play_button()}
 	if(d_stat.is_playing == 1){
@@ -100,7 +103,7 @@ async function search(query) {
 	const data = await response.json();
 	//console.log(Object.keys(data));
 	search_result =  get_s_data(data);
-	console.log(search_result)
+	
 	return search_result
 };
 
@@ -164,7 +167,7 @@ async function loadDB_DF() {
 		//const {title, length} = data[1][i].recording;
 		object = {
 			thumbnail:"Bright_Future.jpg",
-			audio:"Frog Princess -- The Divine Comedy.mp3",
+			audio:"Gin Soaked Boy - The Divine Comedy.mp3",
 			songname: title,
 			artistname: artistname,
 			album: album,
@@ -329,10 +332,10 @@ function play_button() {
 
 main.searchButton.addEventListener("click", function(){
 	console.log('Button Pressed');
-	a = search('there');
-	console.log(search_result);
+	//a = search('there');
+	//console.log(search_result);
 	//console.log(a);
-	//window.location = '/search';
+	window.location = '/search';
 
 
 });
