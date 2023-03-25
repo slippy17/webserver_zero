@@ -136,11 +136,7 @@ player = Juke()
 #player.load()
 player.load_df()
 
-#cur_disk = 10
-#cur_song = 5
-#cur_song_len = 0
-#cur_time = 0
-#is_playing = False
+
 
 
 ## Convert list of commands to IR codes and send using 'pioneer module built with 'IRSlinger'.
@@ -204,25 +200,23 @@ def  pause_request():
     return jsonify(message)  # serialize and use JSON headers
 
 
-# @app.route('/resume', methods=['GET'])
-# def  pause_request():
-#     message = player.resume()
-#     return jsonify(message)  # serialize and use JSON headers
-
 
 @app.route('/')
-def home():
-    
+def home():    
     return render_template('index.html')
 
 
-@app.route('/search', methods=['GET'])   # /<query> removed from url.
-def search(query='beer'):                     # query removed from function.
+@app.route('/search')   # /<query> removed from url.
+def search():
+    return render_template('search.html')
+
+@app.route('/searchDB/<query>', methods=['GET'])
+def search_DB(query):                     # query removed from function.
     result = player.search_DB(query)
     result = result.to_dict(orient="index")
     ##sname=render_template(request.args['sname'])
     ##print(result)
-    return render_template('search.html')  #jsonify(result)
+    return jsonify(result)
 
 @app.route('/loadDatabase/<index_no>', methods=['GET','POST'])
 def load_DB(index_no):

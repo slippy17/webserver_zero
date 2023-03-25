@@ -97,7 +97,8 @@ return dict
 
 
 async function search(query) {
-	var url = '/search/'+query
+	// var query = document.getElementById("submit").value;
+	var url = '/searchDB/'+query
 	//console.log(url)
 	const response = await fetch(url);
 	const data = await response.json();
