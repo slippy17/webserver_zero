@@ -97,14 +97,16 @@ return dict
 
 
 async function search(query) {
-	// var query = document.getElementById("submit").value;
+	if (query==""){
+		return 0;
+	} 
 	var url = '/searchDB/'+query
 	//console.log(url)
 	const response = await fetch(url);
 	const data = await response.json();
 	//console.log(Object.keys(data));
 	search_result =  get_s_data(data);
-	
+	update_sList();
 	return search_result
 };
 
@@ -137,6 +139,21 @@ function update_runtime(runTime){
   document.getElementById("runTime").innerHTML = runTime+" secs";
 
 };
+
+
+function update_sList(){
+let sList = document.querySelector(".search .box .search-list .sList");
+let exerciseItems = "";
+for (let item of search_result) {
+
+  console.log(item.song);
+  exerciseItems += "<li>" + item.artist + " " + item.song + "</li>";
+}
+sList.innerHTML = exerciseItems;
+
+};
+
+
 
 //document.addEventListener("DOMContentLoaded", async () => {
 // Work in  progress.
@@ -264,7 +281,7 @@ for(let i=0;i<songListItems.length;i++){
 
 
 function loadSong(songIndex){
-	console.log('Disk ',diskIndex, 'Song ',songIndex);
+	console.log('Index ',diskIndex, 'Song ',songIndex);
 	let song = songList[songIndex];
 	main.thumbnail.setAttribute("src","./static/"+song.thumbnail);
 	document.body.style.background = `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.8)), url("./static/${song.thumbnail}") center no-repeat`;
@@ -279,7 +296,7 @@ main.prevDisk.addEventListener("click",function(){
 		diskIndex = diskIndex-1;
 		value_seek = diskIndex;
 		//currentSongIndex=0
-		console.log('Disk ',diskIndex, 'Song ',songIndex);
+		console.log('Index ',diskIndex, 'Song ',songIndex);
 		
 	}
 	loadDB_DF();
@@ -303,7 +320,7 @@ main.nextDisk.addEventListener("click",function(){
 		diskIndex = diskIndex+1;
 		value_seek = diskIndex;
 		//currentSongIndex = 0
-		console.log('Disk ',diskIndex, 'Song ',songIndex);
+		console.log('Index ',diskIndex, 'Song ',songIndex);
 	}
 	loadDB_DF();
 });
@@ -332,14 +349,11 @@ function play_button() {
 };
 
 main.searchButton.addEventListener("click", function(){
-	console.log('Button Pressed');
-	//a = search('there');
-	//console.log(search_result);
-	//console.log(a);
 	window.location = '/search';
 
 
 });
+
 
 
 
