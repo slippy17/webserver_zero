@@ -215,7 +215,7 @@ def search_DB(query):                     # query removed from function.
     result = player.search_DB(query)
     result = result.to_dict(orient="index")
     ##sname=render_template(request.args['sname'])
-    ##print(result)
+    print(result)
     return jsonify(result)
 
 @app.route('/loadDatabase/<index_no>', methods=['GET','POST'])
@@ -235,9 +235,15 @@ def requestSong():
 	if request.method == 'POST':
 		
 		data = request.json
-		s_idx = data['Index']  ## Index from the client.
-		sel_cd = str(player.adf.loc[s_idx].Disc_ID) ## Lookup the Disc_ID from that Index.
-		sel_track = str(data['Song']+1)
+		s_idx = data['Index']
+
+	if (s_idx > 100):
+		sel_cd = str(s_idx-100)
+	else:
+		sel_cd = str(player.adf.loc[s_idx].Disc_ID) 
+            ## Lookup the Disc_ID from that Index.
+
+	sel_track = str(data['Song']+1)
 	
 	command_list = command_builder(sel_cd, sel_track)
 	send_code(command_list)

@@ -47,7 +47,8 @@ function get_s_data(data) {
 		song: data[element].Song_Title,
     	artist: data[element].Artist,
     	length: data[element].Length,
-    	track: data[element].Track_ID
+    	track: data[element].Track_ID,
+    	disk: data[element].Disc_ID
     	};
 
     	results.push(object);
@@ -144,13 +145,33 @@ function update_runtime(runTime){
 function update_sList(){
 let sList = document.querySelector(".search .box .search-list .sList");
 let exerciseItems = "";
-for (let item of search_result) {
+for (let i=0;i<search_result.length;i++){
 
-  console.log(item.song);
-  exerciseItems += "<li>" + item.artist + " " + item.song + "</li>";
+  exerciseItems += "<li id='"+i+"'><p>" + search_result[i].artist + "</p> <h2>" + search_result[i].song + "</h2>" +"</li>";
+
 }
+ // console.log(exerciseItems);
 sList.innerHTML = exerciseItems;
 
+for (let i=0;i<search_result.length;i++) {
+   document.getElementById(i).addEventListener("click", selSong);
+}
+};
+
+function selSong(e) {
+	console.log(e.target.parentElement.id); 
+	sInx = parseInt(e.target.parentElement.id);
+	Ind= parseInt(search_result[sInx].disk)+100;
+	sSng = search_result[sInx].track-1;
+
+	console.log(Ind,sSng)
+
+	requestSong(Ind,sSng);
+
+
+	// alert(e.target.attributes.id.value); 
+
+	// body...
 };
 
 
@@ -265,6 +286,8 @@ for(let i=0;i<songListItems.length;i++){
 
 
  function requestSong(diskIndex, currentSongIndex){
+
+ 	console.log('Disk Index '+typeof(diskIndex)+" SongIndx "+typeof(diskIndex))
 	const requestUrl = '/requestSong/';
 	const requestData = {
 		Index: diskIndex, 
@@ -353,8 +376,6 @@ main.searchButton.addEventListener("click", function(){
 
 
 });
-
-
 
 
 

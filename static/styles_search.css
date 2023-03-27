@@ -105,11 +105,12 @@ body {
 	position: absolute;
 	left: 15%;
 	color: #ccc;
-	font-size: 40px;
-	font-weight: 1000;
+	font-size: 40px;*/
+	/*font-weight: 1000;*/
 	width: 80%;
 	height: 60%;
 	margin-top:20%;
+	cursor: pointer;
 	overflow-y: scroll;
 	background: rgba(30,0,0,0.0);
 	z-index:2;
