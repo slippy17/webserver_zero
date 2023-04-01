@@ -48,7 +48,7 @@ class Juke():
         self.is_playing = 1
         
         x = self.df[(self.df["Disc_ID"] == self.cur_disc) & (self.df["Track_ID"] == self.cur_track)]
-        self.song_len = int(x.Length/1000) - 2
+        self.song_len = int(x.Length/1000) - 4
         print(x.to_string())
         
         Juke.playtimer.run(self.song_len)

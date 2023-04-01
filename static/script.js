@@ -141,7 +141,7 @@ function update_runtime(runTime){
 
 };
 
-
+// Search list update to HTML/Browser.
 function update_sList(){
 let sList = document.querySelector(".search .box .search-list .sList");
 let exerciseItems = "";
@@ -164,14 +164,16 @@ function selSong(e) {
 	Ind= parseInt(search_result[sInx].disk)+100;
 	sSng = search_result[sInx].track-1;
 
-	console.log(Ind,sSng)
-
-	requestSong(Ind,sSng);
+	
 
 
-	// alert(e.target.attributes.id.value); 
+	 console.log(Ind,sSng)
 
-	// body...
+	 requestSong(Ind,sSng);
+
+
+
+
 };
 
 
