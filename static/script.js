@@ -160,16 +160,15 @@ for (let i=0;i<search_result.length;i++) {
 
 function selSong(e) {
 
-	//use   .removeEventListener("click", selSong);
+	//use   .removeEventListener("click", selSong) to prevent multiple button presses.
 	for (let i=0;i<search_result.length;i++) {
    document.getElementById(i).removeEventListener("click", selSong);
 }
 
+	nId= e.target.parentElement.id; 
 
-
-
-	console.log(e.target.parentElement.id); 
-	sInx = parseInt(e.target.parentElement.id);
+	document.getElementById(nId).style.background = 'Orange'; //.h2.style.backgroundColor);
+	sInx = parseInt(nId);
 	Ind= parseInt(search_result[sInx].disk)+100;
 	sSng = search_result[sInx].track-1;
 

@@ -97,11 +97,11 @@ body {
 .search .box .search-list .sList{
 	
 	position: absolute;
-	left: 15%;
+	left: 11%;
 	color: #ccc;
-	font-size: 40px;*/
+	font-size: 40px;
 	/*font-weight: 1000;*/
-	width: 80%;
+	max-width: 80%;
 	height: 60%;
 	margin-top:20%;
 	cursor: pointer;
@@ -110,13 +110,13 @@ body {
 	z-index:2;
 	display: block;
 }
-
+/*
 .search .box .search-list .sList:active{
 	color: red;
     border: 1px solid red;
 }
 
-
+*/
 
 /*
 @media all and (max-width: 1500px) {

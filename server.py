@@ -58,7 +58,7 @@ class Juke():
 
 
     def check_timer(self):
-        if (Juke.playtimer.remaining == 0 and self.is_playing == 1):
+        if (Juke.playtimer.remaining <= 0 and self.is_playing == 1):
             self.stop()
             return
         return
