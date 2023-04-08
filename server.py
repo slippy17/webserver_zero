@@ -58,7 +58,7 @@ class Juke():
 
 
     def check_timer(self):
-        if Juke.playtimer.remaining == 0:
+        if (Juke.playtimer.remaining == 0 and self.is_playing == 1):
             self.stop()
             return
         return
@@ -96,11 +96,13 @@ class Juke():
         message['is_playing'] = self.is_playing
         return message
 
+    ## Load database from .json file. Not used since dataframe introduced,
     def load(self):
     	with open("./static/cd_database.json", "r") as infile:
             self.cddb = json.load(infile)
             return
 
+    ## Load DB from dataframe pickel file. Also create a album dataframe (adf) map cd>>slot.
     def load_df(self):
         self.df= pd.read_pickle("./static/cd_database.pkl")
         self.df.Length = self.df.Length.astype('int32')
@@ -227,8 +229,6 @@ def load_DB(index_no):
 
 	return jsonify(data)
 
-
-
 ##@app.route('/requestSong/<s_cd>/<s_track>', methods=['POST','GET'])
 @app.route('/requestSong/', methods=['POST'])
 def requestSong():
@@ -237,6 +237,7 @@ def requestSong():
 		data = request.json
 		s_idx = data['Index']
 
+## request song from search page is disk slot+100, request otherwise is alpha index. 
 	if (s_idx > 100):
 		sel_cd = str(s_idx-100)
 	else:

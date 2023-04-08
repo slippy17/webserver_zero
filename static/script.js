@@ -159,21 +159,23 @@ for (let i=0;i<search_result.length;i++) {
 };
 
 function selSong(e) {
+
+	//use   .removeEventListener("click", selSong);
+	for (let i=0;i<search_result.length;i++) {
+   document.getElementById(i).removeEventListener("click", selSong);
+}
+
+
+
+
 	console.log(e.target.parentElement.id); 
 	sInx = parseInt(e.target.parentElement.id);
 	Ind= parseInt(search_result[sInx].disk)+100;
 	sSng = search_result[sInx].track-1;
 
-	
-
-
 	 console.log(Ind,sSng)
 
 	 requestSong(Ind,sSng);
-
-
-
-
 };
 
 
@@ -188,7 +190,7 @@ var  status = {};
 var play_pause_css = document.querySelector(':root');
 
 
-// Testing a load from dataframe function. Below is the old Loaddb()
+// Load from dataframe function.
 async function loadDB_DF() {
 	var url = '/loadDatabase/'  ;
 	const response = await fetch(url+diskIndex);
