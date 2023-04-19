@@ -26,7 +26,9 @@ function get_stat(data) {
 	song: data.song,
     length: data.length,
     time: data.time,
-    is_playing: data.is_playing
+    is_playing: data.is_playing,
+    artist: data.artist,
+    s_title: data.s_title
     };
 
 	return dict; 
@@ -73,7 +75,7 @@ async function stat() {
 	if(d_stat.is_playing == -1){
 			show_paused_button()}
 
-	update_runtime(d_stat.length-d_stat.time);
+	update_runtime(d_stat.artist, d_stat.s_title, d_stat.length-d_stat.time);
 
 	setTimeout(stat, 5000)
 	
@@ -135,9 +137,9 @@ function show_paused_button(){
 return
 };
 
-function update_runtime(runTime){
+function update_runtime(artist, s_title, runTime){
 
-  document.getElementById("runTime").innerHTML = runTime+" secs";
+  document.getElementById("runStat").innerHTML = artist + " "+s_title + " "+runTime+" secs";
 
 };
 
@@ -241,7 +243,7 @@ let main = {
 	audio:_(".player .main audio"),
 	thumbnail:_(".player .main img"),
 	seekbar:_(".player .main input"),
-	run_time:(".player .main .details h5"),
+	runStat:(".player .main .details h5"),
 	songname:_(".player .main .details h2"),
 	album:_(".player .main .details h3"),
 	artistname:_(".player .main .details p"),

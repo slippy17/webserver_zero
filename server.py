@@ -28,7 +28,8 @@ class Juke():
         self.is_playing = 0
         self.cur_disc = 40
         self.cur_track = 1
-        self.cur_time = 0 ## not used
+        self.cur_art = "No Artist" ## not used
+        self.cur_song_title = ""
         self.song_len = 0   
         self.end = 0        ## Not used. Time that songs ends.
 
@@ -46,9 +47,13 @@ class Juke():
         self.cur_disc = disc_indx
         self.cur_track = track
         self.is_playing = 1
-        
+
         x = self.df[(self.df["Disc_ID"] == self.cur_disc) & (self.df["Track_ID"] == self.cur_track)]
         self.song_len = int(x.Length/1000) - 4
+        self.cur_art = x.Artist.to_string(index=False)
+        self.cur_song_title = x.Song_Title.to_string(index=False)
+        # print(self.cur_art)
+
         print(x.to_string())
         
         Juke.playtimer.run(self.song_len)
@@ -82,7 +87,8 @@ class Juke():
         
     def stop(self):
         self.is_playing = 0
-        self.cur_time = 0   ## not used
+        self.cur_art = "No Artist"
+        self.cur_song_title = ""
         self.cancel_future_calls()
         send_code(['Stop'])
         return 'Stop'
@@ -94,6 +100,11 @@ class Juke():
         message['length']= self.song_len
         message['time'] = Juke.playtimer.elap
         message['is_playing'] = self.is_playing
+        message['artist'] = self.cur_art
+        message['s_title'] = self.cur_song_title
+        # artist = self.df[(self.df["Disc_ID"] == self.cur_disc) & (self.df["Track_ID"] == self.cur_track)]
+        
+        # print (artist.Artist.to_string(), artist.Song_Title.to_string())
         return message
 
     ## Load database from .json file. Not used since dataframe introduced,
