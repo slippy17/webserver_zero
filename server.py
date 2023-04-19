@@ -217,7 +217,7 @@ def search_DB(query):                     # query removed from function.
     result = player.search_DB(query)
     result = result.to_dict(orient="index")
     ##sname=render_template(request.args['sname'])
-    print(result)
+    ##print(result)
     return jsonify(result)
 
 @app.route('/loadDatabase/<index_no>', methods=['GET','POST'])
