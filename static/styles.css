@@ -77,7 +77,7 @@ body {
 .player .main .details h5 {
 	display: flex;
   	justify-content:flex-end;
-  	width: 1800px;
+  	width: 2200px;
     animation: scrolling 20s 1s linear infinite;
 }
 
