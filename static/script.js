@@ -77,7 +77,7 @@ async function stat() {
 
 	update_runtime(d_stat.artist, d_stat.s_title, d_stat.length-d_stat.time);
 
-	setTimeout(stat, 5000)
+	setTimeout(stat, 10000)
 	
 	return d_stat
 };
