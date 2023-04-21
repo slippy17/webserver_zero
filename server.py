@@ -87,6 +87,7 @@ class Juke():
         
     def stop(self):
         self.is_playing = 0
+        self.song_len = 0
         self.cur_art = "No Artist"
         self.cur_song_title = ""
         self.cancel_future_calls()

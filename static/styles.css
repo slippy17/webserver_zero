@@ -19,12 +19,14 @@
 body {
 	height: 100vh;
 	font-family: "Raleway";
+	border-radius : 4%;
 
 }
 .player {
 	position: absolute;
 	top: 25%;
 	left: 50%;
+	border-radius : 2%;
 	transform: translate(-50%,-25%);
 	width:   80%;/* 320px */
 	height: 1200px; /*480px; */
@@ -45,7 +47,7 @@ body {
 .player .main .seekbar input[type="range"] {
 	-webkit-appearance:none;
 	width: 120%;
-	height: 50px;
+	height: 40px;
 	outline: none;
 	background: #aaa;
 	overflow: hidden;
@@ -53,24 +55,25 @@ body {
 .player .main .seekbar input[type="range"]::-webkit-slider-thumb {
 	-webkit-appearance:none;
 	width: 60px;
-	height: 60px;
+	height: 20px;
 	box-shadow: -300px 0px 0px 300px #00acee;
 }
 .player .main .details {
 	text-align: center;
 	color:#eee;
-	padding: 35px 0px;
+	padding: 20px 0px;
 }
 
 .player .main .details .container {
 	font-family: '19 Segment Display' ;
 	/*max-height: 50px;*/
-	padding: 0px;
+	padding: 2px;
 	margin: 3%;
 	width: 94%;
-	font-size: 40px;
+	font-size: 60px;
 	color: orange;
 	background-color: #333;
+	border: 2px solid #444;
 	overflow: hidden;
 }
 
@@ -88,8 +91,8 @@ body {
 
 
 .player .main .details p {
-	font-size: 70px;
-	color: #eee;
+	font-size: 50px;
+	color: #aaa;
 }
 
 .player .main .details h3 {
@@ -97,10 +100,9 @@ body {
 	color: #aaa;
 }
 
-
 .player .main .details h2 {
 	font-size: 38px;
-	color:#eee;
+	color:#aaa;
 	margin-bottom: 5px;
 }
 
