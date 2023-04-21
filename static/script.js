@@ -139,7 +139,7 @@ return
 
 function update_runtime(artist, s_title, runTime){
 
-  document.getElementById("runStat").innerHTML = artist + " "+s_title + " "+runTime+" secs";
+  document.getElementById("runStat").innerHTML = artist + " - "+s_title + " - "+runTime+" secs";
 
 };
 
@@ -186,7 +186,7 @@ function selSong(e) {
 //});
 var songIndex = 0;
 var diskIndex = 40;
-var value_seek = diskIndex;
+var value_seek = 40;
 var  status = {};
 var play_pause_css = document.querySelector(':root');
 
@@ -385,9 +385,10 @@ main.searchButton.addEventListener("click", function(){
 
 
 main.seekbar.addEventListener("change",function(){
-	main.seekbar.setAttribute("min",0);
-	main.seekbar.setAttribute("max",10);
-	diskIndex = main.seekbar.value;
+	main.seekbar.setAttribute("min",1);
+	main.seekbar.setAttribute("max",81);
+	diskIndex = main.seekbar.value.toString();
+	loadDB_DF();
 });
 
 loadSong(songIndex);
