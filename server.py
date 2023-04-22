@@ -125,6 +125,10 @@ class Juke():
     
 
     def album_stats_df(self,index_no):  ## ************** TESTED ************
+        check = (self.adf.index ==index_no).any()
+        if check==False:
+            print('Disk Index Excceded')
+            index_no = index_no-1
         db = self.adf.loc[index_no]
         d_id = db.Disc_ID
         tracks_df = self.df[self.df["Disc_ID"] == d_id]

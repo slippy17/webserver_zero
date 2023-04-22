@@ -322,7 +322,7 @@ function loadSong(songIndex){
 main.prevDisk.addEventListener("click",function(){
 	if(diskIndex > 1){
 		diskIndex = diskIndex-1;
-		value_seek = diskIndex;
+		main.seekbar.value = diskIndex;
 		//currentSongIndex=0
 		console.log('Index ',diskIndex, 'Song ',songIndex);
 		
@@ -335,6 +335,7 @@ main.prevControl.addEventListener("click",function(){
 	songIndex--;
 	if(songIndex < 0){
 		songIndex = songList.length + songIndex;
+
 	}
 	loadSong(songIndex);
 });
@@ -344,9 +345,9 @@ main.nextControl.addEventListener("click",function(){
 });
 
 main.nextDisk.addEventListener("click",function(){
-	if(diskIndex < 99){
+	if(diskIndex < 81){
 		diskIndex = diskIndex+1;
-		value_seek = diskIndex;
+		main.seekbar.value = diskIndex;
 		//currentSongIndex = 0
 		console.log('Index ',diskIndex, 'Song ',songIndex);
 	}
@@ -387,8 +388,11 @@ main.searchButton.addEventListener("click", function(){
 main.seekbar.addEventListener("change",function(){
 	main.seekbar.setAttribute("min",1);
 	main.seekbar.setAttribute("max",81);
-	diskIndex = main.seekbar.value.toString();
+	diskIndex = parseInt(main.seekbar.value);
+	// console.log(main.seekbar.value.toString());
+	// console.log(diskIndex);
 	loadDB_DF();
+
 });
 
 loadSong(songIndex);
