@@ -92,7 +92,7 @@ body {
 	margin: 10%;
 }
 
- 
+
 
 .search .box .search-list .sList{
 	
@@ -109,6 +109,13 @@ body {
 	background: rgba(30,0,0,0.0);
 	z-index:2;
 	display: block;
+}
+
+.bomb{
+	position: absolute;
+	
+	left: 84%;	
+	bottom:-7%;
 }
 /*
 .search .box .search-list .sList:active{

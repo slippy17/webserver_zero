@@ -47,7 +47,7 @@ body {
 .player .main .seekbar input[type="range"] {
 	-webkit-appearance:none;
 	width: 100%;
-	height: 30px;
+	height: 40px;
 	
 	outline: none;
 	background: #aaa;
@@ -56,8 +56,8 @@ body {
 .player .main .seekbar input[type="range"]::-webkit-slider-thumb {
 	-webkit-appearance:none;
 	width: 80px;
-	height: 30px;
-
+	height: 40px;
+	background: orange;
 	/*box-shadow: -300px 0px 0px 300px #00acee;*/
 }
 .player .main .details {
@@ -82,7 +82,7 @@ body {
 .player .main .details h5 {
 	display: flex;
   	justify-content:flex-end;
-  	width: 2200px;
+  	width: 2500px;
     animation: scrolling 20s 1s linear infinite;
 }
 
