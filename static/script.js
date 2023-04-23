@@ -188,7 +188,7 @@ var songIndex = 0;
 var diskIndex = 40;
 var value_seek = 40;
 var  status = {};
-var play_pause_css = document.querySelector(':root');
+var play_pause_css = document.querySelector(':root'); 
 
 
 // Load from dataframe function.
@@ -252,7 +252,8 @@ let main = {
 	playPauseControl:_(".player .main .controls .play-pause-control"),
 	nextDisk:_(".player .main .controls .next-disc-control"),
 	nextControl:_(".player .main .controls .next-control"),
-	searchButton:_(".player .main .search button")
+	searchButton:_(".player .main .search button"),
+
 }
  
 toggleSongList.addEventListener("click", function(){
