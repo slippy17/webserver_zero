@@ -185,7 +185,7 @@ function selSong(e) {
 // Work in  progress.
 //});
 var songIndex = 0;
-var diskIndex = 40;
+var diskIndex = 50;
 var value_seek = 40;
 var  status = {};
 var play_pause_css = document.querySelector(':root'); 
