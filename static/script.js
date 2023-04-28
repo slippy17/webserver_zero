@@ -346,7 +346,7 @@ main.nextControl.addEventListener("click",function(){
 });
 
 main.nextDisk.addEventListener("click",function(){
-	if(diskIndex < 87){
+	if(diskIndex < 89){
 		diskIndex = diskIndex+1;
 		main.seekbar.value = diskIndex;
 		//currentSongIndex = 0
@@ -388,7 +388,7 @@ main.searchButton.addEventListener("click", function(){
 
 main.seekbar.addEventListener("change",function(){
 	main.seekbar.setAttribute("min",1);
-	main.seekbar.setAttribute("max",87);
+	main.seekbar.setAttribute("max",90);
 	diskIndex = parseInt(main.seekbar.value);
 	// console.log(main.seekbar.value.toString());
 	// console.log(diskIndex);

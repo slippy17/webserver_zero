@@ -101,7 +101,7 @@ body {
 	color: #ccc;
 	font-size: 40px;
 	/*font-weight: 1000;*/
-	max-width: 80%;
+	width: 80%;
 	height: 60%;
 	margin-top:20%;
 	cursor: pointer;

@@ -82,7 +82,7 @@ body {
 .player .main .details h5 {
 	display: flex;
   	justify-content:flex-end;
-  	width: 2500px;
+  	width: 3200px;
     animation: scrolling 20s 1s linear infinite;
 }
 
