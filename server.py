@@ -30,17 +30,16 @@ class Juke():
         self.cur_track = 1
         self.cur_art = "No Artist" ## not used
         self.cur_song_title = ""
-        self.song_len = 0   
+        self.song_len = 0
         self.end = 0        ## Not used. Time that songs ends.
 
-                
     def call_repeatedly(self,interval, func, *args):
         stopped = Event()
         def loop():
             while not stopped.wait(interval): # the first call is in `interval` secs
                 func(*args)
-        Thread(target=loop).start()    
-        return stopped.set        
+        Thread(target=loop).start()
+        return stopped.set
 
 
     def play(self, disc_indx, track):
@@ -55,7 +54,7 @@ class Juke():
         # print(self.cur_art)
 
         print(x.to_string())
-        
+
         Juke.playtimer.run(self.song_len)
         self.cancel_future_calls = self.call_repeatedly(5, self.check_timer)
 
@@ -67,7 +66,7 @@ class Juke():
             self.stop()
             return
         return
- 
+
 
     def pause(self):
         if self.is_playing == 1:
@@ -84,7 +83,7 @@ class Juke():
 
         return self.is_playing
 
-        
+
     def stop(self):
         self.is_playing = 0
         self.song_len = 0
@@ -104,7 +103,7 @@ class Juke():
         message['artist'] = self.cur_art
         message['s_title'] = self.cur_song_title
         # artist = self.df[(self.df["Disc_ID"] == self.cur_disc) & (self.df["Track_ID"] == self.cur_track)]
-        
+
         # print (artist.Artist.to_string(), artist.Song_Title.to_string())
         return message
 
@@ -122,7 +121,6 @@ class Juke():
         self.adf= self.df[['Album', 'Disc_ID', 'Artist']].copy()
         self.adf= self.adf.drop_duplicates(subset=['Album'], ignore_index=True)
         return
-    
 
     def album_stats_df(self,index_no):  ## ************** TESTED ************
         check = (self.adf.index ==index_no).any()
@@ -145,17 +143,11 @@ class Juke():
         return result
 
 
-        
-
-        
 app = Flask(__name__)
 
 player = Juke()
 #player.load()
 player.load_df()
-
-
-
 
 ## Convert list of commands to IR codes and send using 'pioneer module built with 'IRSlinger'.
 def send_code(commands):
@@ -181,17 +173,17 @@ def command_builder(s_cd, s_track):
 
     a1= s_cd[0]
     c_builder.append(a1)
-    
+
     if len(s_cd) == 2:
         a2= s_cd[1]
         c_builder.append(a2)
-        
+
     if len(s_cd) == 3:
         a2= s_cd[1]
         c_builder.append(a2)
         a3 = s_cd[2]
         c_builder.append(a3)
-    
+
     c_builder.append('Disc')
     b1= s_track[0]
     c_builder.append(b1)
@@ -207,7 +199,9 @@ def command_builder(s_cd, s_track):
 
 @app.route('/stat', methods=['POST', 'GET'])
 def init():
+	if gpio_avail : os.system("sudo ./ledOFF")
 	stat = player.status()
+	if gpio_avail : os.system("sudo ./ledON")
 	return jsonify(stat)  # serialize and use JSON headers
 
 
@@ -220,7 +214,7 @@ def  pause_request():
 
 
 @app.route('/')
-def home():    
+def home():
     return render_template('index.html')
 
 
@@ -240,7 +234,7 @@ def search_DB(query):                     # query removed from function.
 def load_DB(index_no):
 	index_no = int(index_no)
 	data = player.album_stats_df(index_no) ## changed from .ablum_stats
-	
+
 	data = data.to_dict( orient="records")
 
 	return jsonify(data)
@@ -249,7 +243,7 @@ def load_DB(index_no):
 @app.route('/requestSong/', methods=['POST'])
 def requestSong():
 	if request.method == 'POST':
-		
+
 		data = request.json
 		s_idx = data['Index']
 
@@ -261,7 +255,7 @@ def requestSong():
             ## Lookup the Disc_ID from that Index.
 
 	sel_track = str(data['Song']+1)
-	
+
 	command_list = command_builder(sel_cd, sel_track)
 	send_code(command_list)
 
