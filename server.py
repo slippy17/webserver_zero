@@ -14,6 +14,8 @@ ip_addr= os.environ['IP_ADDRESS']
 
 gpio_avail= eval(os.environ['GPIO_AVAIL'])
 
+bug = not gpio_avail ## debug mode off when running on Raspi.
+
 print (f"IP ADDRESS {ip_addr} GPIO_AVAIL is {gpio_avail}")
 
 if gpio_avail : os.system("sudo ./ledON")
@@ -266,5 +268,5 @@ def requestSong():
 
 
 if __name__=="__main__":
-	app.run(debug=False, host=ip_addr)
+	app.run(debug=bug, host=ip_addr)
 	
