@@ -272,5 +272,5 @@ def requestSong():
 
 
 if __name__=="__main__":
-	app.run(debug=True, host=ip_addr)
+	app.run(debug=False, host=ip_addr)
 	
