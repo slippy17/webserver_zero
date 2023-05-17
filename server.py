@@ -201,9 +201,9 @@ def command_builder(s_cd, s_track):
 
 @app.route('/stat', methods=['POST', 'GET'])
 def init():
-	if gpio_avail : os.system("sudo ./ledOFF")
+	#if gpio_avail : os.system("sudo ./ledOFF")
 	stat = player.status()
-	if gpio_avail : os.system("sudo ./ledON")
+	#if gpio_avail : os.system("sudo ./ledON")
 	return jsonify(stat)  # serialize and use JSON headers
 
 
