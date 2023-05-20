@@ -248,7 +248,7 @@ def requestSong():
 
 		data = request.json
 		s_idx = data['Index']
-
+		print(data)
 ## request song from search page is disk slot+100, request otherwise is alpha index. 
 	if (s_idx > 100):
 		sel_cd = str(s_idx-100)
