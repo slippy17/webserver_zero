@@ -138,8 +138,8 @@ return
 };
 
 function update_runtime(artist, s_title, runTime){
-
-  document.getElementById("runStat").innerHTML = artist + " - "+s_title + " - "+runTime+" secs";
+	display_text = artist + " - "+s_title + " - "+runTime+" secs"
+  document.getElementById("runStat").innerHTML = display_text;
 
 };
 

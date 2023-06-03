@@ -1,5 +1,10 @@
+@font-face { 
+             font-family: 'LCD Display';
+             src: url('./font_LCD/r110a-lcd.ttf');
+         }
+
 @font-face { font-family: '19 Segment Display';
-             src: url('./font_19_Seg_dis/19-segment-display.ttf'); }
+             src: url('./font_19_Seg_dis/19-segment-display.ttf');}
 
 
 * {
@@ -83,7 +88,7 @@ body {
 	display: flex;
   	justify-content:flex-end;
   	width: 3200px;
-    animation: scrolling 20s 1s linear infinite;
+    animation: scrolling 30s linear infinite;
 }
 
 @keyframes scrolling {
