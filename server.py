@@ -45,6 +45,7 @@ class Juke():
 
 
     def play(self, disc_indx, track):
+        Juke.playtimer.reset()
         self.cur_disc = disc_indx
         self.cur_track = track
         self.is_playing = 1
@@ -143,6 +144,7 @@ class Juke():
                 (self.df["Artist"].str.contains(input, case= False, regex=False)) ]
 
         return result
+
 
 
 app = Flask(__name__)

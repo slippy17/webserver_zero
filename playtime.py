@@ -18,6 +18,14 @@ class Tmr():
         t.start()
         return
     
+    def reset(self):
+        self.paused = False
+        self.remaining = 0
+        Tmr.elap = -1
+        self.preset = 0
+        return
+
+
     def pause(self):
         self.paused = True
         return
