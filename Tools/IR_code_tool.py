@@ -18,9 +18,9 @@ def send_code(commands):
             print (command, code, raw)
             if gpio_avail :
                 if yam:
-                    os.system("sudo ./yamaha "+ raw)
+                    os.system("sudo ../static/yamaha "+ raw)
                 else:
-                    os.system("sudo ./pioneer "+ raw)
+                    os.system("sudo ../static/./pioneer "+ raw)
                     print ('Pioneer code')
             if yam:
                 print ('Yamaha code')
