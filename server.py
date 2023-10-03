@@ -163,7 +163,7 @@ def send_code(commands):
             if command == 'Play':
                 time.sleep(8)
             print (command, code)
-            if gpio_avail : os.system("sudo ./pioneer "+ raw)
+            if gpio_avail : os.system("sudo ./static/pioneer "+ raw)
             time.sleep(0.6)
 	return
 
