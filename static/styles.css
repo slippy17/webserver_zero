@@ -144,7 +144,7 @@ body {
 	position: absolute;
 	cursor: pointer;
 	font-size: 6px;
-	top : 81%;
+	top : 85%;
 	left : 35%;
 	border-radius : 8%;
 	font-size: 56px;
@@ -154,6 +154,18 @@ body {
 	padding: 10px 24px;
 
 }
+.player .main .controls > div.vol-up-control i.fa-volume-up {
+	position:absolute;
+	top: 85%;
+	left:85%;
+}
+
+.player .main .controls > div.vol-down-control i.fa-volume-down {
+	position:absolute;
+	top: 85%;
+	left:5%;
+}
+
 
 
 .player .player-list {
