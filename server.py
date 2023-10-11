@@ -1,4 +1,5 @@
 
+
 from threading import Event, Thread
 from flask import Flask, render_template, request, jsonify
 import json
@@ -158,12 +159,19 @@ def send_code(commands):
 	with open("./static/p_codes.json", "r") as infile:
 		cd_player = json.load(infile)
 	for command in commands:
+            yam = False
             code = (cd_player[command])
+            if code[:2] == '5E': yam = True
             raw = bin(int(code, 16))[2:].zfill(32)
             if command == 'Play':
                 time.sleep(8)
             print (command, code)
-            if gpio_avail : os.system("sudo ./static/pioneer "+ raw)
+            if gpio_avail :
+                if yam:
+                    os.system("sudo ../static/./yamaha "+ raw)
+                else:
+                    os.system("sudo ../static/./pioneer "+ raw)
+
             time.sleep(0.6)
 	return
 
@@ -214,6 +222,17 @@ def init():
 def  pause_request():
     message = player.pause()
     return jsonify(message)  # serialize and use JSON headers
+
+@app.route('/vol_up', methods=['GET'])
+def  vol_up():
+    send_code(['Vol+'])
+    return '200'
+
+@app.route('/vol_down', methods=['GET'])
+def  vol_down():
+    send_code(['Vol-'])
+    return '200'
+
 
 
 
