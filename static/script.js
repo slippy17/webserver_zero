@@ -252,6 +252,8 @@ let main = {
 	playPauseControl:_(".player .main .controls .play-pause-control"),
 	nextDisk:_(".player .main .controls .next-disc-control"),
 	nextControl:_(".player .main .controls .next-control"),
+	vol_up:_(".player .main .controls .vol-up-control"),
+	vol_down:_(".player .main .controls .vol-down-control"),
 	searchButton:_(".player .main .search button"),
 
 }
@@ -354,6 +356,20 @@ main.nextDisk.addEventListener("click",function(){
 	}
 	loadDB_DF();
 });
+
+main.vol_down.addEventListener("click",function(){
+	fetch('/vol_down')
+	console.log('Volume Down ');
+
+});
+
+main.vol_up.addEventListener("click",function(){
+	fetch('/vol_up')
+	console.log('Volume Up ');
+
+});
+
+
 
 
 main.playPauseControl.addEventListener("click",play_button)
