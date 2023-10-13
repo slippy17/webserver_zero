@@ -68,6 +68,7 @@ class Juke():
     def check_timer(self):
         if (Juke.playtimer.remaining <= 0 and self.is_playing == 1):
             self.stop()
+            if len(song_Q)>0: play_handler()
             return
         return
 
@@ -154,6 +155,8 @@ player = Juke()
 #player.load()
 player.load_df()
 
+song_Q = []
+
 ## Convert list of commands to IR codes and send using 'pioneer module built with 'IRSlinger'.
 def send_code(commands):
 	with open("./static/p_codes.json", "r") as infile:
@@ -206,6 +209,22 @@ def command_builder(s_cd, s_track):
 
     c_builder.append('Play')
     return c_builder
+
+
+def play_handler():
+
+    if len(song_Q)==0: return
+
+    selection = song_Q.pop(0)
+
+    sel_cd, sel_track = selection[0] , selection[1]
+
+    command_list = command_builder(sel_cd, sel_track)
+    send_code(command_list)
+
+    player.play(int(sel_cd), int(sel_track))
+
+    return
 
 
 
@@ -278,11 +297,12 @@ def requestSong():
             ## Lookup the Disc_ID from that Index.
 
 	sel_track = str(data['Song']+1)
+	
+	song_Q.append((sel_cd,sel_track))
+	
+	print(song_Q)
+	if player.is_playing == 0: play_handler()
 
-	command_list = command_builder(sel_cd, sel_track)
-	send_code(command_list)
-
-	player.play(int(sel_cd), int(sel_track))
 
 	return '200'
 
