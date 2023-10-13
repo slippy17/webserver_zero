@@ -225,7 +225,7 @@ def  pause_request():
 
 @app.route('/vol_up', methods=['GET'])
 def  vol_up():
-    send_code(['Vol+'])
+    send_code(['Vol+','Vol+'])
     return '200'
 
 @app.route('/vol_down', methods=['GET'])
