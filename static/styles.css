@@ -160,12 +160,21 @@ body {
 	left:85%;
 }
 
+.player .main .controls > div.vol-up-control i.fa-volume-up:active {
+  color: darkorange;
+	transform: scale(90%);
+}
 
 
 .player .main .controls > div.vol-down-control i.fa-volume-down {
 	position:absolute;
 	top: 85%;
 	left:5%;
+}
+
+.player .main .controls > div.vol-down-control i.fa-volume-down:active {
+  color: darkorange;
+	transform: scale(90%);
 }
 
 
