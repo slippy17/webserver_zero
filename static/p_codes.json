@@ -39,5 +39,10 @@
   "REC PWR": "5EA1F807",
   "Tuner": "5EA16897",
   "CD":"5EA1A857",
-  "VCR2":"5EA118E7"
+  "Tape":"5EA118E7",
+  "LD"  :"5EA1E817",
+  "VCR1":"5EA1F00F",
+  "VCR2":"5EA1C837",
+  "AUX" :"5EA1AA55",
+  "Phono":"5EA128D7"
 }

@@ -357,7 +357,7 @@ main.nextDisk.addEventListener("click",function(){
 	loadDB_DF();
 });
 
-main.vol_down.addEventListener("click",function(){
+main.vol_down.addEventListener("mousedown",function(){
 	fetch('/vol_down')
 	console.log('Volume Down ');
 
