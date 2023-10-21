@@ -357,20 +357,29 @@ main.nextDisk.addEventListener("click",function(){
 	loadDB_DF();
 });
 
-main.vol_down.addEventListener("mousedown",function(){
-	fetch('/vol_down')
-	console.log('Volume Down ');
+function vol_down(){
+	var t;
+		fetch('/vol_down');
+		console.log('Volume Down ');
+		t = setTimeout(vol_down, 1200);
+		main.vol_down.addEventListener("pointerup",function(){
+			clearTimeout(t)
+		});
+};
 
-});
+function vol_up(){
+	var t;
+		fetch('/vol_up');
+		console.log('Volume Up ');
+		t = setTimeout(vol_up, 1200);
+		main.vol_up.addEventListener("pointerup",function(){
+			clearTimeout(t)
+		});
+};
 
-main.vol_up.addEventListener("click",function(){
-	fetch('/vol_up')
-	console.log('Volume Up ');
+main.vol_down.addEventListener("pointerdown",vol_down);
 
-});
-
-
-
+main.vol_up.addEventListener("pointerdown",vol_up);
 
 main.playPauseControl.addEventListener("click",play_button)
 function play_button() {
