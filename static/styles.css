@@ -154,29 +154,29 @@ body {
 	padding: 10px 24px;
 
 }
+
+
+
 .player .main .controls > div.vol-up-control i.fa-volume-up {
 	position:absolute;
-	top: 85%;
-	left:85%;
-}
-
-.player .main .controls > div.vol-up-control i.fa-volume-up:active {
-  color: darkorange;
-	transform: scale(90%);
+	top: 84%;
+	left:80%;
+	font-size: 7em;
+/*	transform: scale(105%);*/
 }
 
 
 .player .main .controls > div.vol-down-control i.fa-volume-down {
 	position:absolute;
-	top: 85%;
-	left:5%;
+	top: 83%;
+	left:8%;
+	font-size: 8em;
 }
 
-.player .main .controls > div.vol-down-control i.fa-volume-down:active {
+.player .main .controls i.fa:active {
   color: darkorange;
-	transform: scale(90%);
+  transform: scale(85%);
 }
-
 
 
 .player .player-list {
