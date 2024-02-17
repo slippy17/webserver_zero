@@ -1,3 +1,5 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
 @font-face { 
              font-family: 'LCD Display';
              src: url('./font_LCD/r110a-lcd.ttf');
@@ -15,16 +17,21 @@
 
 }
 
+
 :root{
 --show_play:block;
 --show_pause:none;
+
 }
+
+
 
 
 body {
 	height: 100vh;
 	font-family: "Raleway";
 	border-radius : 4%;
+	touch-action: none;
 
 }
 .player {
