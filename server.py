@@ -181,7 +181,7 @@ def send_code(commands):
 
 ## Build command sequence to play a song based on disk and track number.
 def command_builder(s_cd, s_track):
-    c_builder = ['Pause']
+    c_builder = ['Pause','CD']
 
     if (int(s_cd)>100) or (len(s_track)>2):
         print("Error in the length of numbers")
