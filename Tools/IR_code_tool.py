@@ -34,4 +34,3 @@ while True:
     com = input('Type command ')
     
     send_code([com])
-

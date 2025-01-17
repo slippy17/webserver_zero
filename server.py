@@ -69,6 +69,8 @@ class Juke():
         if (Juke.playtimer.remaining <= 0 and self.is_playing == 1):
             self.stop()
             if len(song_Q)>0: play_handler()
+            else: send_code(['Stop'])   
+
             return
         return
 
@@ -88,14 +90,14 @@ class Juke():
 
         return self.is_playing
 
-
+## Sets the status to Stop song. Sets real CD player to pause.
     def stop(self):
         self.is_playing = 0
         self.song_len = 0
         self.cur_art = "No Artist"
         self.cur_song_title = ""
         self.cancel_future_calls()
-        send_code(['Stop'])
+        send_code(['Pause'])
         return 'Stop'
 
     def status(self):
@@ -176,7 +178,7 @@ def send_code(commands):
                     os.system("sudo static/./pioneer "+ raw)
 
             time.sleep(0.6)
-	return
+	
 
 
 ## Build command sequence to play a song based on disk and track number.
