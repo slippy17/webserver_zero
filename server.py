@@ -19,7 +19,7 @@ bug = not gpio_avail ## debug mode off when running on Raspi.
 
 print (f"IP ADDRESS {ip_addr} GPIO_AVAIL is {gpio_avail}")
 
-if gpio_avail : os.system("sudo ./ledON")
+##  if gpio_avail : os.system("sudo ./ledON")
 
 
 class Juke():
