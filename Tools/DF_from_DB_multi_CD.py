@@ -185,7 +185,7 @@ print(a)
 
 
 #****************** Write to Pickle ************************
-df.to_pickle("cd_database.pkl")  # *************************
+#df.to_pickle("cd_database.pkl")  # *************************
 #****************** uncomment to use ************************
 
 
