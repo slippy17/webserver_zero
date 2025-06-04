@@ -146,9 +146,6 @@ body {
 .player .main .controls > div.play-pause-control.paused i.fa-play-circle-o {
 	display: var(--show_paused);
 }
-.player .main .controls > div.play-pause-control.paused i.fa-stop {
-	display: var(--show_stop);
-}
 
 .player .main .search button {
 	position: absolute;

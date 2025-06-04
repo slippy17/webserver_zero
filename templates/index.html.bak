@@ -43,8 +43,6 @@
 				<i class="fa fa-play"></i>
 				<i class="fa fa-pause"></i>
 				<i class="fa fa-play-circle-o"></i>
-                <i class="fa fa-stop"></i>
-
 			</div>
 			<div class="next-control">
 				<i class="fa fa-forward"></i>

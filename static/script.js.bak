@@ -120,7 +120,6 @@ function show_pause_button() {
 			play_pause_css.style.setProperty('--show_play','none');
 			play_pause_css.style.setProperty('--show_pause','block');
 			play_pause_css.style.setProperty('--show_paused','none');
-            play_pause_css.style.setProperty('--show_stop','none');
 return
 };
 function show_play_button() {
@@ -128,7 +127,6 @@ function show_play_button() {
 			play_pause_css.style.setProperty('--show_play','block');
 			play_pause_css.style.setProperty('--show_pause','none');
 			play_pause_css.style.setProperty('--show_paused','none');
-            play_pause_css.style.setProperty('--show_stop','none');
 return
 };
 function show_paused_button(){
@@ -136,22 +134,8 @@ function show_paused_button(){
 			play_pause_css.style.setProperty('--show_play','none');
 			play_pause_css.style.setProperty('--show_pause','none');
 			play_pause_css.style.setProperty('--show_paused','block');
-            play_pause_css.style.setProperty('--show_stop','none');
 return
 };
-
-function show_stop_button(){
-				// display the stop buttin.
-			play_pause_css.style.setProperty('--show_play','none');
-			play_pause_css.style.setProperty('--show_pause','none');
-			play_pause_css.style.setProperty('--show_paused','none');
-            play_pause_css.style.setProperty('--show_stop','block');
-return
-};
-
-
-
-
 
 function update_runtime(artist, s_title, runTime){
 	display_text = artist + " - "+s_title + " - "+runTime+" secs"
