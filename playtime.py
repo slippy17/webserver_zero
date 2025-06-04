@@ -6,6 +6,7 @@ class Tmr():
     elap=0
     def __init__(self):
         self.paused = False
+        self.rset = False
         self.preset = 0
         self.remaining = 0
         return
@@ -13,16 +14,14 @@ class Tmr():
     def run(self,value):
         self.preset = value
         self.paused = False
+        self.rset = False
         print(f'Play timer started with {self.preset} seconds')
         t = threading.Thread(target=self.__run__)
         t.start()
         return
     
     def reset(self):
-        self.paused = False
-        self.remaining = 0
-        Tmr.elap = -1
-        self.preset = 0
+        self.rset = True
         return
 
 
@@ -42,13 +41,19 @@ class Tmr():
             if self.paused == False:
                 Tmr.elap = Tmr.elap +1
                 self.remaining = self.preset - Tmr.elap
-           # print (Tmr.elap)
+            #print (Tmr.elap)
+            if self.rset == True:
+                self.paused = False
+                self.preset = 0
+                Tmr.elap = 0
+                self.rset == False
+                break
+
         if Tmr.elap >= self.preset:
             self.preset = 0
             Tmr.elap = 0
             print ('Song End')
-            return 
-        
+    
 
 
 
