@@ -43,7 +43,7 @@ class Tmr():
                 Tmr.elap = Tmr.elap +1
                 self.remaining = self.preset - Tmr.elap
            # print (Tmr.elap)
-        if Tmr.elap == self.preset:
+        if Tmr.elap >= self.preset:
             self.preset = 0
             Tmr.elap = 0
             print ('Song End')
