@@ -68,10 +68,7 @@ class Juke():
     def check_timer(self):
         if (Juke.playtimer.remaining <= 0 and self.is_playing == 1):
             self.stop()
-            if len(song_Q)>0: play_handler()
-            else: send_code(['Stop'])   
 
-            return
         return
 
 
@@ -97,7 +94,15 @@ class Juke():
         self.cur_art = "No Artist"
         self.cur_song_title = ""
         self.cancel_future_calls()
-        send_code(['Pause'])
+        if len(song_Q)>0:
+            send_code(['Pause'])
+            play_handler()
+        else:
+            send_code(['Stop'])
+            Juke.playtimer.reset()
+
+            return
+        
         return 'Stop'
 
     def status(self):
@@ -243,6 +248,13 @@ def init():
 def  pause_request():
     message = player.pause()
     return jsonify(message)  # serialize and use JSON headers
+
+@app.route('/stop', methods=['GET'])
+def  stop_request():
+    message = player.stop()
+    return '200' #jsonify(message)  # serialize and use JSON headers
+
+
 
 @app.route('/vol_up', methods=['GET'])
 def  vol_up():
