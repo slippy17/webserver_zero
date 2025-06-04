@@ -71,7 +71,7 @@ async function stat() {
 	if(d_stat.is_playing == 0){
 			show_play_button()}
 	if(d_stat.is_playing == 1){
-			show_pause_button()}
+			show_stop_button()}
 	if(d_stat.is_playing == -1){
 			show_paused_button()}
 
@@ -84,6 +84,22 @@ async function stat() {
 
 function pause() {
 	fetch('/pause')
+	.then (data => data.json())
+	.then ( data => {
+
+	dict = {
+	disk: data.Album,
+	artist: data.Artist,
+    length: data.length,
+    time: data.time,
+    is_playing: data.is_playing
+    }});
+
+return dict	
+};
+
+function stop() {
+	fetch('/stop')
 	.then (data => data.json())
 	.then ( data => {
 
@@ -402,13 +418,13 @@ function play_button() {
 		//  d_stat   0 = stopped     1 - playing    -1 = paused
 	if(d_stat.is_playing == 0){
 		requestSong(diskIndex, songIndex);
-		show_pause_button();
+		show_stop_button();
 		d_stat.is_playing == 1;
 		}
 	 if(d_stat.is_playing == 1){
-	 	pause();
-	 	show_paused_button();
-	 	d_stat.is_playing == -1;
+	 	stop();
+	 	show_play_button();
+	 	d_stat.is_playing == 0;
 	 	}
 	 if(d_stat.is_playing == -1){
 	 	pause();
