@@ -96,7 +96,7 @@ class Juke():
         self.is_playing = 0
         self.song_len = 0
         self.cur_art = "No Artist"
-        self.cur_song_title = ""
+        self.cur_song_title = "No Song"
         self.cancel_future_calls()
         if len(song_Q)>0:
             send_code(['Pause'])
