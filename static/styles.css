@@ -10,313 +10,587 @@
 
 
 * {
-	margin:0px;
-	padding: 0px;
-	box-sizing: border-box;
-	
-
+        margin:0px;
+        padding: 0px;
+        box-sizing: border-box;
 }
 
 
 :root{
 --show_play:block;
 --show_pause:none;
-
+--panel-dark: #1a1a1e;
+--panel-mid:  #252530;
+--panel-light:#303040;
+--accent:     #ff8c00;
+--accent-dim: #b86000;
+--metal-hi:   rgba(255,255,255,0.18);
+--metal-lo:   rgba(0,0,0,0.55);
+--btn-face:   #2c2c38;
+--btn-hi:     rgba(255,255,255,0.22);
+--btn-lo:     rgba(0,0,0,0.7);
+--btn-shadow: 0 6px 14px rgba(0,0,0,0.8), 0 2px 4px rgba(0,0,0,0.9);
+--btn-inset:  inset 0 1px 0 rgba(255,255,255,0.15), inset 0 -2px 4px rgba(0,0,0,0.5);
+--btn-active: inset 0 3px 8px rgba(0,0,0,0.9), inset 0 1px 3px rgba(0,0,0,0.8);
 }
-
-
 
 
 body {
-	height: 100vh;
-	font-family: "Raleway";
-	border-radius : 4%;
-	touch-action: none;
+        height: 100vh;
+        font-family: "Raleway";
+        touch-action: none;
+        background: radial-gradient(ellipse at 50% 30%, #2a2a35 0%, #0d0d12 100%);
+        overflow: auto;
+}
 
-}
+
 .player {
-	position: absolute;
-	top: 25%;
-	left: 50%;
-	border-radius : 2%;
-	transform: translate(-50%,-25%);
-	width:   80%;/* 320px */
-	height: 1200px; /*480px; */
-	overflow: hidden;
+        position: absolute;
+        top: 53%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90%;
+        height: 1320px;
+        border-radius: 18px;
+        overflow: hidden;
+
+        /* Faceplate — brushed-aluminium layered gradients */
+        background:
+                linear-gradient(160deg,
+                        rgba(255,255,255,0.06) 0%,
+                        rgba(255,255,255,0.00) 40%),
+                linear-gradient(to bottom,
+                        #2e2e3a 0%,
+                        #1c1c26 40%,
+                        #14141c 70%,
+                        #1e1e2a 100%);
+
+        /* Raised panel effect */
+        box-shadow:
+                0 0 0 1px rgba(255,255,255,0.10),
+                0 0 0 3px #0a0a0f,
+                0 20px 60px rgba(0,0,0,0.95),
+                0 4px 12px rgba(0,0,0,0.8),
+                inset 0 1px 0 rgba(255,255,255,0.14),
+                inset 0 -2px 6px rgba(0,0,0,0.6);
 }
+
+/* Thin chrome top-edge reflection line */
+.player::before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0; left: 4%; right: 4%;
+        height: 2px;
+        background: linear-gradient(90deg,
+                transparent 0%,
+                rgba(255,255,255,0.35) 30%,
+                rgba(255,255,255,0.50) 50%,
+                rgba(255,255,255,0.35) 70%,
+                transparent 100%);
+        border-radius: 2px;
+        z-index: 10;
+        pointer-events: none;
+}
+
+/* Glossy reflection sweep across the top third */
+.player::after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 38%;
+        background: linear-gradient(to bottom,
+                rgba(255,255,255,0.07) 0%,
+                rgba(255,255,255,0.02) 60%,
+                transparent 100%);
+        border-radius: 18px 18px 0 0;
+        pointer-events: none;
+        z-index: 5;
+}
+
+
 .player .main {
-	width: 100%;
-	height: 100%;
-	background: #222;
-	transition:all 500ms ease-in-out;
+        width: 100%;
+        height: 100%;
+        background: transparent;
+        transition: all 500ms ease-in-out;
+        position: relative;
 }
+
 .player .main .thumbnail img {
-	width: 100%;
+        width: 100%;
+        display: block;
+        /* Slight vignette overlay so it blends into the dark panel */
+        mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0));
+        -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0));
 }
+
+
+/* ── SEEKBAR ─────────────────────────────────────────── */
 .player .main .seekbar {
-	margin-top: -30px;
+        margin-top: -30px;
+        position: relative;
+        z-index: 6;
 }
+
 .player .main .seekbar input[type="range"] {
-	-webkit-appearance:none;
-	width: 100%;
-	height: 8px;
-	outline: none;
-	background: #000;
-	overflow: visible;
+        -webkit-appearance: none;
+        width: 100%;
+        height: 10px;
+        outline: none;
+        background: #0a0a0f;
+        overflow: visible;
+        box-shadow:
+                inset 0 2px 5px rgba(0,0,0,0.9),
+                inset 0 -1px 1px rgba(255,255,255,0.05),
+                0 0 0 1px #000;
 }
+
 .player .main .seekbar input[type="range"]::-webkit-slider-thumb {
-	-webkit-appearance:none;
-	width: 40px;
-	height: 100px;
-	background: orange;
-	border-radius: 50%;
-	/*box-shadow: -300px 0px 0px 300px #00acee;*/
+        -webkit-appearance: none;
+        width: 44px;
+        height: 110px;
+        background:
+                linear-gradient(135deg,
+                        rgba(255,255,255,0.30) 0%,
+                        rgba(255,255,255,0.05) 40%,
+                        rgba(0,0,0,0.10) 100%),
+                linear-gradient(to bottom, #e08000, #a05000);
+        border-radius: 6px;
+        box-shadow:
+                0 4px 10px rgba(0,0,0,0.8),
+                0 1px 0 rgba(255,200,80,0.5) inset,
+                0 -2px 4px rgba(0,0,0,0.6) inset;
+        border: 1px solid #703000;
 }
+
+
+/* ── LCD DISPLAY ─────────────────────────────────────── */
 .player .main .details {
-	text-align: center;
-	color:#eee;
-	padding: 20px 0px;
+        text-align: center;
+        color: #eee;
+        padding: 20px 0px;
+        position: relative;
+        z-index: 6;
 }
 
 .player .main .details .container {
-	font-family: '19 Segment Display' ;
-	/*max-height: 50px;*/
-	padding: 2px;
-	margin: 4%;
-	width: 93%;
-	font-size: 60px;
-	color: orange;
-	background-color: #333;
-	border: 2px solid #444;
-	overflow: hidden;
+        font-family: '19 Segment Display';
+        padding: 10px 14px;
+        margin: 4%;
+        width: 93%;
+        font-size: 60px;
+        color: #ff9800;
+        /* Dark tinted LCD panel */
+        background: #0e0e08;
+        border-radius: 6px;
+        overflow: hidden;
+        position: relative;
+
+        /* Recessed inset look */
+        box-shadow:
+                inset 0 4px 14px rgba(0,0,0,0.95),
+                inset 0 1px 3px rgba(0,0,0,0.8),
+                0 1px 0 rgba(255,255,255,0.08),
+                0 0 0 1px #000,
+                0 0 0 3px #1a1a22,
+                0 0 0 4px rgba(255,255,255,0.06);
+
+        /* Orange glow */
+        text-shadow:
+                0 0 8px rgba(255,160,0,0.9),
+                0 0 18px rgba(255,120,0,0.6),
+                0 0 32px rgba(255,80,0,0.3);
+}
+
+/* Glossy reflection on the LCD glass */
+.player .main .details .container::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 45%;
+        background: linear-gradient(to bottom,
+                rgba(255,255,255,0.07) 0%,
+                rgba(255,255,255,0.01) 100%);
+        pointer-events: none;
+        border-radius: 6px 6px 0 0;
 }
 
 .player .main .details h5 {
-	display: flex;
-  	justify-content:flex-end;
-  	width: 3200px;
-    animation: scrolling 30s linear infinite;
+        display: flex;
+        justify-content: flex-end;
+        width: 3200px;
+        animation: scrolling 30s linear infinite;
 }
 
 @keyframes scrolling {
     from { left: 0; transform: translate3d(0, 0, 0); }
-    to { transform: translate3d( -100%,0,0); }
-  }
-
+    to { transform: translate3d(-100%, 0, 0); }
+}
 
 .player .main .details p {
-	font-size: 50px;
-	color: #aaa;
+        font-size: 50px;
+        color: #bbb;
+        text-shadow: 0 1px 3px rgba(0,0,0,0.8);
 }
-
 .player .main .details h3 {
-	font-size: 50px;
-	color: #aaa;
+        font-size: 50px;
+        color: #bbb;
+        text-shadow: 0 1px 3px rgba(0,0,0,0.8);
 }
-
 .player .main .details h2 {
-	font-size: 38px;
-	color:#aaa;
-	margin-bottom: 5px;
+        font-size: 38px;
+        color: #ccc;
+        margin-bottom: 5px;
+        text-shadow: 0 1px 3px rgba(0,0,0,0.8);
 }
 
 
+/* ── CONTROLS STRIP ──────────────────────────────────── */
 .player .main .controls {
-	display: flex;
-	justify-content: normal;
-	margin:5px -20px;
+        display: flex;
+        justify-content: normal;
+        margin: 25px 0px;
+        position: relative;
+        z-index: 6;
 }
+
 .player .main .controls > div {
-	margin:0px 40px;
-	cursor: pointer;
-}
-.player .main .controls i.fa {
-	font-size:6rem;
-	color: orange;
-}
-.player .main .controls > div.play-pause-control i.fa-play-circle-o {
-	display: none;
-}
-.player .main .controls > div.play-pause-control.paused i.fa-play {
-	display: var(--show_play);
-}
-.player .main .controls > div.play-pause-control.paused i.fa-pause {
-	display: var(--show_pause);
-}
-.player .main .controls > div.play-pause-control.paused i.fa-play-circle-o {
-	display: var(--show_paused);
-}
-.player .main .controls > div.play-pause-control.paused i.fa-stop {
-	display: var(--show_stop);
-}
-
-.player .main .search button {
-	position: absolute;
-	cursor: pointer;
-	font-size: 6px;
-	top : 85%;
-	left : 35%;
-	border-radius : 8%;
-	font-size: 56px;
-	color: orange;
-	background: black;
-	border: 2px solid orange;
-	padding: 10px 24px;
-
-}
-
-
-
-.player .main .controls > div.vol-up-control i.fa-volume-up {
-	position:absolute;
-	top: 84%;
-	left:80%;
-	font-size: 7em;
-/*	transform: scale(105%);*/
-}
-
-
-.player .main .controls > div.vol-down-control i.fa-volume-down {
-	position:absolute;
-	top: 83%;
-	left:8%;
-	font-size: 8em;
-}
-
-.player .main .controls i.fa:active {
-  color: darkorange;
-  transform: scale(85%);
-}
-
-
-.player .player-list {
-	
-	position: absolute;
-	width: 100%;
-	height: 800px;
-	margin-top:-20px;
-	overflow-y: scroll;
-	background: rgba(0,0,0,0.8);
-	z-index:2;
-	transition:all 500ms ease-in-out;
-}
-.player .player-list .toggle-list {
-	position: sticky;
-	top:0px;
-	text-align: center;
-	height: 40px;
-	line-height: 40px;
-	background: #555;
-}
-.player .player-list .toggle-list i.fa {
-	position: sticky; 
-	color: #ccc;
-	font-size: 40px;
-	font-weight: 600;
-}
-.player .player-list .toggle-list i.fa-angle-down {
-	display: block;
-}
-.player .player-list .toggle-list.active i.fa-angle-up {
-	display: none;
-
-
-}
-.player .player-list .toggle-list.active i.fa-angle-down {
-	display: none;
-}
-.player .list {
-	padding: 10px;
-}
-.player .list .item {
-	display: flex;
-	padding: 5px 0px;
-	border-bottom: 1px solid #222;
-	cursor: pointer;
-}
-.player .list .item .thumbnail {
-	width: 50px;
-	height: 50px;
-	overflow: hidden;
-}
-.player .list .thumbnail img {
-	width: 100%;
-	height: 100%;
-}
-.player .list .item .details {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	padding: 0px 10px;
-}
-.player .list .item .details h2 {
-	color: #eee;
-	font-size: 60px;
-}
-
-.player .list .item .details p {
-	color: #aaa;
-	font-size: 40px;
-}
-.player .player-list::-webkit-scrollbar {
-	width: 5px;
-	background: #222;
-}
-.player .player-list::-webkit-scrollbar-thumb {
-	background: #00acee;
-}
-.player.activeSongList .player-list {
-	margin-top: -800px; /* was about 300*/
-}
-.player.activeSongList .main {
-	filter:blur(10px);
+        margin: 25px 33px;
+        cursor: pointer;
 }
 
 /*
-@media all and (max-width: 1500px) {
-.player{width: 90%;
-	top: 48%;
-	height: 90%;}
+   Each button wrapper gets a recessed "button well" —
+   a shallow pocket in the faceplate that the button sits inside.
+   This is the key detail that makes physical Hi-Fi buttons look real.
+*/
+.player .main .controls > div:not(.search) {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0px;
+        border-radius: 5px;
+        background: #111116;
+        box-shadow:
+                inset 0 2px 5px rgba(0,0,0,0.9),
+                inset 0 1px 2px rgba(0,0,0,0.7),
+                0 1px 0 rgba(255,255,255,0.07);
+        border: 1px solid #0a0a0d;
+}
 
-.player .main .details {
-	text-align: center;
-	padding: 35px 0px;
-}
-.player .main .details h2 {
-	font-size: 68px;
-	color:#eee;
-	margin-bottom: 5px;
-}
-.player .main .details h3 {
-	font-size: 65px;
-	color: #aaa;
-}
-.player .main .details p {
-	font-size: 85px;
-	color: #eee;
-}
+/* ── Physical hard-plastic button face ── */
 .player .main .controls i.fa {
-	font-size:100px;
-	padding: 25px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 110px;
+        height: 100px;
+        font-size: 6rem;
+
+        color: #ff9800;
+        padding: 5px;
+
+        /* Matte hard-plastic face: very slight top-to-bottom gradient only */
+        border-radius: 6px;
+        background: linear-gradient(to bottom, #323238 0%, #26262c 55%, #222228 100%);
+
+        /*
+           Hard-edge shadow stack — the signature of a real physical button:
+           • A solid bottom edge (the button body has real thickness)
+           • A soft outer drop shadow
+           • One sharp top bevel catch-light (light hits the top edge)
+           • One sharp left bevel catch-light (light comes from top-left)
+           • No inner glow, no gradient sheen
+        */
+        box-shadow:
+                /* Solid "thickness" edge below the button */
+                0 5px 0 #0b0b0e,
+                /* Soft drop shadow from that thickness */
+                0 8px 16px rgba(0,0,0,0.75),
+                /* Top edge: bright bevel catch-light */
+                inset 0 1px 0 rgba(255,255,255,0.28),
+                /* Left edge: softer catch-light */
+                inset 1px 0 0 rgba(255,255,255,0.10),
+                /* Bottom inner edge: shadow side of bevel */
+                inset 0 -1px 0 rgba(0,0,0,0.55),
+                /* Right inner edge: shadow side of bevel */
+                inset -1px 0 0 rgba(0,0,0,0.35);
+
+        border: 1px solid #111118;
+
+        text-shadow:
+                0 0 8px rgba(255,160,0,0.9),
+                0 0 18px rgba(255,120,0,0.6),
+                0 0 32px rgba(255,80,0,0.3);
+
+        transition: box-shadow 55ms ease, transform 55ms ease, color 55ms ease;
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
 }
 
-.player .player-list {
-height: 70%;
+/*
+   Pressed state: the button physically drops 5px (the same height as
+   the solid edge), collapsing that gap — exactly like a real button.
+*/
+.player .main .controls i.fa:active {
+        color: #cc7000;
+        transform: translateY(5px);
+        box-shadow:
+                /* Thickness collapses to 1px */
+                0 1px 0 #0b0b0e,
+                0 2px 6px rgba(0,0,0,0.5),
+                /* Top edge now in shadow (button face is flush) */
+                inset 0 2px 4px rgba(0,0,0,0.7),
+                inset 0 1px 0 rgba(0,0,0,0.6),
+                /* Bottom inner edge now catches light (flipped) */
+                inset 0 -1px 0 rgba(255,255,255,0.10);
+        text-shadow:
+                0 0 5px rgba(255,160,0,0.55),
+                0 0 12px rgba(255,120,0,0.35),
+                0 0 20px rgba(255,80,0,0.15);
 }
-.player.activeSongList .player-list {
-	margin-top: -600px; /* was about 300
+
+
+/* ── PLAY-PAUSE multi-icon control ───────────────────── */
+.player .main .controls > div.play-pause-control i.fa-play-circle-o {
+        display: none;
+}
+.player .main .controls > div.play-pause-control.paused i.fa-play {
+        display: var(--show_play);
+}
+.player .main .controls > div.play-pause-control.paused i.fa-pause {
+        display: var(--show_pause);
+}
+.player .main .controls > div.play-pause-control.paused i.fa-play-circle-o {
+        display: var(--show_paused);
+}
+.player .main .controls > div.play-pause-control.paused i.fa-stop {
+        display: var(--show_stop);
+}
+
+
+/* ── SEARCH BUTTON ───────────────────────────────────── */
+.player .main .search button {
+        position: absolute;
+        cursor: pointer;
+        top: 150%;
+        left: 35%;
+        font-size: 68px;
+        color: #ff9800;
+
+        /* Same matte hard-plastic treatment as the transport buttons */
+        background: linear-gradient(to bottom, #323238 0%, #26262c 55%, #222228 100%);
+        border: 1px solid #111118;
+        border-radius: 6px;
+        padding: 14px 32px;
+
+        box-shadow:
+                /* Dark well ring — matches the transport button wells */
+                0 0 0 9px  #111116,
+                0 0 0 10px #0a0a0d,
+                /* Button thickness edge */
+                0 5px 0 #0b0b0e,
+                0 8px 16px rgba(0,0,0,0.75),
+                inset 0 1px 0 rgba(255,255,255,0.28),
+                inset 1px 0 0 rgba(255,255,255,0.10),
+                inset 0 -1px 0 rgba(0,0,0,0.55),
+                inset -1px 0 0 rgba(0,0,0,0.35);
+
+        text-shadow:
+                0 0 8px rgba(255,160,0,0.9),
+                0 0 18px rgba(255,120,0,0.6),
+                0 0 32px rgba(255,80,0,0.3);
+
+        overflow: hidden;
+        transition: box-shadow 55ms ease, transform 55ms ease, color 55ms ease;
+}
+
+.player .main .search button:active {
+        color: #cc7000;
+        transform: translateY(5px);
+        box-shadow:
+                0 0 0 9px  #111116,
+                0 0 0 10px #0a0a0d,
+                0 1px 0 #0b0b0e,
+                0 2px 6px rgba(0,0,0,0.5),
+                inset 0 2px 4px rgba(0,0,0,0.7),
+                inset 0 1px 0 rgba(0,0,0,0.6),
+                inset 0 -1px 0 rgba(255,255,255,0.10);
+}
+
+
+/* ── VOLUME BUTTONS (absolute-positioned) ────────────── */
+/*
+   These icons are pulled out of their wrapper divs via position:absolute.
+   We replicate the full button-face + well-ring styling here directly,
+   using a spread box-shadow to add the dark recessed well ring.
+*/
+.player .main .controls > div.vol-up-control i.fa-volume-up,
+.player .main .controls > div.vol-down-control i.fa-volume-down {
+        border-radius: 6px;
+        background: linear-gradient(to bottom, #323238 0%, #26262c 55%, #222228 100%);
+        box-shadow:
+                /* Dark well ring around the button */
+                0 0 0 9px  #111116,
+                0 0 0 10px #0a0a0d,
+                /* Button thickness edge */
+                0 5px 0 #0b0b0e,
+                0 8px 16px rgba(0,0,0,0.75),
+                /* Bevel catch-lights */
+                inset 0 1px 0 rgba(255,255,255,0.28),
+                inset 1px 0 0 rgba(255,255,255,0.10),
+                inset 0 -1px 0 rgba(0,0,0,0.55),
+                inset -1px 0 0 rgba(0,0,0,0.35);
+        border: 1px solid #111118;
+        text-shadow:
+                0 0 8px rgba(255,160,0,0.9),
+                0 0 18px rgba(255,120,0,0.6),
+                0 0 32px rgba(255,80,0,0.3);
+}
+
+.player .main .controls > div.vol-up-control i.fa-volume-up:active,
+.player .main .controls > div.vol-down-control i.fa-volume-down:active {
+        transform: translateY(5px);
+        box-shadow:
+                0 0 0 9px  #111116,
+                0 0 0 10px #0a0a0d,
+                0 1px 0 #0b0b0e,
+                0 2px 6px rgba(0,0,0,0.5),
+                inset 0 2px 4px rgba(0,0,0,0.7),
+                inset 0 1px 0 rgba(0,0,0,0.6),
+                inset 0 -1px 0 rgba(255,255,255,0.10);
+}
+
+.player .main .controls > div.vol-up-control i.fa-volume-up {
+        position: absolute;
+        top: 150%;
+        left: 80%;
+        font-size: 7em;
+        width: 130px;
+        height: 130px;
+}
+
+.player .main .controls > div.vol-down-control i.fa-volume-down {
+        position: absolute;
+        top: 150%;
+        left: 8%;
+        font-size: 8em;
+        width: 140px;
+        height: 140px;
+}
+
+
+/* ── SONG LIST (drawer) ──────────────────────────────── */
+.player .player-list {
+        position: absolute;
+        width: 100%;
+        height: 800px;
+        margin-top: -20px;
+        overflow-y: scroll;
+        background: rgba(8, 8, 14, 0.93);
+        backdrop-filter: blur(8px);
+        z-index: 2;
+        transition: all 500ms ease-in-out;
+        box-shadow: inset 0 4px 16px rgba(0,0,0,0.8);
+}
+
+.player .player-list .toggle-list {
+        position: sticky;
+        top: 0px;
+        text-align: center;
+        height: 50px;
+        line-height: 50px;
+        background:
+                linear-gradient(to bottom, #3a3a48 0%, #26262e 100%);
+        box-shadow:
+                0 2px 8px rgba(0,0,0,0.6),
+                inset 0 1px 0 rgba(255,255,255,0.12),
+                inset 0 -1px 0 rgba(0,0,0,0.5);
+        border-bottom: 1px solid #111;
 }
 
 .player .player-list .toggle-list i.fa {
-	font-size: 25px;
-	
+        position: sticky;
+        color: #ccc;
+        font-size: 40px;
+        font-weight: 600;
+        text-shadow: 0 1px 3px rgba(0,0,0,0.8);
 }
+
+.player .player-list .toggle-list i.fa-angle-down {
+        display: block;
+}
+.player .player-list .toggle-list.active i.fa-angle-up {
+        display: none;
+}
+.player .player-list .toggle-list.active i.fa-angle-down {
+        display: none;
+}
+
+.player .list {
+        padding: 10px;
+}
+
+.player .list .item {
+        display: flex;
+        padding: 8px 4px;
+        border-bottom: 1px solid #1a1a24;
+        cursor: pointer;
+        transition: background 120ms ease;
+}
+
+.player .list .item:hover {
+        background: rgba(255,140,0,0.06);
+}
+
+.player .list .item .thumbnail {
+        width: 50px;
+        height: 50px;
+        overflow: hidden;
+        border-radius: 4px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.7);
+}
+
+.player .list .thumbnail img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+}
+
+.player .list .item .details {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 0px 10px;
+}
+
 .player .list .item .details h2 {
-	
-	font-size: 56px;
+        color: #ddd;
+        font-size: 60px;
+        text-shadow: 0 1px 2px rgba(0,0,0,0.8);
 }
 
 .player .list .item .details p {
-	font-size: 55px;
+        color: #888;
+        font-size: 40px;
 }
-}*/
+
+.player .player-list::-webkit-scrollbar {
+        width: 6px;
+        background: #111;
+}
+.player .player-list::-webkit-scrollbar-thumb {
+        background: #ff8c00;
+        border-radius: 3px;
+        box-shadow: 0 0 4px rgba(255,140,0,0.4);
+}
+
+.player.activeSongList .player-list {
+        margin-top: -800px;
+}
+.player.activeSongList .main {
+        filter: blur(10px);
+}
