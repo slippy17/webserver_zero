@@ -5,7 +5,7 @@ import musicbrainzngs
 import pandas as pd
 
 # Load existing CD database
-df = pd.read_pickle("cd_database.pkl")
+df = pd.read_pickle("../static/cd_database.pkl")
 
 # Initialize MusicBrainz user agent
 musicbrainzngs.set_useragent("python-discid-example", "0.1", "your@mail")
