@@ -355,7 +355,7 @@ function loadSong(songIndex){
 }
 
 main.prevDisk.addEventListener("click",function(){
-	if(diskIndex > 1){
+	if(diskIndex > 0){
 		diskIndex = diskIndex-1;
 		main.seekbar.value = diskIndex;
 		//currentSongIndex=0
@@ -380,7 +380,7 @@ main.nextControl.addEventListener("click",function(){
 });
 
 main.nextDisk.addEventListener("click",function(){
-	if(diskIndex < 89){
+	if(diskIndex < 99){
 		diskIndex = diskIndex+1;
 		main.seekbar.value = diskIndex;
 		//currentSongIndex = 0
@@ -444,8 +444,8 @@ main.searchButton.addEventListener("click", function(){
 
 
 main.seekbar.addEventListener("change",function(){
-	main.seekbar.setAttribute("min",1);
-	main.seekbar.setAttribute("max",90);
+	main.seekbar.setAttribute("min",0);
+	main.seekbar.setAttribute("max",99);
 	diskIndex = parseInt(main.seekbar.value);
 	// console.log(main.seekbar.value.toString());
 	// console.log(diskIndex);
