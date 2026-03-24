@@ -135,7 +135,7 @@ class Juke():
         self.df.Length = self.df.Length.astype('int32')
         self.df.Disc_ID = self.df.Disc_ID.astype('int')
         self.adf= self.df[['Album', 'Disc_ID', 'Artist']].copy()
-        ## self.adf = adf.drop(adf[adf["Disc_ID"] == 0].index) - drop where "Disc_ID"=0 i.e. not physically in cd player.
+        self.adf = self.adf.drop(self.adf[self.adf["Disc_ID"] == 0].index) ## drop where "Disc_ID"=0 i.e. not physically in cd player.
         self.adf= self.adf.drop_duplicates(subset=['Album'], ignore_index=True)
         return
 

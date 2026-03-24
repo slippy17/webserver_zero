@@ -2,6 +2,10 @@ import pandas as pd
 from sqlalchemy import create_engine, text
 
 ##############################################################################
+##
+## This Tool creates a pkl file from the data in MySQL database.
+## 
+##
 ## Algorithm                                                                
 ## 1) Load pickle file
 ## 2) Use columns from pickle file to buid SELECT query.
@@ -9,10 +13,13 @@ from sqlalchemy import create_engine, text
 ## 4) Run SELECT query + Capture the query in a dataframe
 ## 5) Convert the dataframe to match format of pkl file.
 ## 6) Save as pickle file.
+##
+## Note: A the current in-use pkl file is loaded so DF and DB can be compared.
+##
 ##############################################################################
 
 ## 1) Load pickle file
-df = pd.read_pickle("../static/cd_database.pkl")
+df = pd.read_pickle("../static/cddb.pkl")
 
 ## 2) Use columns from pickle file.
 cols = df.columns
@@ -67,9 +74,10 @@ db = pd.DataFrame(query_db())
 db = convert_cols(cols,db)
 
 ## 6) Save as pickle file.
-#pd.to_pickle(db, "../static/cddb.pkl")
+pd.to_pickle(db, "../static/cd_database.pkl")
 
 
 ## show albums in slot 0
-##   db[db["Disc_ID"] == 0].drop_duplicates(subset=['Album']
+##   db[db["Disc_ID"] == 0].drop_duplicates(subset=['Album'])
+##   db[db["Disc_ID"] == 0].drop_duplicates(subset=['Album']).Album
 

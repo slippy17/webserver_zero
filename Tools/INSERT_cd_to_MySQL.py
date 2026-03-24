@@ -3,7 +3,10 @@ import musicbrainzngs
 import pandas as pd
 from sqlalchemy import create_engine, text, event
 ##############################################################################
-## Algorithm                                                                
+##
+##  This tool gets CD info from musicbrainzngs and inserts with disc_id (slot) 0 to MySQL DB.
+##
+#Algorithm                                                                
 ## 1) Get CD info from MusicBrainzngs.
 ## 2) Check if artist exists in artists table.
 ## 3) INSERT artist into artists table if not already there.
@@ -13,6 +16,8 @@ from sqlalchemy import create_engine, text, event
 ## 7) Get album ID
 ## 8) INSERT tracks with album ID into tracks table
 ## 9) Perform steps 5 to 8 for multiple CD albums. 
+##
+## Note: This has been updatd for mutli album cds.
 
 # -----------------------------
 # Database connection
