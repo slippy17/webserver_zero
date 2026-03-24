@@ -161,6 +161,10 @@ class Juke():
 
 
 
+
+
+
+
 app = Flask(__name__)
 
 player = Juke()
@@ -238,6 +242,13 @@ def play_handler():
 
     return
 
+def reset_pkl():
+    os.system("python3 Tools/pkl_from_MySQL_DB.py")
+    print('Reset')
+    player.load_df()
+
+    return
+
 
 
 @app.route('/stat', methods=['POST', 'GET'])
@@ -262,6 +273,12 @@ def  stop_request():
 @app.route('/cd_power', methods=['GET'])
 def  cd_power_request():
     message = player.cd_power()
+    return '200' #jsonify(message)  # serialize and use JSON headers
+
+
+@app.route('/reset', methods=['GET'])
+def reset():
+    reset_pkl()
     return '200' #jsonify(message)  # serialize and use JSON headers
 
 
