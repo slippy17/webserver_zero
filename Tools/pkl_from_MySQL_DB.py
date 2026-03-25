@@ -19,7 +19,7 @@ from sqlalchemy import create_engine, text
 ##############################################################################
 
 ## 1) Load pickle file
-df = pd.read_pickle("../static/cddb.pkl")
+df = pd.read_pickle("static/cddb.pkl")
 
 ## 2) Use columns from pickle file.
 cols = df.columns
@@ -74,7 +74,7 @@ db = pd.DataFrame(query_db())
 db = convert_cols(cols,db)
 
 ## 6) Save as pickle file.
-##pd.to_pickle(db, "static/cd_database.pkl")
+pd.to_pickle(db, "static/cd_database.pkl")
 
 
 ## show albums in slot 0
