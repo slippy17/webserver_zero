@@ -28,13 +28,13 @@ class Juke():
     playtimer = pt.Tmr()
 
     def __init__(self):
-        self.is_playing = 0
+        self.is_playing = 0  ## 1 = playing. 0 = not playing. -1 Paused.
         self.cur_disc = 40
-        self.cur_track = 1
-        self.cur_art = "No Artist" ## not used
+        self.cur_track = 1   ## -1 sets Album mode.
+        self.cur_art = "No Artist" 
         self.cur_song_title = ""
         self.song_len = 0
-        self.end = 0        ## Not used. Time that songs ends.
+        self.mode = 0        ## 0 = single mode.  1 = album mode.
 
     def call_repeatedly(self,interval, func, *args):
         stopped = Event()
@@ -160,6 +160,21 @@ class Juke():
         return result
 
 
+    ## Function to load tracks to Q when a full album is requested.
+    def get_album_tracks(self, sel_cd):
+    	self.mode = 1 # sets album mode.
+    	tracks_df = self.df[self.df["Disc_ID"] == int(sel_cd)]
+    	#tracks_df = tracks_df.drop(['Artist', 'Album', 'Song_Title', 'Length'], axis=1, inplace=True)
+    	
+    	## Get album data
+		## Iterate over track and add to Q with track_id set to -1
+		## Play Handler later should ignore the IR to send next track to CD_player.
+    	tracks_df =[(str(row.Disc_ID), str(row.Track_ID)) for row in tracks_df.itertuples(index=False)]
+    	print(tracks_df)
+    	return tracks_df
+    		#return [(row.Disc_ID, row.track) for row in tracks_df.itertuples(index=False)]
+
+
 
 
 
@@ -172,6 +187,10 @@ player = Juke()
 player.load_df()
 
 song_Q = []
+
+
+
+
 
 ## Convert list of commands to IR codes and send using 'pioneer module built with 'IRSlinger'.
 def send_code(commands):
@@ -229,14 +248,18 @@ def command_builder(s_cd, s_track):
 
 def play_handler():
 
-    if len(song_Q)==0: return
+    if len(song_Q)==0:
+    	if player.mode == 1: player.mode=0
+    	return
 
     selection = song_Q.pop(0)
 
     sel_cd, sel_track = selection[0] , selection[1]
 
     command_list = command_builder(sel_cd, sel_track)
-    send_code(command_list)
+
+    if (sel_track=='1') or (player.mode==0): 
+    	send_code(command_list)
 
     player.play(int(sel_cd), int(sel_track))
 
@@ -337,9 +360,14 @@ def requestSong():
 		sel_cd = str(player.adf.loc[s_idx].Disc_ID) 
             ## Lookup the Disc_ID from that Index.
 
-	sel_track = str(data['Song']+1)
-	
-	song_Q.append((sel_cd,sel_track))
+	sel_track = str(data['Song']+1)  ##  Adds 1 to the index value. i.e. index 0 is track 1.
+	## Note when sel_track from request set to -1 will play full album.
+	global song_Q
+	print(sel_track)
+	if sel_track=="0":
+		song_Q = player.get_album_tracks(sel_cd)
+	else:
+		song_Q.append((sel_cd,sel_track))
 	
 	print(song_Q)
 	if player.is_playing == 0: play_handler()

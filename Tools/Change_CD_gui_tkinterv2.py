@@ -216,14 +216,18 @@ def insert():
     append(f"INSERTED: Album_ID {album_id} {album_name} into Disc slot {disc_id}\n")
     refresh_list()
 
+def f_slot():
+    pass
+
 # --- BUTTONS ---
 btn_frame = tk.Frame(root, bg=BG)
 btn_frame.pack(pady=5)
 
-ttk.Button(btn_frame, text="CHECK", command=check).grid(row=0, column=0, padx=5)
-ttk.Button(btn_frame, text="INSERT", command=insert).grid(row=0, column=1, padx=5)
-ttk.Button(btn_frame, text="REFRESH", command=refresh_list).grid(row=0, column=2, padx=5)
-ttk.Button(btn_frame, text="EXIT", command=root.quit).grid(row=0, column=3, padx=5)
+ttk.Button(btn_frame, text="DISC ID CHK", command=check).grid(row=0, column=0, padx=5)
+ttk.Button(btn_frame, text="FREE-SLOT CHK", command=f_slot).grid(row=0, column=1, padx=5)
+ttk.Button(btn_frame, text="INSERT", command=insert).grid(row=0, column=2, padx=5)
+ttk.Button(btn_frame, text="REFRESH", command=refresh_list).grid(row=0, column=3, padx=5)
+ttk.Button(btn_frame, text="EXIT", command=root.quit).grid(row=0, column=4, padx=5)
 
 # --- EVENTS ---
 album_listbox.bind("<<ListboxSelect>>", on_select)
