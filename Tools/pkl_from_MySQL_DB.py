@@ -46,7 +46,7 @@ def convert_cols(cols,db):
     db = db.set_axis(c, axis=1)                 ## rename db columns as in pkl file
     db = db[cols]                               ## put columns back in order as orginal pkl
     db['Disc_ID'] = db['Disc_ID'].fillna(0)     ## Disc_ID became a float. Need to make Nulls a 0
-    #db = db.drop(db[db["Disc_ID"] == 0].index)  ## Drop Disc_ID=0 as CD not in CD player.
+    db = db.drop(db[db["Disc_ID"] == 0].index)  ## Drop Disc_ID=0 as CD not in CD player.
     db['Disc_ID'] = db['Disc_ID'].astype('int64')# Convert to int64
     db['Track_ID'] = db['Track_ID'].astype('object')
     db['Length'] = db['Length'].astype('object')
