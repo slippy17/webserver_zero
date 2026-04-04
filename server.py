@@ -101,14 +101,11 @@ class Juke():
         if (len(song_Q)>0) and (self.mode==0):
             send_code(['Pause'])
             play_handler()
-	elif (len(song_Q)>0) and (self.mode==1):
-	    play_handler()
+        elif (len(song_Q)>0) and (self.mode==1):
+            play_handler()
         else:
             send_code(['Stop'])
             Juke.playtimer.reset()
-
-            return
-        
         return 'Stop'
 
     def status(self):
@@ -121,7 +118,6 @@ class Juke():
         message['artist'] = self.cur_art
         message['s_title'] = self.cur_song_title
         # artist = self.df[(self.df["Disc_ID"] == self.cur_disc) & (self.df["Track_ID"] == self.cur_track)]
-
         # print (artist.Artist.to_string(), artist.Song_Title.to_string())
         return message
 
@@ -166,19 +162,9 @@ class Juke():
     def get_album_tracks(self, sel_cd):
     	self.mode = 1 # sets album mode.
     	tracks_df = self.df[self.df["Disc_ID"] == int(sel_cd)]
-    	#tracks_df = tracks_df.drop(['Artist', 'Album', 'Song_Title', 'Length'], axis=1, inplace=True)
-    	
-    	## Get album data
-		## Iterate over track and add to Q with track_id set to -1
-		## Play Handler later should ignore the IR to send next track to CD_player.
     	tracks_df =[(str(row.Disc_ID), str(row.Track_ID)) for row in tracks_df.itertuples(index=False)]
     	print(tracks_df)
     	return tracks_df
-    		#return [(row.Disc_ID, row.track) for row in tracks_df.itertuples(index=False)]
-
-
-
-
 
 
 
@@ -249,7 +235,6 @@ def command_builder(s_cd, s_track):
 
 
 def play_handler():
-
     if len(song_Q)==0:
     	if player.mode == 1: player.mode=0
     	return
@@ -262,10 +247,9 @@ def play_handler():
 
     if (sel_track=='1') or (player.mode==0): 
     	send_code(command_list)
-
     player.play(int(sel_cd), int(sel_track))
-
     return
+
 
 def reset_pkl():
     os.system("python3 Tools/pkl_from_MySQL_DB.py")
@@ -273,7 +257,6 @@ def reset_pkl():
     player.load_df()
 
     return
-
 
 
 @app.route('/stat', methods=['POST', 'GET'])
@@ -284,16 +267,17 @@ def init():
 	return jsonify(stat)  # serialize and use JSON headers
 
 
-
 @app.route('/pause', methods=['GET'])
 def  pause_request():
     message = player.pause()
     return jsonify(message)  # serialize and use JSON headers
 
+
 @app.route('/stop', methods=['GET'])
 def  stop_request():
     message = player.stop()
     return '200' #jsonify(message)  # serialize and use JSON headers
+
 
 @app.route('/cd_power', methods=['GET'])
 def  cd_power_request():
@@ -307,7 +291,6 @@ def reset():
     return '200' #jsonify(message)  # serialize and use JSON headers
 
 
-
 @app.route('/vol_up', methods=['GET'])
 def  vol_up():
     send_code(['Vol+'])
@@ -319,8 +302,6 @@ def  vol_down():
     return '200'
 
 
-
-
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -330,6 +311,7 @@ def home():
 def search():
     return render_template('search.html')
 
+
 @app.route('/searchDB/<query>', methods=['GET'])
 def search_DB(query):                     # query removed from function.
     result = player.search_DB(query)
@@ -337,6 +319,7 @@ def search_DB(query):                     # query removed from function.
     ##sname=render_template(request.args['sname'])
     ##print(result)
     return jsonify(result)
+
 
 @app.route('/loadDatabase/<index_no>', methods=['GET','POST'])
 def load_DB(index_no):
@@ -346,6 +329,7 @@ def load_DB(index_no):
 	data = data.to_dict( orient="records")
 
 	return jsonify(data)
+
 
 ##@app.route('/requestSong/<s_cd>/<s_track>', methods=['POST','GET'])
 @app.route('/requestSong/', methods=['POST'])
@@ -371,9 +355,7 @@ def requestSong():
 	else:
 		song_Q.append((sel_cd,sel_track))
 	
-	print(song_Q)
 	if player.is_playing == 0: play_handler()
-
 
 	return '200'
 
