@@ -98,9 +98,11 @@ class Juke():
         self.cur_art = "No Artist"
         self.cur_song_title = "No Song"
         self.cancel_future_calls()
-        if (len(song_Q)>0) and (player.mode==0):
+        if (len(song_Q)>0) and (self.mode==0):
             send_code(['Pause'])
             play_handler()
+	elif (len(song_Q)>0) and (self.mode==1):
+	    play_handler()
         else:
             send_code(['Stop'])
             Juke.playtimer.reset()
