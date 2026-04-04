@@ -106,6 +106,7 @@ class Juke():
         else:
             send_code(['Stop'])
             Juke.playtimer.reset()
+            play_handler()
         return 'Stop'
 
     def status(self):
