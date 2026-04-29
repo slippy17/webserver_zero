@@ -48,6 +48,10 @@ class Juke():
         send_code(['CD_Power'])
         return 'CD_Power'
 
+    def rec_power(self):
+        send_code(['REC PWR'])
+        return 'REC PWR'
+
 
     def play(self, disc_indx, track):
         # Juke.playtimer.reset()
@@ -283,6 +287,11 @@ def  stop_request():
 @app.route('/cd_power', methods=['GET'])
 def  cd_power_request():
     message = player.cd_power()
+    return '200' #jsonify(message)  # serialize and use JSON headers
+
+@app.route('/rec_power', methods=['GET'])
+def  rec_power_request():
+    message = player.rec_power()
     return '200' #jsonify(message)  # serialize and use JSON headers
 
 
