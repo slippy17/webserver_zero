@@ -5,13 +5,14 @@ from flask import Flask, render_template, request, jsonify
 import json
 import time 
 import os
+from rapidfuzz import process
 import pandas as pd
 import playtime as pt  ## Custom timer module for Play, Pause and Stop functions.
 
 #### Environment variables.
 ## Used to autoset options if testing on laptop or running on Raspberr Pi.
 
-ip_addr= os.environ['IP_ADDRESS']
+ip_addr='10.0.0.78' ### os.environ['IP_ADDRESS']
 
 gpio_avail= eval(os.environ['GPIO_AVAIL'])
 
@@ -171,6 +172,21 @@ class Juke():
     	print(tracks_df)
     	return tracks_df
 
+    def getSearch(self,song,search_type="Song_Title"):
+        result = self.df[(self.df[search_type].str.contains(song, case= False, regex=False))]
+        matches = process.extract(
+        song.title(),
+        result[search_type],
+        score_cutoff=90,
+        limit=None)
+    
+        rows = self.df.loc[[m[2] for m in matches]].copy()
+        rows["Match_Score"] = [m[1] for m in matches]
+
+        return rows.sort_values("Match_Score", ascending=False)
+
+
+
 
 
 app = Flask(__name__)
@@ -325,6 +341,14 @@ def search():
 @app.route('/searchDB/<query>', methods=['GET'])
 def search_DB(query):                     # query removed from function.
     result = player.search_DB(query)
+    result = result.to_dict(orient="index")
+    ##sname=render_template(request.args['sname'])
+    ##print(result)
+    return jsonify(result)
+
+@app.route('/getSong/<query>', methods=['GET'])
+def getSong(query):                     # query removed from function.
+    result = player.getSearch(query)
     result = result.to_dict(orient="index")
     ##sname=render_template(request.args['sname'])
     ##print(result)
