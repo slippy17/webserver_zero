@@ -12,7 +12,7 @@ import playtime as pt  ## Custom timer module for Play, Pause and Stop functions
 #### Environment variables.
 ## Used to autoset options if testing on laptop or running on Raspberr Pi.
 
-ip_addr='10.0.0.78' ### os.environ['IP_ADDRESS']
+ip_addr=os.environ['IP_ADDRESS']
 
 gpio_avail= eval(os.environ['GPIO_AVAIL'])
 
