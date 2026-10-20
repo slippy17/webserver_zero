@@ -12,7 +12,7 @@ import playtime as pt  ## Custom timer module for Play, Pause and Stop functions
 #### Environment variables.
 ## Used to autoset options if testing on laptop or running on Raspberr Pi.
 
-ip_addr='10.0.0.78' ### os.environ['IP_ADDRESS']
+ip_addr=os.environ['IP_ADDRESS']
 
 gpio_avail= eval(os.environ['GPIO_AVAIL'])
 
@@ -67,11 +67,16 @@ class Juke():
         # print(self.cur_art)
 
         print(x.to_string())
+        
 
         Juke.playtimer.run(self.song_len)
         self.cancel_future_calls = self.call_repeatedly(5, self.check_timer)
 
-        return 'Playing', self.song_len
+        return
+
+    def song_request_stats(self, disc, track):
+        x = self.df[(self.df["Disc_ID"] == int(disc)) & (self.df["Track_ID"] == int(track))]
+        return x.to_dict(orient='records')
 
 
     def check_timer(self):
@@ -183,7 +188,7 @@ class Juke():
         rows = self.df.loc[[m[2] for m in matches]].copy()
         rows["Match_Score"] = [m[1] for m in matches]
 
-        return rows.sort_values("Match_Score", ascending=False)
+        return rows.sort_values("Match_Score", ascending=False).to_dict(orient='records')
 
 
 
@@ -391,7 +396,8 @@ def requestSong():
 	
 	if player.is_playing == 0: play_handler()
 
-	return '200'
+## returns info on the requested song.
+	return player.song_request_stats(sel_cd, sel_track)
 
 
 
