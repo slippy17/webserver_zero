@@ -28,7 +28,7 @@ cols = df.columns
 # Database connection
 ## 3) Connect to DB
 # -----------------------------
-engine = create_engine("mysql+pymysql://root:123@192.168.0.115/cddb", echo=False)
+engine = create_engine("mysql+pymysql://root:123@192.168.0.127/cddb", echo=False)
 
 
 def query_db():
